@@ -1152,6 +1152,35 @@ function closePopup() {
 }
 </script>
 
+<script>
+  const body = document.body;
+  const hamburger = document.getElementById('hamburger');
+  const overlay = document.getElementById('menuOverlay');
+  const topBar = document.getElementById('topBar');
+
+  function toggleMenu(open) {
+    if (open) {
+      body.classList.add('menu-open');
+    } else {
+      body.classList.remove('menu-open');
+    }
+  }
+
+  hamburger.addEventListener('click', () => {
+    toggleMenu(!body.classList.contains('menu-open'));
+  });
+
+  overlay.addEventListener('click', () => toggleMenu(false));
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      topBar.classList.add('shrink');
+    } else {
+      topBar.classList.remove('shrink');
+    }
+  });
+</script>
+  
 </body>
 </html>
 
