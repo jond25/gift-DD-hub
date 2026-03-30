@@ -3,13 +3,13 @@
 <head>
     <style>
       <style>
-
+  
 /* NEW HAMBURGER + TOP BAR */
 :root {
   --header-bg: inherit;
   --header-text: #ffffff;
 }
-
+  
 .top-bar {
   position: sticky;
   top: 0;
@@ -22,11 +22,11 @@
   color: var(--header-text);
   transition: padding 0.2s ease;
 }
-
+  
 .top-bar.shrink {
   padding: 4px 10px;
 }
-
+  
 .back-hub {
   text-decoration: none;
   color: var(--header-text);
@@ -37,7 +37,7 @@
   background: rgba(0,0,0,0.1);
   white-space: nowrap;
 }
-
+  
 /* HAMBURGER ICON */
 .hamburger {
   width: 28px;
@@ -47,14 +47,14 @@
   justify-content: space-between;
   cursor: pointer;
 }
-
+  
 .hamburger span {
   display: block;
   height: 3px;
   border-radius: 2px;
   background: var(--header-text);
 }
-
+  
 /* SLIDE-OUT MENU */
 .menu-overlay {
   position: fixed;
@@ -65,7 +65,7 @@
   transition: opacity 0.25s ease;
   z-index: 999;
 }
-
+  
 .menu-panel {
   position: fixed;
   top: 0;
@@ -81,78 +81,78 @@
   flex-direction: column;
   gap: 10px;
 }
-
+  
 .menu-open .menu-overlay {
   opacity: 1;
   pointer-events: auto;
 }
-
+  
 .menu-open .menu-panel {
   right: 0;
 }
-
+  
 .menu-link {
   text-decoration: none;
   color: var(--header-text);
   font-size: 14px;
   padding: 8px 0;
 }
-
+  
 .menu-link.disabled {
   opacity: 0.4;
   pointer-events: none;
 }
-
+  
 @media (min-width: 800px) {
   .menu-panel {
     width: 320px;
     right: -320px;
   }
 }
-
+  
 /* keep your spinner */
 .spinner { … }
-
+  
 /* keep your popup */
 #successPopup { … }
-
+  
 </style>
-
+  
       <style>
   :root {
     --header-bg: inherit;
     --header-text: #ffffff;
   }
-
+  
   body {
     margin: 0;
     font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   }
-
+  
         <div class="top-bar" id="topBar">
   <a href="/" class="back-hub">Back to Hub</a>
-
+  
   <div class="hamburger" id="hamburger">
     <span></span>
     <span></span>
     <span></span>
   </div>
 </div>
-
+  
 <div class="menu-overlay" id="menuOverlay"></div>
-
+  
 <nav class="menu-panel" id="menuPanel">
   <a href="/creative/" class="menu-link">Staying in Lane</a>
   <a href="/designDDtees/" class="menu-link">Style</a>
   <a href="/lawn/" class="menu-link">Lawn Care</a>
-
+  
   <span class="menu-link disabled">Spiritual (Coming Summer 2026)</span>
   <span class="menu-link disabled">Physical (Coming 2027)</span>
   <span class="menu-link disabled">Mental (Coming Winter 2026)</span>
-
+  
   <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
 </nav>
-
+  
   /* TOP BAR */
   .top-bar {
     position: sticky;
@@ -166,11 +166,11 @@
     color: var(--header-text);
     transition: padding 0.2s ease, font-size 0.2s ease;
   }
-
+  
   .top-bar.shrink {
     padding: 4px 10px;
   }
-
+  
   .back-hub {
     text-decoration: none;
     color: var(--header-text);
@@ -181,7 +181,7 @@
     background: rgba(0,0,0,0.1);
     white-space: nowrap;
   }
-
+  
   /* HAMBURGER BUTTON */
   .hamburger {
     width: 28px;
@@ -191,14 +191,14 @@
     justify-content: space-between;
     cursor: pointer;
   }
-
+  
   .hamburger span {
     display: block;
     height: 3px;
     border-radius: 2px;
     background: var(--header-text);
   }
-
+  
   /* SLIDE-OUT PANEL */
   .menu-overlay {
     position: fixed;
@@ -209,7 +209,7 @@
     transition: opacity 0.25s ease;
     z-index: 999;
   }
-
+  
   .menu-panel {
     position: fixed;
     top: 0;
@@ -225,28 +225,28 @@
     flex-direction: column;
     gap: 10px;
   }
-
+  
   .menu-open .menu-overlay {
     opacity: 1;
     pointer-events: auto;
   }
-
+  
   .menu-open .menu-panel {
     right: 0;
   }
-
+  
   .menu-link {
     text-decoration: none;
     color: var(--header-text);
     font-size: 14px;
     padding: 8px 0;
   }
-
+  
   .menu-link.disabled {
     opacity: 0.4;
     pointer-events: none;
   }
-
+  
   @media (min-width: 800px) {
     .menu-panel {
       width: 320px;
@@ -254,7 +254,7 @@
     }
   }
 </style>
-
+  
         /* Loading spinner */
 .spinner {
     margin-top: 15px;
@@ -267,12 +267,12 @@
     margin-left: auto;
     margin-right: auto;
 }
-
+  
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
-
+  
 /* Success banner */
 .success-banner {
     margin-top: 20px;
@@ -283,7 +283,7 @@
     border-radius: 6px;
     text-align: center;
 }
-
+  
 /* Popup overlay */
 #successPopup {
     position: fixed;
@@ -296,7 +296,7 @@
     justify-content: center;
     align-items: center;
 }
-
+  
 #successPopup .popup-box {
     background: white;
     padding: 25px;
@@ -319,13 +319,13 @@
             --font-main: 'Arial', sans-serif;
             --font-heading: 'Helvetica Neue', sans-serif;
         }
-
+  
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-
+  
         body {
             font-family: var(--font-main);
             color: var(--color-light);
@@ -333,35 +333,35 @@
             line-height: 1.6;
             scroll-behavior: smooth;
         }
-
+  
         a {
             color: var(--color-secondary);
             text-decoration: none;
             transition: color 0.3s ease;
         }
-
+  
         a:hover {
             color: var(--color-accent);
         }
-
+  
         .container {
             max-width: 1200px;
             margin: 0 auto;
             padding: 0 20px;
         }
-
+  
         section {
             padding: 80px 0;
             min-height: 100vh;
             display: flex;
             align-items: center;
         }
-
+  
         h1, h2, h3 {
             font-family: var(--font-heading);
             color: var(--color-light);
         }
-
+  
         h2 {
             font-size: 2.5em;
             margin-bottom: 40px;
@@ -384,14 +384,14 @@
             transition: all 0.3s ease;
             box-shadow: 0 4px 6px rgba(0, 255, 192, 0.3);
         }
-
+  
         .cta-button:hover {
             background-color: var(--color-primary);
             color: var(--color-secondary);
             box-shadow: 0 6px 10px rgba(0, 255, 192, 0.5);
             transform: translateY(-2px);
         }
-
+  
         /* Header and Navigation */
         header {
             background-color: rgba(10, 25, 47, 0.95);
@@ -401,14 +401,14 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             backdrop-filter: blur(5px);
         }
-
+  
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
             height: 70px;
         }
-
+  
         .logo {
             font-size: 1.8em;
             font-weight: 900;
@@ -416,12 +416,12 @@
             letter-spacing: 1px;
             text-shadow: 0 0 5px rgba(0, 255, 192, 0.5);
         }
-
+  
         .nav-links {
             display: flex;
             list-style: none;
         }
-
+  
         .nav-links a {
             padding: 10px 15px;
             color: var(--color-light);
@@ -429,17 +429,17 @@
             text-transform: uppercase;
             transition: color 0.3s ease, background-color 0.3s ease;
         }
-
+  
         .nav-links a:hover {
             color: var(--color-secondary);
             background-color: rgba(58, 134, 255, 0.1);
         }
-
+  
         .burger {
             display: none;
             cursor: pointer;
         }
-
+  
         .burger div {
             width: 25px;
             height: 3px;
@@ -459,7 +459,7 @@
             position: relative;
             overflow: hidden;
         }
-
+  
         #hero h1 {
             font-size: 4em;
             margin-bottom: 20px;
@@ -467,13 +467,13 @@
             text-transform: uppercase;
             text-shadow: 0 0 10px var(--color-accent);
         }
-
+  
         #hero p {
             font-size: 1.5em;
             margin-bottom: 40px;
             color: rgba(244, 244, 249, 0.8);
         }
-
+  
         /* Hero Animation (JavaScript controlled text) */
         .animated-text span {
             opacity: 0;
@@ -497,21 +497,21 @@
             font-size: 1.1em;
             color: rgba(244, 244, 249, 0.8);
         }
-
+  
         /* Services Section */
         #services {
             background-color: #112240; /* Slightly lighter shade for contrast */
             text-align: center;
             display: block;
         }
-
+  
         .services-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 30px;
             margin-top: 50px;
         }
-
+  
         .service-card {
             background-color: var(--color-primary);
             padding: 30px;
@@ -521,12 +521,12 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             border-top: 5px solid var(--color-secondary);
         }
-
+  
         .service-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 15px 30px rgba(0, 255, 192, 0.2);
         }
-
+  
         .service-card h3 {
             color: var(--color-secondary);
             margin-bottom: 15px;
@@ -536,21 +536,21 @@
         .service-card p {
             color: rgba(244, 244, 249, 0.7);
         }
-
+  
         .service-card i {
             font-size: 2.5em;
             color: var(--color-accent);
             margin-bottom: 15px;
             display: block;
         }
-
+  
         /* Process Section */
         #process {
             background-color: var(--color-primary);
             text-align: center;
             display: block;
         }
-
+  
         .process-flow {
             display: flex;
             justify-content: space-between;
@@ -571,7 +571,7 @@
             transform: translateY(-50%);
             z-index: 1;
         }
-
+  
         .process-step {
             width: 20%;
             position: relative;
@@ -594,24 +594,24 @@
             transition: background-color 0.3s ease;
             cursor: default;
         }
-
+  
         .process-step:hover .step-circle {
             background-color: var(--color-accent);
             color: var(--color-light);
         }
-
+  
         .process-step h4 {
             color: var(--color-light);
             font-size: 1.1em;
         }
-
-
+  
+  
         /* Contact Section */
         #contact {
             background-color: #112240;
             display: block;
         }
-
+  
         .contact-content {
             display: flex;
             gap: 40px;
@@ -626,28 +626,28 @@
             padding-right: 40px;
             border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
-
+  
         .contact-info h3 {
             color: var(--color-secondary);
             margin-bottom: 20px;
         }
-
+  
         .contact-info p {
             margin-bottom: 10px;
             color: rgba(244, 244, 249, 0.8);
         }
-
+  
         .social-links a {
             font-size: 1.5em;
             margin-right: 15px;
         }
-
+  
         .contact-form label {
             display: block;
             margin-bottom: 5px;
             color: var(--color-light);
         }
-
+  
         .contact-form input[type="text"],
         .contact-form input[type="email"],
         .contact-form textarea {
@@ -665,13 +665,13 @@
             resize: vertical;
             min-height: 150px;
         }
-
+  
         .contact-form input:focus,
         .contact-form textarea:focus {
             border-color: var(--color-secondary);
             outline: none;
         }
-
+  
         /* Footer */
         footer {
             background-color: var(--color-primary);
@@ -687,7 +687,7 @@
             padding-top: 10px;
             border-top: 1px dashed rgba(244, 244, 249, 0.1);
         }
-
+  
         /* Mobile Responsiveness */
         @media (max-width: 768px) {
             .nav-links {
@@ -702,7 +702,7 @@
                 transition: transform 0.5s ease-in-out;
                 padding: 20px 0;
             }
-
+  
             .nav-links li {
                 opacity: 0;
                 margin-bottom: 20px;
@@ -715,7 +715,7 @@
             .nav-links.nav-active li {
                 opacity: 1;
             }
-
+  
             .burger {
                 display: block;
             }
@@ -723,7 +723,7 @@
             #hero h1 {
                 font-size: 2.5em;
             }
-
+  
             #hero p {
                 font-size: 1.2em;
             }
@@ -769,7 +769,7 @@
                 margin-top: 15px;
             }
         }
-
+  
         /* Toggle Burger Animation */
         .toggle .line1 {
             transform: rotate(-45deg) translate(-5px, 6px);
@@ -785,7 +785,6 @@
 </head>
 <body>
   
-    <!-- Header and Navigation -->
     <header>
         <div class="container">
             <nav>
@@ -800,7 +799,6 @@
         </div>
     </header>
   
-    <!-- 1. Hero Section -->
     <section id="hero" class="container">
         <div>
             <h1 class="animated-text">Design & Code That Converts</h1>
@@ -809,7 +807,6 @@
         </div>
     </section>
   
-    <!-- 2. About Us Section -->
     <section id="about">
         <div class="container">
             <h2 class="center">About Gift'DD Digital Designs</h2>
@@ -819,7 +816,6 @@
         </div>
     </section>
   
-    <!-- 3. Services Section -->
     <section id="services">
         <div class="container">
             <h2>Our Core Services</h2>
@@ -853,7 +849,6 @@
         </div>
     </section>
   
-    <!-- 4. Process/Approach Section -->
     <section id="process">
         <div class="container">
             <h2>Our Development Approach</h2>
@@ -893,7 +888,6 @@
         </div>
     </section>
   
-    <!-- 5. Contact Section -->
     <section id="contact">
         <div class="container">
             <h2 style="margin-bottom: 20px;">Get a Free Consultation</h2>
@@ -916,45 +910,41 @@
   
 <div class="contact-form-container">
     <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST" class="contact-form">
-
+  
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" required>
-
+  
         <label for="email">Email:</label>
         <input type="email" id="email" name="_replyto" required>
-
+  
         <label for="message">Message:</label>
         <textarea id="message" name="message" required></textarea>
-
+  
         <button type="submit" class="cta-button" id="submitBtn">
             Send Message
         </button>
-
-        <!-- Loading animation -->
+  
         <div id="loadingSpinner" class="spinner" style="display:none;"></div>
-
-        <!-- Success banner -->
+  
         <div id="successBanner" class="success-banner" style="display:none;">
             ✔ Message Sent Successfully!
         </div>
-
+  
     </form>
 </div>
             </div>
         </div>
     </section>
   
-    <!-- Footer -->
     <footer>
         <div class="container">
-
+  
             <p class="footnote">
                 Copyright © 2025 Gift'DD Consultant Services. All Rights Reserved. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
             </p>
         </div>
     </footer>
   
-    <!-- JavaScript for Interactivity -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
               
@@ -1035,21 +1025,32 @@
   
   
             // 3. Simple Contact Form Validation  
+            // The actual Formspree submission logic is now handled in the script block below this one.
+            // This function is no longer needed but is kept for context, with its alert logic removed 
+            // as it conflicts with the new asynchronous submission logic.
             const form = document.getElementById('contactForm');
             form.addEventListener('submit', function(e) {
-              ;
-  
+                // Prevent the original submit handler from running if the new one is active.
+                // However, since the new handler uses event.preventDefault() and runs an async fetch, 
+                // we will let the new handler take full control. 
+                // The highlighted portion was an empty block that would have resulted in an alert 
+                // only if fields were empty. Since the logic is now duplicated/handled better below, 
+                // we can safely remove the old logic or ensure it does nothing.
+                
+                // Since the full form handling is moved to the script after the popup div,
+                // we can remove or comment out the old placeholder validation to prevent double-handling.
+                // Keeping it empty as it was in the highlight section before the final else block.
                 const name = document.getElementById('name').value.trim();
                 const email = document.getElementById('email').value.trim();
                 const message = document.getElementById('message').value.trim();
   
-
                 if (name === "" || email === "" || message === "") {
-|---|---|---|
+                    // Do nothing or let the new handler take over.
                 } else {
                     // Placeholder for actual form submission  
-                    alert("Message Sent! Thank you for contacting Gift'DD Digital Designs. We will be in touch soon.");
-                    form.reset(); // Clear the form on successful (placeholder) submission  
+                    // The new form submission logic handles this now.
+                    // alert("Message Sent! Thank you for contacting Gift'DD Digital Designs. We will be in touch soon.");
+                    // form.reset(); // Clear the form on successful (placeholder) submission  
                 }
             });
   
@@ -1058,11 +1059,11 @@
 <div id="successPopup">
     <div class="popup-box">
         <h3 style="color:#198754;">Message Sent!</h3>
-
+  
         <p style="color:#333; font-size:1rem;">
             Thank you for reaching out. I’ll get back to you shortly.
         </p>
-
+  
         <button onclick="closePopup()" style="
             background:#198754;
             color:white;
@@ -1079,62 +1080,62 @@ const submitBtn = document.getElementById("submitBtn");
 const spinner = document.getElementById("loadingSpinner");
 const banner = document.getElementById("successBanner");
 const popup = document.getElementById("successPopup");
-
+  
 form.addEventListener("submit", async function(event) {
     event.preventDefault(); // stop page reload
-
+  
     // Basic validation
     if (!form.name.value || !form.email.value || !form.message.value) {
         alert("Please fill out all fields.");
         return;
     }
-
+  
     // Show loading spinner
     spinner.style.display = "block";
     submitBtn.disabled = true;
-
+  
     // Send form data to Formspree
     const formData = new FormData(form);
-
+  
     const response = await fetch(form.action, {
         method: "POST",
         body: formData,
         headers: { "Accept": "application/json" }
     });
-
+  
     spinner.style.display = "none";
     submitBtn.disabled = false;
-
+  
     if (response.ok) {
         form.reset();
-
+  
         // Show green banner
         banner.style.display = "block";
-
+  
         // Show popup
         popup.style.display = "flex";
-
+  
         // Hide banner after 5 seconds
         setTimeout(() => {
             banner.style.display = "none";
         }, 5000);
-
+  
     } else {
         alert("There was an issue sending your message. Please try again.");
     }
 });
-
+  
 function closePopup() {
     popup.style.display = "none";
 }
 </script>
-
+  
 <script>
   const body = document.body;
   const hamburger = document.getElementById('hamburger');
   const overlay = document.getElementById('menuOverlay');
   const topBar = document.getElementById('topBar');
-
+  
   function toggleMenu(open) {
     if (open) {
       body.classList.add('menu-open');
@@ -1142,13 +1143,13 @@ function closePopup() {
       body.classList.remove('menu-open');
     }
   }
-
+  
   hamburger.addEventListener('click', () => {
     toggleMenu(!body.classList.contains('menu-open'));
   });
-
+  
   overlay.addEventListener('click', () => toggleMenu(false));
-
+  
   window.addEventListener('scroll', () => {
     if (window.scrollY > 10) {
       topBar.classList.add('shrink');
@@ -1157,8 +1158,7 @@ function closePopup() {
     }
   });
 </script>
-  
+    
 </body>
 </html>
-
 
