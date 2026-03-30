@@ -24,71 +24,74 @@
 <html lang="en">
 <head>
     <style>
-    .nav {
+    /* NAV BAR — CLEAN, CENTERED, RESPONSIVE */
+.nav {
   height: 60px;
   width: 100%;
-  background: #198754;
+  background: inherit; /* Matches the page’s own color */
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.nav-header {
-  display: inline-block;
-}
-
-.nav-title {
-  font-size: 22px;
-  color: #fff;
-  padding: 18px;
-}
-
-.nav-btn {
+/* Remove old title */
+.nav-header, .nav-title {
   display: none;
 }
 
-.nav-links {
-  display: inline-block;
-  float: right;
-  padding-right: 20px;
-}
-
-.nav-links a {
-  display: inline-block;
-  padding: 18px;
-  color: #fff;
-  text-decoration: none;
+/* Hamburger button */
+.nav-btn {
+  display: none;
 }
 
 #nav-check {
   display: none;
 }
 
+/* Desktop menu */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  padding: 10px;
+  font-size: 15px;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+/* MOBILE */
 @media (max-width: 700px) {
   .nav-btn {
-    display: inline-block;
+    display: block;
     position: absolute;
-    right: 10px;
+    right: 15px;
     top: 15px;
     cursor: pointer;
   }
 
   .nav-btn span {
     display: block;
-    width: 28px;
+    width: 26px;
     height: 3px;
     margin: 5px;
     background: #fff;
   }
 
   .nav-links {
-    display: block;
-    width: 100%;
-    background: #198754;
     position: absolute;
     top: 60px;
     left: 0;
+    width: 100%;
+    background: inherit;
+    flex-direction: column;
+    align-items: center;
     height: 0;
     overflow: hidden;
-    transition: 0.3s;
+    transition: 0.3s ease;
   }
 
   #nav-check:checked ~ .nav-links {
@@ -96,11 +99,10 @@
   }
 
   .nav-links a {
-    display: block;
-    text-align: center;
+    padding: 14px 0;
+    font-size: 16px;
   }
 }
-
         /* Loading spinner */
 .spinner {
     margin-top: 15px;
