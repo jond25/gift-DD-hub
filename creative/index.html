@@ -1,0 +1,247 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  /* Base styles for modern, clean look */
+  .lane-container {
+    padding: 30px 15px;
+    background-color: #f7f7f7; /* Very light grey background */
+    border-radius: 0; /* Remove border-radius for full-width feel */
+    box-shadow: none; /* No shadow */
+    margin-bottom: 0;
+    font-family: 'Inter', 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; /* Modern font stack */
+    min-height: 100vh; /* Ensure it covers the full viewport height */
+  }
+  .header-section {
+    background-color: #1a73e8; /* Google Blue inspired color */
+    color: white;
+    padding: 60px 0;
+    margin-bottom: 0;
+  }
+  .header-icon {
+    font-size: 3.5rem;
+    color: white;
+    margin-bottom: 15px;
+  }
+  .core-principles-section {
+    padding: 50px 0;
+    background-color: #ffffff; /* White background for contrast */
+  }
+  .card-modern {
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    border: 1px solid #e0e0e0; /* Subtle border */
+    border-left: 5px solid #1a73e8; /* Accent line */
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    height: 100%;
+  }
+  .card-modern:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+  .card-header-modern {
+    background-color: #f8f9fa; /* Lighter header background */
+    font-weight: 700;
+    color: #343a40;
+    border-bottom: none;
+    padding: 15px 20px;
+  }
+  .card-body .list-unstyled li {
+    margin-bottom: 5px;
+  }
+  .action-plan-section {
+    padding: 50px 0;
+    background-color: #f0f0f0; /* Grey background for the tools section */
+  }
+  .accordion-item {
+    border: none;
+    margin-bottom: 10px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.07);
+  }
+  .accordion-button {
+    background-color: #ffffff;
+    color: #333;
+    font-weight: 600;
+    border-left: 4px solid #f90; /* Orange accent */
+  }
+  .accordion-button:not(.collapsed) {
+    color: #1a73e8;
+    background-color: #e6f0ff;
+    border-left: 4px solid #1a73e8;
+  }
+  .footer-section {
+    background-color: #343a40; /* Dark footer */
+    color: #ffffff;
+    padding: 20px 0;
+    font-size: 0.85rem;
+  }
+  /* Optimization for mobile */
+  @media (max-width: 768px) {
+    .header-section {
+      padding: 40px 0;
+    }
+    .display-4 {
+      font-size: 2.2rem;
+    }
+  }
+</style>
+
+<div class="lane-container">
+
+  <div class="header-section text-center">
+    <div class="container">
+      <i class="bi bi-compass-fill header-icon"></i>
+      <h1 class="display-4 fw-bold">Staying In Your Lane: Focus & Flow</h1>
+      <p class="lead opacity-75">A practical guide to identifying your core competencies and maximizing impact by respecting boundaries.</p>
+    </div>
+  </div>
+
+  <div class="core-principles-section">
+    <div class="container">
+      <h2 class="text-center mb-5 text-secondary fw-light">The Three Pillars of Lane Maintenance</h2>
+      <div class="row g-4">
+        
+        <div class="col-md-4">
+          <div class="card-modern h-100">
+            <div class="card-header-modern">Define Your Expertise</div>
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-primary">Identify Your Zone</h5>
+              <p class="card-text text-muted">Clearly articulate what you are uniquely qualified to do. Understand your role's specific responsibilities and boundaries.</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Role Clarity</li>
+                <li><i class="bi bi-check-circle-fill text-success me-2"></i> Skill Assessment</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card-modern h-100">
+            <div class="card-header-modern">Respecting Others' Territory</div>
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-primary">Collaboration vs. Intervention</h5>
+              <p class="card-text text-muted">Offer support, not takeover. Trust your teammates to manage their domains and provide constructive feedback when invited.</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-people-fill text-info me-2"></i> Mutual Trust</li>
+                <li><i class="bi bi-chat-left-text-fill text-info me-2"></i> Structured Feedback</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4">
+          <div class="card-modern h-100">
+            <div class="card-header-modern">Maximizing Efficiency</div>
+            <div class="card-body">
+              <h5 class="card-title fw-bold text-primary">Deep Work & Impact</h5>
+              <p class="card-text text-muted">Focusing your energy prevents burnout and ensures that your contributions are meaningful, high-quality, and on point.</p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-clock-fill text-warning me-2"></i> Time Management</li>
+                <li><i class="bi bi-graph-up-arrow text-warning me-2"></i> Quality Output</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+  <div class="action-plan-section">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-10 offset-lg-1">
+          <h2 class="text-center mb-4 text-dark">Actionable Steps for Lane Maintenance</h2>
+          <div class="accordion" id="laneAccordion">
+            
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">  
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">  
+                  Tip 1: Create a Responsibility Matrix (RACI)  
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#laneAccordion">  
+                <div class="accordion-body">  
+                  Define who is **Responsible**, **Accountable**, **Consulted**, and **Informed** for key tasks. This visual aid clarifies boundaries immediately.  
+                </div>
+              </div>
+            </div>
+            
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingTwo">  
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">  
+                  Tip 2: Practice "Gentle Redirection"  
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#laneAccordion">  
+                <div class="accordion-body">  
+                  When someone asks you to step into their lane, use phrases like: "That's a great point for [Owner's Name] to consider," or "My best contribution here would be to offer guidance on X, but [Owner's Name] has the final say."  
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingThree">  
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">  
+                  Tip 3: Set "Meeting Endpoints"  
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#laneAccordion">  
+                <div class="accordion-body">  
+                  Before a meeting, identify the non-negotiable outcome. If the discussion veers off course, bring it back by stating, "To make sure we hit our endpoint, let's focus on deciding X."  
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFour">  
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">  
+                  Tip 4: Embrace the "It's Not My Job" Mantra (Just kidding, mostly)  
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#laneAccordion">  
+                <div class="accordion-body">  
+                  While you can't literally say "not my job," mentally framing it this way helps. Ask yourself: "Is this task *critical* for my success, or just *convenient* for someone else's?" If it's the latter, politely suggest the proper channel or owner.  
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                  Tip 5: Schedule "Boundary Review" Time
+                </button>
+              </h2>
+              <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive" data-bs-parent="#laneAccordion">
+                <div class="accordion-body">
+                  Dedicate 15 minutes each week to review recent tasks and meetings. Identify moments where your lane was crossed (or you crossed someone else's). Proactively address recurring boundary issues in a one-on-one setting.
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+      
+  <div class="footer-section text-center">
+    <div class="container">
+      <p>This resource is designed to promote effective collaboration and role clarity. Template by gift'DD/Dynastia.</p>
+    </div>
+  </div>
+
+</div>
+    
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="year"></span> Gift'DD Digital Designs. All Rights Reserved.</p>
+            <p class="footnote">
+                Copyright © 2025 Gift'DD Consultant Services. All Rights Reserved. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
+            </p>
+        </div>
+    </footer>
