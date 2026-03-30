@@ -26,7 +26,111 @@
     <style>
       <style>
 
-/* NEW HAMBURGER + TOP BAR CSS GOES HERE */
+/* NEW HAMBURGER + TOP BAR */
+:root {
+  --header-bg: inherit;
+  --header-text: #ffffff;
+}
+
+.top-bar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--header-bg);
+  color: var(--header-text);
+  transition: padding 0.2s ease;
+}
+
+.top-bar.shrink {
+  padding: 4px 10px;
+}
+
+.back-hub {
+  text-decoration: none;
+  color: var(--header-text);
+  font-size: 14px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.6);
+  background: rgba(0,0,0,0.1);
+  white-space: nowrap;
+}
+
+/* HAMBURGER ICON */
+.hamburger {
+  width: 28px;
+  height: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.hamburger span {
+  display: block;
+  height: 3px;
+  border-radius: 2px;
+  background: var(--header-text);
+}
+
+/* SLIDE-OUT MENU */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease;
+  z-index: 999;
+}
+
+.menu-panel {
+  position: fixed;
+  top: 0;
+  right: -70%;
+  width: 70%;
+  height: 100%;
+  background: var(--header-bg);
+  color: var(--header-text);
+  padding: 20px 16px;
+  box-shadow: -4px 0 12px rgba(0,0,0,0.3);
+  transition: right 0.25s ease;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.menu-open .menu-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.menu-open .menu-panel {
+  right: 0;
+}
+
+.menu-link {
+  text-decoration: none;
+  color: var(--header-text);
+  font-size: 14px;
+  padding: 8px 0;
+}
+
+.menu-link.disabled {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+@media (min-width: 800px) {
+  .menu-panel {
+    width: 320px;
+    right: -320px;
+  }
+}
 
 /* keep your spinner */
 .spinner { … }
