@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stellar Designs | Graphic Storytelling & Visual Branding</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Fonts (Example: Montserrat & Playfair Display for Artsy Look) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+    <!-- Custom CSS File Link -->
+    <style>
+        /* EDITABLE: GLOBAL STYLES */
+        :root {
+            --primary-color: #A3A3FF; /* Light Periwinkle/Blue-Purple Accent */
+            --secondary-color: #FF6B6B; /* Coral/Red Accent */
+            --background-dark: #121212; /* Dark Background */
+            --text-light: #F8F8F8;
+            --font-primary: 'Montserrat', sans-serif;
+            --font-secondary: 'Playfair Display', serif;
+        }
+
+        body {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            font-family: var(--font-primary);
+            overflow-x: hidden; /* Prevent horizontal scroll from animations */
+        }
+
+        h1, h2, h3, h4 {
+            font-family: var(--font-secondary);
+            font-weight: 700;
+        }
+
+        .btn-primary-custom {
+            background-color: var(--primary-color);
+            border-color: var(--primary-color);
+            color: var(--background-dark); /* Contrast for dark background */
+            font-weight: 600;
+            padding: 0.75rem 2rem;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary-custom:hover {
+            background-color: var(--secondary-color);
+            border-color: var(--secondary-color);
+            color: var(--background-dark);
+            transform: translateY(-2px);
+        }
+
+        /* --- Custom Component Styles --- */
+          
+        /* EDITABLE: HEADER/HERO SECTION STYLES */
+        #hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            /* Placeholder for Visual - Use a subtle overlay for text readability */
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            /* IMPORTANT: Placeholder for Image URL - Add your high-resolution background image here */
+            background-image: linear-gradient(rgba(18, 18, 18, 0.5), rgba(18, 18, 18, 0.7)), url('YOUR_HERO_IMAGE_URL_HERE');   
+        }
+
+        #hero-section h1 {
+            font-size: 4rem; /* EDITABLE: Font size for the main headline */
+            color: var(--text-light);
+            text-shadow: 2px 2px 5px rgba(0,0,0,0.5);
+            font-weight: 800;
+        }
+
+        /* Artsy Scrolling Reveal Effect (Opacity/Translation) */
+        .reveal-on-scroll {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .reveal-on-scroll.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* EDITABLE: Visual Element Styling (e.g., Portfolio image grid) */
+        .portfolio-item {
+            overflow: hidden;
+            border-radius: 8px; /* Slightly rounded corners */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+        }
+        .portfolio-item img {
+            transition: transform 0.5s ease;
+            width: 100%;
+            height: auto;
+        }
+        .portfolio-item img:hover {
+            transform: scale(1.05); /* Subtle hover zoom effect */
+        }
+
+        /* EDITABLE: Process Section Styling */
+        .process-step {
+            border-left: 2px solid var(--primary-color);
+            padding-left: 1.5rem;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+        .process-step::before {
+            content: attr(data-step);
+            position: absolute;
+            left: -18px;
+            top: 0;
+            background: var(--primary-color);
+            color: var(--background-dark);
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+        }
+
+    </style>
+</head>
+<body>
+  
+    <!-- ============================================== -->
+    <!-- SECTION 1: COMPREHENSIVE HEADER/ABOVE-THE-FOLD -->
+    <!-- Goal: Immediate capture and clear value proposition. -->
+    <!-- ============================================== -->
+    <header id="hero-section" class="bg-dark text-white">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-10 offset-lg-1">
+                    <!-- EDITABLE: Headline Text -->
+                    <h1 class="display-1 mb-4">
+                        Design That Tells Your Story.
+                    </h1>
+                    <!-- EDITABLE: Value Proposition Subtext -->
+                    <p class="lead mb-5 fs-4 fw-light">
+                        Elevating brands through strategic, visually compelling graphic design and art direction.
+                    </p>
+                    <!-- EDITABLE: CTA Text and Link -->
+                    <a href="https://sites.google.com/d/1Kxj0IacvRycv2HO5_K7fx67Jp-YR17oj/p/1UTUfb0RCTV13GsC1AUrrUaXsQ50ylxoI/edit" class="btn btn-primary-custom btn-lg shadow-lg">
+                        View Our Creative Portfolio
+                    </a>
+                </div>
+            </div>
+        </div>
+    </header>
+  
+    <main>
+          
+        <!-- ============================================== -->
+        <!-- SECTION 2: INTRODUCTION & BIO (PROGRESSIVE DISCLOSURE) -->
+        <!-- Goal: Validate problem, introduce the solution, and establish credibility. -->
+        <!-- ============================================== -->
+        <section id="about-intro" class="py-5 py-md-5 bg-dark">
+            <div class="container">
+                <div class="row align-items-center g-5">
+                    <div class="col-lg-6 reveal-on-scroll">
+                        <span class="text-uppercase fw-bold" style="color: var(--primary-color);">Creative Director</span>
+			 <h2 class="display-4 my-3">I turn visions into visceral 
+realities.</h2>
+              <p class="lead">
+                            For three years, I have specialized in cutting-edge visual branding, focusing on delivering distinctive, high-impact design solutions. My approach blends deep market strategy with unconventional artistry, ensuring every project is not just beautiful, but strategically effective.
+                        </p>
+                        <!-- EDITABLE: Bio Details (3 Years Experience) -->
+                        <p class="mb-4 small fst-italic">
+                            3 Years of professional experience in graphic design and art direction, spanning print, digital, and interactive media. Proven expertise in brand identity development and campaign execution.
+                        </p>
+                        <a href="https://forms.gle/vP6xiiUrskmh5CnCA">Start Your Project</a>
+                    </div>
+                    <div class="col-lg-6 reveal-on-scroll">
+                        <!-- IMPORTANT: Placeholder for Image URL - Add your Bio/Headshot Image here -->
+                        <div class="portfolio-item">
+                            <img src="YOUR_BIO_IMAGE_URL_HERE" class="img-fluid" alt="Headshot of the Creative Director" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+  
+        <!-- ============================================== -->
+        <!-- SECTION 3: FEATURES/BENEFITS BREAKDOWN -->
+        <!-- Goal: Detail what the user receives, focusing on outcomes. -->
+        <!-- ============================================== -->
+        <section id="benefits" class="py-5 py-md-5" style="background-color: #0A0A0A;">
+            <div class="container">
+                <h2 class="text-center display-5 mb-5 reveal-on-scroll">The Art & Strategy Behind Our Work</h2>
+                <div class="row text-center">
+                      
+                    <!-- Feature 1 -->
+                    <div class="col-md-4 mb-4 reveal-on-scroll">
+                        <div class="p-4">
+                            <h3 class="h4" style="color: var(--secondary-color);">Strategic Branding</h3>
+                            <p class="small">
+                                Define your unique market position with a brand identity that connects deeply with your ideal audience, resulting in immediate recognition.
+                            </p>
+                            <!-- EDITABLE: Iconography - Replace with relevant icon class if using an icon library (e.g., FontAwesome) -->
+                            <h1 class="display-3" style="color: var(--primary-color);">🎨</h1>
+                        </div>
+                    </div>
+  
+                    <!-- Feature 2 -->
+                    <div class="col-md-4 mb-4 reveal-on-scroll" data-delay="100">
+                        <div class="p-4">
+                            <h3 class="h4" style="color: var(--secondary-color);">Visual Storytelling</h3>
+                            <p class="small">
+                                Go beyond aesthetics. We craft narratives into visuals, ensuring every design element drives conversion and engagement.
+                            </p>
+                            <h1 class="display-3" style="color: var(--primary-color);">✨</h1>
+                        </div>
+                    </div>
+  
+                    <!-- Feature 3 -->
+                    <div class="col-md-4 mb-4 reveal-on-scroll" data-delay="200">
+                        <div class="p-4">
+                            <h3 class="h4" style="color: var(--secondary-color);">Seamless Execution</h3>
+                            <p class="small">
+                                Receive polished, production-ready assets across all platforms (web, print, motion) without the technical hassle.
+                            </p>
+                            <h1 class="display-3" style="color: var(--primary-color);">🛠️</h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+  
+        <!-- ============================================== -->
+        <!-- SECTION 4: PROCESS/TIMELINE -->
+        <!-- Goal: Demystify the service with a clear, visual workflow. -->
+        <!-- ============================================== -->
+        <section id="process" class="py-5 py-md-5 bg-dark">
+            <div class="container">
+                <h2 class="text-center display-5 mb-5 reveal-on-scroll">Our Structured Creative Workflow</h2>
+                <div class="row justify-content-center">
+                      
+                    <div class="col-lg-8">
+                        <!-- Step 1 -->
+                        <div class="process-step reveal-on-scroll" data-step="1">
+                            <h3 class="h4" style="color: var(--secondary-color);">Discovery & Strategy</h3>
+                            <p>We start with an in-depth session to understand your goals, audience, and competitive landscape. This stage defines the project's visual direction.</p>
+                        </div>
+                          
+                        <!-- Step 2 -->
+                        <div class="process-step reveal-on-scroll" data-step="2">
+                            <h3 class="h4" style="color: var(--secondary-color);">Conceptual Design</h3>
+                            <p>Development of initial concepts, mood boards, and prototypes. We iterate based on your feedback to refine the core look and feel.</p>
+                        </div>
+  
+                        <!-- Step 3 -->
+                        <div class="process-step reveal-on-scroll" data-step="3">
+                            <h3 class="h4" style="color: var(--secondary-color);">Finalization & Launch</h3>
+                            <p>Polishing the final designs, preparing all master files, and providing a comprehensive brand guide for consistent implementation across all channels.</p>
+                        </div>
+                    </div>
+  
+                </div>
+            </div>
+        </section>
+  
+  
+        <!-- ============================================== -->
+        <!-- SECTION 5: VISUAL PORTFOLIO (High-Quality Photography/Illustrations) -->
+        <!-- Goal: Visual proof of capability and artistic style. -->
+        <!-- ============================================== -->
+        <section id="portfolio-section" class="py-5 py-md-5" style="background-color: #0A0A0A;">
+            <div class="container">
+                <h2 class="text-center display-5 mb-5 reveal-on-scroll">Recent Visual Experiments</h2>
+                <div class="row g-4">
+                      
+                    <!-- Portfolio Item 1 -->
+                    <div class="col-lg-4 col-md-6 reveal-on-scroll">
+                        <div class="portfolio-item">
+                            <!-- IMPORTANT: Placeholder for Image URL -->
+                            <img src="YOUR_PORTFOLIO_IMAGE_1_URL_HERE" class="img-fluid" alt="Abstract branding project" loading="lazy">
+                        </div>
+                    </div>
+  
+                    <!-- Portfolio Item 2 -->
+                    <div class="col-lg-4 col-md-6 reveal-on-scroll">
+                        <div class="portfolio-item">
+                            <!-- IMPORTANT: Placeholder for Image URL -->
+                            <img src="YOUR_PORTFOLIO_IMAGE_2_URL_HERE" class="img-fluid" alt="Digital illustration concept" loading="lazy">
+                        </div>
+                    </div>
+  
+                    <!-- Portfolio Item 3 -->
+                    <div class="col-lg-4 col-md-6 reveal-on-scroll">
+                        <div class="portfolio-item">
+                            <!-- IMPORTANT: Placeholder for Image URL -->
+                            <img src="YOUR_PORTFOLIO_IMAGE_3_URL_HERE" class="img-fluid" alt="Magazine layout design" loading="lazy">
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center mt-5 reveal-on-scroll">
+                    <a href="#" class="btn btn-outline-light btn-lg">Explore Full Gallery</a>
+                </div>
+            </div>
+        </section>
+  
+        <!-- ============================================== -->
+        <!-- SECTION 6: SOCIAL PROOF/TESTIMONIALS -->
+        <!-- Goal: Build trust signals early. -->
+        <!-- ============================================== -->
+        <section id="testimonials" class="py-5 py-md-5 bg-dark">
+            <div class="container">
+                <h2 class="text-center display-5 mb-5 reveal-on-scroll">Trusted By Creative Visionaries</h2>
+                <div class="row">
+                      
+                    <!-- Testimonial 1 -->
+                    <div class="col-md-6 mb-4 reveal-on-scroll">
+                        <blockquote class="p-4 border-start border-5" style="border-color: var(--primary-color) !important; background-color: #1A1A1A;">
+                            <p class="fst-italic">"The rebrand was seamless and strategically perfect. They truly captured the emotional core of our product and was very patient."</p>
+                            <footer class="blockquote-footer mt-2">Alex R. <cite title="Source Title">Marketing Director, TechCo</cite></footer>
+                        </blockquote>
+                    </div>
+  
+                    <!-- Testimonial 2 -->
+                    <div class="col-md-6 mb-4 reveal-on-scroll">
+                        <blockquote class="p-4 border-start border-5" style="border-color: var(--primary-color) !important; background-color: #1A1A1A;">
+                            <p class="fst-italic">"Unbelievable attention to detail and delivered ahead of schedule. Our conversions jumped 30%."</p>
+                            <footer class="blockquote-footer mt-2">Dr. Chen <cite title="Source Title">CEO, Wellness Start-up</cite></footer>
+                        </blockquote>
+                    </div>
+                </div>
+            </div>
+        </section>
+  
+        <!-- ============================================== -->
+        <!-- SECTION 7: FINAL CONVERSION & CTA -->
+        <!-- Goal: Definitive action point. -->
+        <!-- ============================================== -->
+        <section id="contact-section" class="py-5 py-md-5 text-center" style="background-color: var(--primary-color); color: var(--background-dark);">
+            <div class="container reveal-on-scroll">
+                <h2 class="display-3 mb-4 fw-bold">Ready to Elevate Your Brand?</h2>
+                <p class="lead mb-4">
+                    Let's collaborate on your next visual masterpiece. Schedule a free consultation today.
+                </p>
+                <!-- EDITABLE: Final CTA Text and Link -->
+                <a href="mailto:giftdd.llc@gmail.com" class="btn btn-primary-custom btn-lg shadow-lg" style="background-color: var(--secondary-color); border-color: var(--secondary-color); color: var(--text-light);">
+                    Contact Us Now
+                </a>
+            </div>
+        </section>
+  
+    </main>
+  
+    <!-- ============================================== -->
+    <!-- FOOTER -->
+    <!-- ============================================== -->
+    <footer class="py-4 bg-dark text-center small border-top" style="border-color: #333 !important;">
+        <div class="container">
+            <p class="mb-1">&copy; 2023 gift'DD Designs. All Rights Reserved. Without Recourse.</p>
+            <!-- EDITABLE: Footer Links -->
+            <ul class="list-inline mt-2">
+                <li class="list-inline-item"><a href="#" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
+                <li class="list-inline-item">|</li>
+                <li class="list-inline-item"><a href="#" class="text-white-50 text-decoration-none">Terms of Service</a></li>
+                <li class="list-inline-item">|</li>
+                <li class="list-inline-item"><a href="mailto:giftdd.llc@gmail.com" class="text-white-50 text-decoration-none">Email Us</a></li>
+            </ul>
+        </div>
+    </footer>
+  
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+    <!-- Custom JavaScript for Scrolling Animations (Reveal on Scroll) -->
+    <script>
+        // EDITABLE: JavaScript for subtle reveal animations on scroll  
+        document.addEventListener("DOMContentLoaded", function() {  
+            const observerOptions = {  
+                root: null,  
+                rootMargin: "0px",  
+                threshold: 0.2 // Trigger when 20% of the element is visible  
+            };  
+  
+            const revealElements = document.querySelectorAll('.reveal-on-scroll');  
+  
+            const observer = new IntersectionObserver((entries, observer) => {  
+                entries.forEach(entry => {  
+                    if (entry.isIntersecting) {  
+                        entry.target.classList.add('is-visible');  
+                        observer.unobserve(entry.target); // Stop observing once visible  
+                    }  
+                });  
+            }, observerOptions);
+
+            revealElements.forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
