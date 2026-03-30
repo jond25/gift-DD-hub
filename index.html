@@ -1,7 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <style>
+/* Loading spinner */
+.spinner {
+    margin-top: 15px;
+    border: 4px solid #ddd;
+    border-top: 4px solid #198754;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    animation: spin 1s linear infinite;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success banner */
+.success-banner {
+    margin-top: 20px;
+    padding: 12px;
+    background-color: #198754;
+    color: white;
+    font-weight: bold;
+    border-radius: 6px;
+    text-align: center;
+}
+
+/* Popup overlay */
+#successPopup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    justify-content: center;
+    align-items: center;
+}
+
+#successPopup .popup-box {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    text-align: center;
+    width: 300px;
+    border-top: 6px solid #198754;
+}
+</style>
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Design for Impact</title>
     <style>
@@ -609,20 +661,32 @@
                     </div>
                 </div>
   
-                <div class="contact-form-container">
-                    <form id="https://forms.gle/ssbKgSzstWMryp1y5" class="contact-form">
-                        <label for="name">Name:</label>
-                        <input type="text" id="name" name="name" required>
-  
-                        <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" required>
-  
-                        <label for="message">Message:</label>
-                        <textarea id="message" name="message" required></textarea>
-  
-                        <button type="https://forms.gle/mSfFU1JnYPZ35DmE8" class="cta-button">Send Message</button>
-                    </form>
-                </div>
+<div class="contact-form-container">
+    <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST" class="contact-form">
+
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="_replyto" required>
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" required></textarea>
+
+        <button type="submit" class="cta-button" id="submitBtn">
+            Send Message
+        </button>
+
+        <!-- Loading animation -->
+        <div id="loadingSpinner" class="spinner" style="display:none;"></div>
+
+        <!-- Success banner -->
+        <div id="successBanner" class="success-banner" style="display:none;">
+            ✔ Message Sent Successfully!
+        </div>
+
+    </form>
+</div>
             </div>
         </div>
     </section>
@@ -630,7 +694,7 @@
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p>&copy; <span id="year"></span> Gift'DD Digital Designs. All Rights Reserved.</p>
+
             <p class="footnote">
                 Copyright © 2025 Gift'DD Consultant Services. All Rights Reserved. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
             </p>
@@ -738,7 +802,80 @@
   
         });
     </script>
-  
+<div id="successPopup">
+    <div class="popup-box">
+        <h3 style="color:#198754;">Message Sent!</h3>
+
+        <p style="color:#333; font-size:1rem;">
+            Thank you for reaching out. I’ll get back to you shortly.
+        </p>
+
+        <button onclick="closePopup()" style="
+            background:#198754;
+            color:white;
+            padding:10px 20px;
+            border:none;
+            border-radius:6px;
+            cursor:pointer;
+        ">Close</button>
+    </div>
+</div>
+<script>
+const form = document.getElementById("contactForm");
+const submitBtn = document.getElementById("submitBtn");
+const spinner = document.getElementById("loadingSpinner");
+const banner = document.getElementById("successBanner");
+const popup = document.getElementById("successPopup");
+
+form.addEventListener("submit", async function(event) {
+    event.preventDefault(); // stop page reload
+
+    // Basic validation
+    if (!form.name.value || !form.email.value || !form.message.value) {
+        alert("Please fill out all fields.");
+        return;
+    }
+
+    // Show loading spinner
+    spinner.style.display = "block";
+    submitBtn.disabled = true;
+
+    // Send form data to Formspree
+    const formData = new FormData(form);
+
+    const response = await fetch(form.action, {
+        method: "POST",
+        body: formData,
+        headers: { "Accept": "application/json" }
+    });
+
+    spinner.style.display = "none";
+    submitBtn.disabled = false;
+
+    if (response.ok) {
+        form.reset();
+
+        // Show green banner
+        banner.style.display = "block";
+
+        // Show popup
+        popup.style.display = "flex";
+
+        // Hide banner after 5 seconds
+        setTimeout(() => {
+            banner.style.display = "none";
+        }, 5000);
+
+    } else {
+        alert("There was an issue sending your message. Please try again.");
+    }
+});
+
+function closePopup() {
+    popup.style.display = "none";
+}
+</script>
+
 </body>
 </html>
 
