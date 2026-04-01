@@ -3,128 +3,145 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staying In Lane | Gift'DD</title>
+    <title>Staying In Lane | Focus & Flow</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 
     <style>
-        /* --- 1. NEW HAMBURGER & HUB NAV CSS --- */
         :root {
             --hub-navy: #0A192F;
             --hub-neon: #00FFC0;
+            --lane-blue: #1a73e8;
         }
 
-        .top-bar {
-            background-color: var(--hub-navy);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px 20px;
-            position: sticky;
-            top: 0;
-            z-index: 2000;
-        }
+        body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; color: #333; }
 
-        /* Turning the link into a Button */
-        .back-hub {
-            color: var(--hub-neon) !important;
-            text-decoration: none;
-            border: 1px solid var(--hub-neon);
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: 0.3s;
+        /* FLOATING HAMBURGER (Sticks to screen) */
+        .floating-burger {
+            position: fixed; top: 20px; right: 20px; z-index: 4000;
+            background: var(--hub-navy); width: 50px; height: 50px;
+            border-radius: 50%; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid var(--hub-neon);
         }
-        .back-hub:hover {
-            background: var(--hub-neon);
-            color: var(--hub-navy) !important;
-        }
+        .floating-burger span { width: 25px; height: 3px; background: var(--hub-neon); margin: 2px 0; transition: 0.3s; }
 
-        .hamburger {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        .hamburger span {
-            display: block;
-            width: 25px;
-            height: 3px;
-            background: var(--hub-neon);
-        }
-
-        /* HIDDEN MENU PANEL */
+        /* SLIDE MENU */
         .menu-panel {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 300px;
-            height: 100vh;
-            background: var(--hub-navy);
-            z-index: 3000;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: 0.4s ease-in-out;
+            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
+            background: var(--hub-navy); z-index: 5000; display: flex;
+            flex-direction: column; justify-content: center; align-items: center;
+            transition: 0.5s ease-in-out;
         }
+        body.menu-open .menu-panel { right: 0; }
+        .menu-link { color: white; text-decoration: none; font-size: 1.2rem; margin: 15px 0; text-transform: uppercase; }
+        .menu-link:hover { color: var(--hub-neon); }
 
-        /* When active, slide it in */
-        body.menu-open .menu-panel {
-            right: 0;
+        /* BACK HUB BUTTON (Not sticky, just at top) */
+        .hub-btn-container { padding: 20px; }
+        .back-hub {
+            display: inline-block; color: var(--lane-blue); border: 2px solid var(--lane-blue);
+            padding: 8px 20px; border-radius: 25px; text-decoration: none; font-weight: bold;
         }
+        .back-hub:hover { background: var(--lane-blue); color: white; }
 
-        .menu-link {
-            color: white !important;
-            text-decoration: none;
-            font-size: 1.2rem;
-            margin: 15px 0;
-            text-transform: uppercase;
-        }
-
-        /* --- 2. EXISTING LANE STYLES (Kept exactly as yours) --- */
-        .lane-container {
-            padding: 30px 15px;
-            background-color: #f7f7f7;
-            font-family: 'Inter', sans-serif;
-            min-height: 100vh;
-        }
-        .header-section { background-color: #1a73e8; color: white; padding: 60px 0; }
-        .card-modern { border-left: 5px solid #1a73e8; border-radius: 8px; transition: 0.3s; }
+        /* LANE CONTENT STYLES */
+        .header-section { background-color: var(--lane-blue); color: white; padding: 80px 0; }
+        .card-modern { border-left: 5px solid var(--lane-blue); transition: 0.3s; height: 100%; }
+        .card-modern:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
         
-        /* Spinner & Popup (Restored) */
-        .spinner { border: 4px solid #ddd; border-top: 4px solid #198754; border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite; margin: 15px auto; }
+        /* FORM STYLES */
+        .contact-section { padding: 80px 0; background: #fff; border-top: 1px solid #ddd; }
+        .form-control { border: 1px solid var(--lane-blue); margin-bottom: 15px; }
+        .btn-lane { background: var(--lane-blue); color: white; width: 100%; font-weight: bold; }
+
+        .spinner { border: 4px solid #ddd; border-top: 4px solid var(--hub-neon); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 10px auto; display: none; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body id="mainBody">
 
-    <div class="top-bar">
-        <a href="https://ddynastia.com" class="back-hub">Back to Hub</a>
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
+    <div class="floating-burger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
     </div>
 
     <nav class="menu-panel">
-        <a href="/creative/" class="menu-link" style="color: var(--hub-neon) !important;">Staying in Lane</a>
-        <a href="/designDDtees/" class="menu-link">Style</a>
-        <a href="/lawn/" class="menu-link">Lawn Care</a>
+        <a href="/creative/index.html" class="menu-link" style="color: var(--hub-neon);">Staying in Lane</a>
+        <a href="/designDDtees/index.html" class="menu-link">Style</a>
+        <a href="/lawn/index.html" class="menu-link">Lawn Care</a>
         <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
         <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; margin-top: 20px;">[ CLOSE ]</a>
     </nav>
 
-    <div class="lane-container">
+    <div class="hub-btn-container">
+        <a href="https://ddynastia.com" class="back-hub">Back to Hub</a>
+    </div>
+
+    <div class="header-section text-center">
+        <div class="container">
+            <i class="bi bi-compass-fill" style="font-size: 3rem;"></i>
+            <h1 class="display-4 fw-bold">Staying In Your Lane: Focus & Flow</h1>
+            <p class="lead">Identifying core competencies and maximizing impact.</p>
+        </div>
+    </div>
+
+    <div class="container py-5">
+        <h2 class="text-center mb-5">The Three Pillars</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card card-modern p-4">
+                    <h5 class="fw-bold text-primary">Identify Your Zone</h5>
+                    <p>Clearly articulate what you are uniquely qualified to do.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-modern p-4">
+                    <h5 class="fw-bold text-primary">Trust Collaboration</h5>
+                    <p>Offer support, not takeover. Trust teammates to manage their domains.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card card-modern p-4">
+                    <h5 class="fw-bold text-primary">Maximizing Efficiency</h5>
+                    <p>Focusing energy prevents burnout and ensures high-quality output.</p>
+                </div>
+            </div>
         </div>
 
+        <div class="text-center mt-5">
+            <a href="lane-impacts.html" class="btn btn-primary btn-lg px-5 shadow">Explore Lane Definitions (Deep Dive) &rarr;</a>
+        </div>
+    </div>
+
+    <div class="contact-section">
+        <div class="container" style="max-width: 600px;">
+            <h2 class="text-center mb-4">Inquire About This Framework</h2>
+            <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST">
+                <input type="text" name="name" class="form-control" placeholder="Name" required>
+                <input type="email" name="email" class="form-control" placeholder="Email" required>
+                <textarea name="message" class="form-control" rows="4" placeholder="Your Message" required></textarea>
+                <button type="submit" class="btn btn-lane py-3">Send to Gift'DD</button>
+                <div id="loadingSpinner" class="spinner"></div>
+            </form>
+        </div>
+    </div>
+
+    <footer class="py-4 text-center border-top small">
+        <p>© 2025 Gift'DD Consultant Services. All Rights Reserved.</p>
+    </footer>
+
     <script>
-        function toggleMenu() {
-            document.body.classList.toggle('menu-open');
-        }
+        function toggleMenu() { document.body.classList.toggle('menu-open'); }
+
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            document.getElementById('loadingSpinner').style.display = 'block';
+            const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }});
+            document.getElementById('loadingSpinner').style.display = 'none';
+            if (res.ok) { alert('Message Sent!'); form.reset(); }
+        });
     </script>
 </body>
 </html>
