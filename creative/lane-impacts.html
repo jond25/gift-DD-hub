@@ -1,197 +1,106 @@
-<div class="top-bar" id="topBar">
-  <a href="/" class="back-hub">Back to Hub</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lane Impacts | Deep Dive</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --hub-navy: #0A192F;
+            --hub-neon: #00FFC0;
+            --term-bg: #282c34;
+            --term-text: #abb2bf;
+        }
 
-  <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
+        body { background-color: var(--term-bg); color: var(--term-text); font-family: 'Fira Code', monospace; margin: 0; }
 
-<div class="menu-overlay" id="menuOverlay"></div>
+        /* FLOATING HAMBURGER */
+        .floating-burger {
+            position: fixed; top: 20px; right: 20px; z-index: 4000;
+            background: var(--hub-navy); width: 50px; height: 50px;
+            border-radius: 50%; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5); border: 2px solid var(--hub-neon);
+        }
+        .floating-burger span { width: 25px; height: 3px; background: var(--hub-neon); margin: 2px 0; }
 
-<nav class="menu-panel" id="menuPanel">
-  <a href="/creative/" class="menu-link">Staying in Lane</a>
-  <a href="/designDDtees/" class="menu-link">Style</a>
-  <a href="/lawn/" class="menu-link">Lawn Care</a>
+        .menu-panel {
+            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
+            background: var(--hub-navy); z-index: 5000; display: flex;
+            flex-direction: column; justify-content: center; align-items: center;
+            transition: 0.5s ease-in-out;
+        }
+        body.menu-open .menu-panel { right: 0; }
+        .menu-link { color: white; text-decoration: none; font-size: 1.2rem; margin: 15px 0; text-transform: uppercase; }
 
-  <span class="menu-link disabled">Spiritual (Coming Summer 2026)</span>
-  <span class="menu-link disabled">Physical (Coming 2027)</span>
-  <span class="menu-link disabled">Mental (Coming Winter 2026)</span>
+        /* TERMINAL CONTAINER */
+        .lane-container-new { padding: 60px 20px; max-width: 900px; margin: 0 auto; }
+        .terminal-title { color: #61afef; border-bottom: 2px solid #56b6c2; padding-bottom: 10px; }
+        
+        .lane-item { border-left: 5px solid #61afef; background: #21252b; padding: 20px; margin: 20px 0; transition: 0.3s; }
+        .lane-item:hover { transform: translateX(10px); background: rgba(97, 175, 239, 0.1); }
+        
+        .back-btn { display: inline-block; color: #e5c07b; border: 1px solid #e5c07b; padding: 5px 15px; border-radius: 20px; text-decoration: none; margin: 20px; }
 
-  <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
-</nav>
-<!-- Attempt to load the Fira Code font using the standard link tag -->
-<link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&display=swap" rel="stylesheet">
+        /* FORM */
+        .form-container { background: #21252b; padding: 30px; border-radius: 8px; margin-top: 50px; }
+        input, textarea { width: 100%; background: #282c34; border: 1px solid #3e4451; color: white; padding: 10px; margin-bottom: 10px; }
+        button { background: #98c379; color: #282c34; border: none; padding: 10px 20px; font-weight: bold; cursor: pointer; width: 100%; }
+    </style>
+</head>
+<body id="mainBody">
 
-<style> 
-  <style>
+    <div class="floating-burger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
 
-/* NEW HAMBURGER + TOP BAR CSS GOES HERE */
+    <nav class="menu-panel">
+        <a href="/creative/index.html" class="menu-link">Staying in Lane</a>
+        <a href="/designDDtees/index.html" class="menu-link">Style</a>
+        <a href="/lawn/index.html" class="menu-link">Lawn Care</a>
+        <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
+        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; margin-top: 20px;">[ CLOSE ]</a>
+    </nav>
 
-/* keep your spinner */
-.spinner { … }
+    <a href="index.html" class="back-btn">&larr; Back to Focus Guide</a>
 
-/* keep your popup */
-#successPopup { … }
+    <div class="lane-container-new">
+        <h2 class="terminal-title">>> Lane Definitions Initialization...</h2>
+        <p><span style="color: #98c379;">> Philosophy:</span> Depth triumphs over superficial breadth.</p>
 
-</style>
-
-  /* External font import line removed */
-  
-  .lane-container-new {  
-    background-color: #282c34; 
-    color: #abb2bf; 
-    padding: 30px;  
-    border-radius: 8px;  
-    font-family: 'Fira Code', monospace; /* The coding font */
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);  
-  }  
-  
-  .terminal-title {  
-    color: #61afef; 
-    border-bottom: 2px solid #56b6c2;  
-    padding-bottom: 10px;  
-    margin-bottom: 20px;  
-    font-weight: 700;  
-  }  
-  
-  #laneDetails {  
-    max-height: 350px; 
-    overflow-y: auto; 
-    padding-right: 15px; 
-    border: 1px solid #3e4451;  
-    padding: 15px;  
-    background-color: #21252b;  
-    border-radius: 4px;  
-  }  
-  
-  .lane-item {  
-    margin-bottom: 15px;  
-    padding: 10px;  
-    border-left: 5px solid;  
-    transition: transform 0.2s ease-in-out;  
-  }  
-  
-  .lane-item:hover {  
-    transform: translateX(5px);  
-    background-color: rgba(97, 175, 239, 0.1); 
-  }  
-  
-  .lane-analytical { border-left-color: #e5c07b; } 
-  .lane-creative { border-left-color: #98c379; } 
-  .lane-technical { border-left-color: #61afef; } 
-  .lane-relational { border-left-color: #c678dd; } 
-  .lane-operational { border-left-color: #e06c75; } 
-  
-  .lane-role {  
-    color: #e5c07b; 
-    font-weight: bold;  
-  }  
-  
-  .lane-description {  
-    font-style: italic;  
-    color: #7f848e; 
-  }
-  
-  /* Additional fix for utility classes used in the HTML */
-  .text-success { color: #98c379; }
-  .text-warning { color: #e5c07b; }
-  .text-info { color: #61afef; }
-  .mb-0 { margin-bottom: 0 !important; }
-  .mt-4 { margin-top: 1.5rem !important; }
-  .mb-3 { margin-bottom: 1rem !important; }
-  .ms-3 { margin-left: 1rem !important; }
-</style>  
-  
-  
-<div class="lane-container-new">  
-  <h2 class="terminal-title">&gt;&gt; Staying In Your Lane: Focus & Impact</h2>  
-  
-  <!-- Introductory Section -->  
-  <p>  
-    <span class="text-success"> > Initializing Philosophy: </span>  
-    Here at "Staying in Your Lane," we believe in the focused pursuit of mastery and impact in life. Staying in Your lane isn't about limiting yourself; it's about acknowledging your unique strengths, dedicating your energy to where it creates the most value, and collaborating effectively with others who are excelling in their own domains. It’s the philosophy that depth triumphs over superficial breadth.  
-  </p>  
-  <p>  
-    <span class="text-warning"> > Core Competencies Required: </span>  
-    When staying in your lane you quickly understand your core competencies (i.e., the skills, industries, or roles where your talent, experience, and passion intersect); now life requires you to commit to those areas.  
-  </p>  
-  
-  <hr style="border-top: 1px dashed #3e4451; border: 0;">  
-      
-
-<h4 class="text-light mt-4 mb-3">Available Lanes: (Scroll for more details)</h4>
-
-
-
-<div id="laneDetails">
-
-
-
-    
-<div class="lane-item lane-analytical" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; background-color: #f8f9fa;">
-    <p style="font-weight: bold; color: #007bff; margin-bottom: 5px;">Analytical Lane</p>
-    <ul style="list-style-type: none; padding-left: 15px; margin-bottom: 0;">
-        <li><span style="font-weight: bold; color: #17a2b8;">Focus:</span> Data interpretation, trend forecasting, and strategic insights</li>
-        <li><span style="font-weight: bold; color: #17a2b8;">Examples:</span> Data Scientists, Financial Analysts, Business Intelligence Managers</li>
-    </ul>
-</div>
-
-
-    
-<div class="lane-item lane-creative" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; background-color: #f8f9fa;">
-    <p style="font-weight: bold; color: #007bff; margin-bottom: 5px;">Creative Lane</p>
-    <ul style="list-style-type: none; padding-left: 15px; margin-bottom: 0;">
-        <li><span style="font-weight: bold; color: #17a2b8;">Focus:</span> Visual design, branding, and imaginative problem-solving</li>
-        <li><span style="font-weight: bold; color: #17a2b8;">Examples:</span> Graphic Designers, UX/UI Specialists, Content Strategists, Copywriters</li>
-    </ul>
-</div>
-
-
-    
-<div class="lane-item lane-technical" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; background-color: #f8f9fa;">
-    <p style="font-weight: bold; color: #007bff; margin-bottom: 5px;">Technical Lane</p>
-    <ul style="list-style-type: none; padding-left: 15px; margin-bottom: 0;">
-        <li><span style="font-weight: bold; color: #17a2b8;">Focus:</span> System architecture, code development, and infrastructure management</li>
-        <li><span style="font-weight: bold; color: #17a2b8;">Examples:</span> Software Engineers, Network Administrators, Cloud Architects</li>
-    </ul>
-</div>
-
-
-    
-<div class="lane-item lane-relational" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; background-color: #f8f9fa;">
-    <p style="font-weight: bold; color: #007bff; margin-bottom: 5px;">Relational Lane</p>
-    <ul style="list-style-type: none; padding-left: 15px; margin-bottom: 0;">
-        <li><span style="font-weight: bold; color: #17a2b8;">Focus:</span> Building and maintaining connections, negotiation, and client success</li>
-        <li><span style="font-weight: bold; color: #17a2b8;">Examples:</span> Sales Representatives, Account Managers, HR Professionals, Community Organizers</li>
-    </ul>
-</div>
-
-
-    
-<div class="lane-item lane-operational" style="margin-bottom: 15px; padding: 10px; border: 1px solid #ddd; background-color: #f8f9fa;">
-    <p style="font-weight: bold; color: #007bff; margin-bottom: 5px;">Operational Lane</p>
-    <ul style="list-style-type: none; padding-left: 15px; margin-bottom: 0;">
-        <li><span style="font-weight: bold; color: #17a2b8;">Focus:</span> Process optimization, logistics, efficiency, and resource allocation</li>
-        <li><span style="font-weight: bold; color: #17a2b8;">Examples:</span> Operations Managers, Supply Chain Directors, Project Coordinators</li>
-    </ul>
-</div>
-
-
-</div>
-
-    
-
-<p class="lane-description mt-0.5 mb-0 text-center" style="font-style: italic;"> Read again out loud for best understanding of Lane Definitions. Scroll down for details on next steps. </p>
-
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; <span id="year"></span> Gift'DD Digital Designs. All Rights Reserved.</p>
-            <p class="footnote">
-                Copyright © 2025 Gift'DD Consultant Services. All Rights Reserved. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
-            </p>
+        <div class="lane-item">
+            <h4 style="color: #e5c07b; margin: 0;">Analytical Lane</h4>
+            <p>Focus: Data interpretation, trend forecasting, and strategic insights.</p>
         </div>
-    </footer>
+        <div class="lane-item" style="border-color: #98c379;">
+            <h4 style="color: #98c379; margin: 0;">Creative Lane</h4>
+            <p>Focus: Visual design, branding, and imaginative problem-solving.</p>
+        </div>
+        <div class="lane-item" style="border-color: #c678dd;">
+            <h4 style="color: #c678dd; margin: 0;">Relational Lane</h4>
+            <p>Focus: Building connections, negotiation, and client success.</p>
+        </div>
+
+        <div class="form-container">
+            <h3 style="color: #61afef;">>> Contact Terminal</h3>
+            <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST">
+                <input type="text" name="name" placeholder="User ID / Name" required>
+                <input type="email" name="email" placeholder="Contact Protocol (Email)" required>
+                <textarea name="message" rows="4" placeholder="Input Message Data..." required></textarea>
+                <button type="submit">EXECUTE SUBMISSION</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function toggleMenu() { document.body.classList.toggle('menu-open'); }
+        const form = document.getElementById('contactForm');
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }});
+            if (res.ok) { alert('Data Transmitted Successfully.'); form.reset(); }
+        });
+    </script>
+</body>
+</html>
