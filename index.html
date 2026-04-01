@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design for Impact</title>
+    <title>Gift'DD Hub & Design</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
@@ -11,131 +11,159 @@
             --color-primary: #0A192F; 
             --color-secondary: #00FFC0; 
             --color-light: #F4F4F9;
+            --hub-green: #198754;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
+            font-family: 'Arial', sans-serif;
             background-color: var(--color-primary);
             color: var(--color-light);
-            font-family: sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        /* HEADER */
-        .top-bar {
+        /* HEADER & TOP BAR */
+        header {
             position: sticky;
             top: 0;
+            z-index: 1000;
+            background: rgba(10, 25, 47, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0, 255, 192, 0.1);
+            padding: 15px 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px;
-            background: rgba(10, 25, 47, 0.9);
-            border-bottom: 1px solid var(--color-secondary);
-            z-index: 1000;
         }
 
-        .logo {
-            font-weight: bold;
-            font-size: 1.2rem;
+        .nav-title {
+            font-size: 24px;
+            font-weight: 900;
             color: var(--color-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
-        /* MENU TOGGLE BUTTON */
-        .hamburger {
+        /* HAMBURGER */
+        .burger {
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            gap: 6px;
         }
 
-        .hamburger span {
-            display: block;
-            width: 25px;
+        .burger div {
+            width: 30px;
             height: 3px;
-            background: var(--color-secondary);
+            background-color: var(--color-secondary);
+            transition: 0.3s;
         }
 
-        /* HERO SECTION */
-        .hero {
-            height: 80vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            padding: 20px;
-        }
-
-        h1 {
-            font-size: 3rem;
-            color: var(--color-light);
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 1.2rem;
-            color: var(--color-secondary);
-            margin-bottom: 30px;
-        }
-
-        .cta {
-            padding: 15px 30px;
-            background: var(--color-secondary);
-            color: var(--color-primary);
-            text-decoration: none;
-            font-weight: bold;
-            border-radius: 5px;
-        }
-
-        /* SLIDE OUT MENU */
+        /* SLIDE MENU */
         .menu-panel {
             position: fixed;
             top: 0;
-            right: -300px;
+            right: -320px;
             width: 300px;
             height: 100%;
             background: #112240;
-            padding: 50px 20px;
-            transition: 0.3s;
             z-index: 2000;
+            padding: 60px 30px;
+            transition: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
-        body.menu-open .menu-panel {
-            right: 0;
-        }
+        body.menu-open .menu-panel { right: 0; }
 
         .menu-link {
-            display: block;
             color: white;
             text-decoration: none;
-            padding: 15px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            font-size: 18px;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
+
+        .menu-link:hover { color: var(--color-secondary); }
+
+        /* CONTACT FORM & UI */
+        .cta-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background: var(--color-secondary);
+            color: var(--color-primary);
+            font-weight: bold;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+
+        .spinner { border: 4px solid #ddd; border-top: 4px solid var(--hub-green); border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite; margin: 20px auto; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+
+        #successPopup { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 3000; }
+        .popup-box { background: white; padding: 30px; border-radius: 10px; text-align: center; color: #333; }
     </style>
 </head>
+
 <body>
 
-    <div class="top-bar">
-        <div class="logo">Design for Impact</div>
-        <div class="hamburger" onclick="document.body.classList.toggle('menu-open')">
-            <span></span>
-            <span></span>
-            <span></span>
+    <header>
+        <div class="nav-container">
+            <div class="nav-title">Gift’DD Hub</div>
+            <div class="burger" id="menuBtn">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>
+    </header>
+
+    <nav class="menu-panel" id="sideMenu">
+        <a href="creative/" class="menu-link">Staying in Lane</a>
+        <a href="designDDtees/" class="menu-link">Style</a>
+        <a href="lawn/" class="menu-link">Lawn Care</a>
+        <a href="#" class="menu-link" style="opacity:0.5">Spiritual (Soon)</a>
+        <a href="#" class="menu-link" style="opacity:0.5">Physical (Soon)</a>
+        <a href="#" class="menu-link" onclick="toggleMenu()">CLOSE MENU</a>
+    </nav>
+
+    <section style="height: 80vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;">
+        <h1 style="font-size: 3.5em; margin-bottom: 20px;">Design & Code That Converts</h1>
+        <p style="font-size: 1.5em; color: var(--color-secondary); margin-bottom: 40px;">Your Vision, Digitally Gifted.</p>
+        <a href="#contact" class="cta-button">Start Your Project Today</a>
+    </section>
+
+    <div id="successPopup">
+        <div class="popup-box">
+            <h3 style="color:#198754;">Message Sent!</h3>
+            <p>I will get back to you shortly.</p>
+            <button onclick="document.getElementById('successPopup').style.display='none'" style="margin-top:20px; padding:10px 20px; cursor:pointer;">Close</button>
         </div>
     </div>
 
-    <nav class="menu-panel">
-        <a href="#" class="menu-link">Staying in Lane</a>
-        <a href="#" class="menu-link">Style</a>
-        <a href="#" class="menu-link">Lawn Care</a>
-        <a href="#" class="menu-link" onclick="document.body.classList.remove('menu-open')">Close Menu</a>
-    </nav>
+    <script>
+        const body = document.body;
+        const menuBtn = document.getElementById('menuBtn');
 
-    <section class="hero">
-        <h1>Design & Code That Converts</h1>
-        <p>Your Vision, Digitally Gifted.</p>
-        <a href="#" class="cta">Start Your Project Today</a>
-    </section>
+        function toggleMenu() {
+            body.classList.toggle('menu-open');
+        }
+
+        menuBtn.addEventListener('click', toggleMenu);
+
+        // Simple check to ensure page isn't "blank"
+        console.log("Gift'DD Hub Loaded Successfully");
+    </script>
 
 </body>
 </html>
