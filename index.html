@@ -3,218 +3,188 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design for Impact | Gift'DD Digital Designs</title>
+    <title>Design for Impact</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* --- 1. CORE THEME & RESET --- */
+        /* --- KEEPING YOUR ORIGINAL SPINNER & POPUP STYLES --- */
+        .spinner {
+            margin-top: 15px; border: 4px solid #ddd; border-top: 4px solid #198754;
+            border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite;
+            margin-left: auto; margin-right: auto;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        .success-banner {
+            margin-top: 20px; padding: 12px; background-color: #198754;
+            color: white; font-weight: bold; border-radius: 6px; text-align: center;
+        }
+
+        #successPopup {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6); display: none; justify-content: center; align-items: center; z-index: 2000;
+        }
+        #successPopup .popup-box {
+            background: white; padding: 25px; border-radius: 10px; text-align: center;
+            width: 300px; border-top: 6px solid #198754;
+        }
+
+        /* --- CORE THEME --- */
         :root {
             --color-primary: #0A192F; 
             --color-secondary: #00FFC0; 
             --color-accent: #3A86FF; 
             --color-light: #F4F4F9;
             --font-main: 'Arial', sans-serif;
+            --font-heading: 'Helvetica Neue', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
-            font-family: var(--font-main);
-            color: var(--color-light);
-            background-color: var(--color-primary);
-            line-height: 1.6;
-            scroll-behavior: smooth;
-            overflow-x: hidden;
+            font-family: var(--font-main); color: var(--color-light);
+            background-color: var(--color-primary); line-height: 1.6; scroll-behavior: smooth;
         }
 
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 80px 0; min-height: 100vh; display: flex; align-items: center; }
-
-        /* --- 2. RESTORED NAVIGATION (The Fix) --- */
+        /* --- UPDATED HEADER & NAV --- */
         header {
             background-color: rgba(10, 25, 47, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 255, 192, 0.1);
+            position: sticky; top: 0; z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(5px);
         }
 
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
+            display: flex; justify-content: space-between; align-items: center;
+            height: 80px; max-width: 1200px; margin: 0 auto; padding: 0 20px;
         }
 
-        .logo {
-            font-size: 1.8em;
-            font-weight: 900;
-            color: var(--color-secondary);
-            text-shadow: 0 0 5px rgba(0, 255, 192, 0.5);
+        .back-hub {
+            color: var(--color-secondary); border: 1px solid var(--color-secondary);
+            padding: 5px 12px; border-radius: 20px; font-size: 0.8rem;
+            text-decoration: none; transition: 0.3s; margin-right: 15px;
+        }
+        .back-hub:hover { background: var(--color-secondary); color: var(--color-primary); }
+
+        .logo { font-size: 1.4em; font-weight: 900; color: var(--color-secondary); }
+
+        .nav-links { display: flex; list-style: none; align-items: center; }
+        .nav-links a {
+            padding: 10px 15px; color: var(--color-light); font-weight: 500;
+            text-transform: uppercase; font-size: 0.85rem; text-decoration: none;
+        }
+        .nav-links a:hover { color: var(--color-secondary); }
+
+        /* BURGER STYLES */
+        .burger { display: none; cursor: pointer; }
+        .burger div { width: 25px; height: 3px; background-color: var(--color-secondary); margin: 5px; transition: all 0.3s ease; }
+
+        /* MOBILE NAV LOGIC */
+        @media (max-width: 950px) {
+            .nav-links {
+                position: fixed; right: 0; top: 80px; height: calc(100vh - 80px);
+                background-color: var(--color-primary); width: 100%;
+                flex-direction: column; transform: translateX(100%);
+                transition: transform 0.5s ease-in; padding-top: 50px;
+            }
+            .nav-links li { opacity: 0; width: 100%; text-align: center; }
+            .burger { display: block; }
         }
 
-        .hamburger {
-            cursor: pointer;
-            z-index: 2001;
+        .nav-active { transform: translateX(0%); }
+
+        @keyframes navLinkFade {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0px); }
         }
 
-        .hamburger div {
-            width: 25px;
-            height: 3px;
-            background-color: var(--color-secondary);
-            margin: 5px;
-            transition: 0.3s;
-        }
+        .toggle .line1 { transform: rotate(-45deg) translate(-5px, 6px); }
+        .toggle .line2 { opacity: 0; }
+        .toggle .line3 { transform: rotate(45deg) translate(-5px, -6px); }
 
-        /* Slide-out Panel */
-        .menu-panel {
-            position: fixed;
-            top: 0;
-            right: -100%;
-            width: 100%;
-            height: 100vh;
-            background: var(--color-primary);
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            transition: 0.5s ease-in-out;
-            z-index: 2000;
-        }
-
-        @media (min-width: 768px) { .menu-panel { width: 40%; right: -40%; } }
-
-        body.menu-open .menu-panel { right: 0; }
-
-        .menu-link {
-            font-size: 1.5rem;
-            color: var(--color-light);
-            text-decoration: none;
-            margin: 15px 0;
-            text-transform: uppercase;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .menu-link:hover { color: var(--color-secondary); }
-
-        /* --- 3. RESTORED HERO --- */
-        #hero { text-align: center; justify-content: center; }
-        #hero h1 { font-size: 4em; text-transform: uppercase; text-shadow: 0 0 10px var(--color-accent); margin-bottom: 20px; }
+        /* --- KEEPING ALL YOUR ORIGINAL SECTION STYLES --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        section { padding: 80px 0; min-height: 100vh; display: flex; align-items: center; }
+        h1, h2, h3 { font-family: var(--font-heading); color: var(--color-light); }
+        h2 { font-size: 2.5em; margin-bottom: 40px; text-align: center; border-bottom: 2px solid var(--color-secondary); display: inline-block; padding-bottom: 10px; }
+        .cta-button { display: inline-block; padding: 15px 30px; background-color: var(--color-secondary); color: var(--color-primary); border: 2px solid var(--color-secondary); font-weight: bold; text-transform: uppercase; border-radius: 5px; transition: all 0.3s ease; box-shadow: 0 4px 6px rgba(0, 255, 192, 0.3); text-decoration: none; }
+        .cta-button:hover { background-color: var(--color-primary); color: var(--color-secondary); transform: translateY(-2px); }
+        
+        #hero { text-align: center; justify-content: center; overflow: hidden; }
+        #hero h1 { font-size: 4em; margin-bottom: 20px; text-transform: uppercase; text-shadow: 0 0 10px var(--color-accent); }
         .animated-text span { opacity: 0; transition: opacity 0.5s ease; display: inline-block; }
 
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: var(--color-secondary);
-            color: var(--color-primary);
-            font-weight: bold;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: 0.3s;
-        }
+        #about { text-align: center; display: block; }
+        #services { background-color: #112240; text-align: center; display: block; }
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
+        .service-card { background-color: var(--color-primary); padding: 30px; border-radius: 8px; border-top: 5px solid var(--color-secondary); text-align: left; transition: 0.3s; }
+        .service-card i { font-size: 2.5em; color: var(--color-accent); margin-bottom: 15px; display: block; }
+        
+        #process { text-align: center; display: block; }
+        .process-flow { display: flex; justify-content: space-between; margin-top: 50px; position: relative; }
+        .process-flow::before { content: ''; position: absolute; top: 30px; left: 0; right: 0; height: 4px; background-color: var(--color-accent); z-index: 1; }
+        .process-step { width: 20%; position: relative; z-index: 2; }
+        .step-circle { width: 60px; height: 60px; background-color: var(--color-secondary); border-radius: 50%; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; font-weight: bold; color: var(--color-primary); border: 5px solid var(--color-primary); }
 
-        /* --- 4. RESTORED SERVICES & PROCESS --- */
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            margin-top: 50px;
-        }
+        #contact { background-color: #112240; display: block; }
+        .contact-content { display: flex; gap: 40px; margin-top: 50px; }
+        .contact-form input, .contact-form textarea { width: 100%; padding: 10px; margin-bottom: 20px; border: 1px solid var(--color-accent); background: rgba(0,0,0,0.2); color: white; border-radius: 5px; }
 
-        .service-card {
-            background-color: #112240;
-            padding: 30px;
-            border-radius: 8px;
-            border-top: 5px solid var(--color-secondary);
-            transition: 0.3s;
-        }
-
-        .service-card:hover { transform: translateY(-10px); }
-
-        .process-flow {
-            display: flex;
-            justify-content: space-between;
-            margin-top: 50px;
-            position: relative;
-        }
-
-        .step-circle {
-            width: 60px;
-            height: 60px;
-            background-color: var(--color-secondary);
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-primary);
-            font-weight: bold;
-        }
-
-        /* --- 5. CONTACT & POPUPS --- */
-        .contact-form input, .contact-form textarea {
-            width: 100%; padding: 12px; margin-bottom: 20px;
-            background: rgba(0,0,0,0.2); border: 1px solid var(--color-accent); color: white; border-radius: 5px;
-        }
-
-        .spinner { border: 4px solid #ddd; border-top: 4px solid #198754; border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite; margin: 15px auto; display: none; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-
-        #successPopup { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 3000; }
-        .popup-box { background: white; padding: 30px; border-radius: 10px; text-align: center; color: #333; }
+        footer { padding: 20px 0; text-align: center; border-top: 1px solid rgba(0, 255, 192, 0.1); font-size: 0.8em; color: rgba(244, 244, 249, 0.5); }
     </style>
 </head>
 <body>
 
     <header>
-        <div class="container">
-            <nav>
+        <nav>
+            <div style="display: flex; align-items: center;">
+                <a href="https://ddynastia.com" class="back-hub">Back to Hub</a>
                 <div class="logo">Design for Impact</div>
-                <div class="hamburger" onclick="toggleMenu()">
-                    <div></div><div></div><div></div>
-                </div>
-            </nav>
-        </div>
-    </header>
+            </div>
+            
+            <ul class="nav-links">
+                <li><a href="/creative/">Staying in Lane</a></li>
+                <li><a href="/designDDtees/">Style</a></li>
+                <li><a href="/lawn/">Lawn Care</a></li>
+                <li><a href="/sample-sites.html">Sample Sites</a></li>
+                <li><a href="#" style="opacity: 0.5; pointer-events: none;">Spiritual (2026)</a></li>
+            </ul>
 
-    <div class="menu-panel" id="menuPanel">
-        <a href="creative/" class="menu-link">Staying in Lane</a>
-        <a href="designDDtees/" class="menu-link">Style</a>
-        <a href="lawn/" class="menu-link">Lawn Care</a>
-        <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
-        <a href="#" class="menu-link" onclick="toggleMenu()">Close Menu</a>
-    </div>
+            <div class="burger">
+                <div class="line1"></div>
+                <div class="line2"></div>
+                <div class="line3"></div>
+            </div>
+        </nav>
+    </header>
 
     <section id="hero" class="container">
         <div>
             <h1 class="animated-text">Design & Code That Converts</h1>
-            <p style="font-size: 1.5em; margin-bottom: 40px;">Your Vision, Digitally Gifted.</p>
-            <a href="#contact" class="cta-button">Start Your Project Today</a>
+            <p>Your Vision, Digitally Gifted.</p>
+            <a href="https://forms.gle/QoNwNjqTcypDnoD46" class="cta-button">Start Your Project Today</a>
         </div>
     </section>
 
     <section id="about">
-        <div class="container" style="text-align: center;">
-            <h2 style="font-size: 2.5em; margin-bottom: 40px; border-bottom: 2px solid var(--color-secondary); display: inline-block;">About Gift'DD Digital Designs</h2>
-            <p style="max-width: 800px; margin: 0 auto;">We combine the fun, creative user experiences (UX) you need to captivate your audience with the robust, clean, and fast code required for modern digital success.</p>
+        <div class="container">
+            <h2>About Gift'DD Digital Designs</h2>
+            <p>We combine creative UX with robust, fast code. Trust us to craft a digital presence that is professional and approachable.</p>
         </div>
     </section>
 
-    <section id="services" style="background-color: #112240;">
+    <section id="services">
         <div class="container">
-            <h2 style="display: block; text-align: center;">Our Core Services</h2>
+            <h2>Our Core Services</h2>
             <div class="services-grid">
                 <div class="service-card">
-                    <i class="fas fa-desktop" style="font-size: 2em; color: var(--color-accent); margin-bottom: 15px; display: block;"></i>
+                    <i class="fas fa-desktop"></i>
                     <h3>Custom Design</h3>
-                    <p>Bespoke websites tailored exactly to your brand and business goals.</p>
+                    <p>Clean, responsive code tailored exactly to your brand goals.</p>
                 </div>
                 <div class="service-card">
-                    <i class="fas fa-shopping-cart" style="font-size: 2em; color: var(--color-accent); margin-bottom: 15px; display: block;"></i>
+                    <i class="fas fa-shopping-cart"></i>
                     <h3>E-commerce</h3>
-                    <p>Launch your online store with confidence using Shopify or WooCommerce.</p>
+                    <p>Launch stores with confidence on Shopify and WooCommerce.</p>
                 </div>
             </div>
         </div>
@@ -222,62 +192,104 @@
 
     <section id="contact">
         <div class="container">
-            <h2 style="display: block; text-align: center;">Get a Free Consultation</h2>
-            <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST" class="contact-form" style="max-width: 600px; margin: 40px auto 0;">
-                <input type="text" name="name" placeholder="Name" required>
-                <input type="email" name="_replyto" placeholder="Email" required>
-                <textarea name="message" placeholder="Message" required rows="5"></textarea>
-                <button type="submit" class="cta-button" id="submitBtn" style="width: 100%;">Send Message</button>
-                <div id="loadingSpinner" class="spinner"></div>
-            </form>
+            <h2>Get a Free Consultation</h2>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <h3>Contact Us</h3>
+                    <p>Email: giftdd.llc@gmail.com</p>
+                    <p>Phone: (202) 709-3063</p>
+                </div>
+                <div class="contact-form-container">
+                    <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST">
+                        <input type="text" name="name" placeholder="Name" required>
+                        <input type="email" name="_replyto" placeholder="Email" required>
+                        <textarea name="message" placeholder="Message" required rows="5"></textarea>
+                        <button type="submit" class="cta-button" id="submitBtn" style="width: 100%;">Send Message</button>
+                        <div id="loadingSpinner" class="spinner" style="display:none;"></div>
+                        <div id="successBanner" class="success-banner" style="display:none;">✔ Message Sent Successfully!</div>
+                    </form>
+                </div>
+            </div>
         </div>
     </section>
+
+    <footer>
+        <p>© 2025 Gift'DD Consultant Services. All Rights Reserved.</p>
+    </footer>
 
     <div id="successPopup">
         <div class="popup-box">
             <h3 style="color:#198754;">Message Sent!</h3>
-            <p>I will get back to you shortly.</p>
-            <button onclick="document.getElementById('successPopup').style.display='none'" style="margin-top:20px; padding:10px 20px; cursor:pointer;">Close</button>
+            <p>I'll get back to you shortly.</p>
+            <button onclick="document.getElementById('successPopup').style.display='none'" style="margin-top:20px; padding:10px 20px; cursor:pointer; background:#198754; color:white; border:none; border-radius:5px;">Close</button>
         </div>
     </div>
 
     <script>
-        // 1. MENU TOGGLE
-        function toggleMenu() {
-            document.body.classList.toggle('menu-open');
-        }
-
-        // 2. HERO ANIMATION
         document.addEventListener('DOMContentLoaded', () => {
+            
+            // 1. Mobile Navigation Logic
+            const navSlide = () => {
+                const burger = document.querySelector('.burger');
+                const nav = document.querySelector('.nav-links');
+                const navLinks = document.querySelectorAll('.nav-links li');
+
+                burger.addEventListener('click', () => {
+                    nav.classList.toggle('nav-active');
+                    navLinks.forEach((link, index) => {
+                        if (link.style.animation) {
+                            link.style.animation = '';
+                        } else {
+                            link.style.animation = `navLinkFade 0.5s ease forwards ${index / 7 + 0.3}s`;
+                        }
+                    });
+                    burger.classList.toggle('toggle');
+                });
+            };
+            navSlide();
+
+            // 2. Hero Text Animation (Original Logic)
             const heroText = document.querySelector('.animated-text');
-            const text = heroText.textContent;
+            const textContent = heroText.textContent.trim();
             heroText.innerHTML = '';
-            text.split('').forEach((char, i) => {
+            textContent.split('').forEach((char, index) => {
                 const span = document.createElement('span');
-                span.textContent = char;
+                span.textContent = char === ' ' ? '\u00A0' : char;
                 heroText.appendChild(span);
-                setTimeout(() => span.style.opacity = 1, i * 50);
+                setTimeout(() => { span.style.opacity = 1; }, index * 50);
             });
-        });
 
-        // 3. FORMSPREE LOGIC
-        const form = document.getElementById("contactForm");
-        const popup = document.getElementById("successPopup");
-        const spinner = document.getElementById("loadingSpinner");
+            // 3. Formspree / Popup Logic (Original Logic)
+            const form = document.getElementById("contactForm");
+            const submitBtn = document.getElementById("submitBtn");
+            const spinner = document.getElementById("loadingSpinner");
+            const banner = document.getElementById("successBanner");
+            const popup = document.getElementById("successPopup");
 
-        form.addEventListener("submit", async (e) => {
-            e.preventDefault();
-            spinner.style.display = "block";
-            const response = await fetch(form.action, {
-                method: "POST",
-                body: new FormData(form),
-                headers: { 'Accept': 'application/json' }
+            form.addEventListener("submit", async function(event) {
+                event.preventDefault();
+                spinner.style.display = "block";
+                submitBtn.disabled = true;
+
+                const formData = new FormData(form);
+                const response = await fetch(form.action, {
+                    method: "POST",
+                    body: formData,
+                    headers: { "Accept": "application/json" }
+                });
+
+                spinner.style.display = "none";
+                submitBtn.disabled = false;
+
+                if (response.ok) {
+                    form.reset();
+                    banner.style.display = "block";
+                    popup.style.display = "flex";
+                    setTimeout(() => { banner.style.display = "none"; }, 5000);
+                } else {
+                    alert("Issue sending message. Please try again.");
+                }
             });
-            spinner.style.display = "none";
-            if (response.ok) {
-                form.reset();
-                popup.style.display = "flex";
-            }
         });
     </script>
 </body>
