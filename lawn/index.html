@@ -3,51 +3,137 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lawn Services</title>
+    <title>Lawn Services | Gift'DD</title>
 
     <style>
+        /* --- 1. THE ESSENTIAL CSS FOR THE SLIDE MENU --- */
+        :root {
+            --color-primary: #0A192F; 
+            --color-secondary: #00FFC0; 
+            --color-light: #F4F4F9;
+            --lawn-green: #198754; /* Keeping your lawn theme color */
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
         body {
             font-family: Arial, sans-serif;
-            margin: 40px;
+            background-color: var(--color-light); /* Light background for the lawn site */
+            color: #333;
+            line-height: 1.6;
         }
-        a {
-            color: #198754;
+
+        /* TOP BAR */
+        .top-bar {
+            background-color: var(--color-primary);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .back-hub {
+            color: var(--color-secondary);
             text-decoration: none;
-            font-weight: 600;
+            border: 1px solid var(--color-secondary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
         }
+
+        /* HAMBURGER */
+        .hamburger {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: var(--color-secondary);
+            transition: 0.3s;
+        }
+
+        /* MENU PANEL */
+        .menu-panel {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 100%;
+            height: 100vh;
+            background: var(--color-primary);
+            z-index: 2000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s ease-in-out;
+        }
+
+        @media (min-width: 768px) { .menu-panel { width: 350px; right: -350px; } }
+
+        body.menu-open .menu-panel { right: 0; }
+
+        .menu-link {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            margin: 15px 0;
+            text-transform: uppercase;
+        }
+
+        .menu-link:hover { color: var(--color-secondary); }
+        .disabled { opacity: 0.4; pointer-events: none; }
+
+        /* CONTENT */
+        .content {
+            padding: 40px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        h1 { color: var(--lawn-green); margin-bottom: 20px; }
     </style>
 </head>
 
-<body>
+<body id="mainBody">
 
     <div class="top-bar" id="topBar">
-  <a href="/" class="back-hub">Back to Hub</a>
+        <a href="https://ddynastia.com" class="back-hub">Back to Hub</a>
+        <div class="logo" style="font-weight: bold;">Lawn Care</div>
+        <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
 
-  <div class="hamburger" id="hamburger">
-    <span></span>
-    <span></span>
-    <span></span>
-  </div>
-</div>
+    <nav class="menu-panel" id="menuPanel">
+        <a href="/creative/" class="menu-link">Staying in Lane</a>
+        <a href="/designDDtees/" class="menu-link">Style</a>
+        <a href="/lawn/" class="menu-link" style="color: var(--color-secondary);">Lawn Care</a>
+        <span class="menu-link disabled">Spiritual (2026)</span>
+        <a href="/sample-sites.html" class="menu-link">Portfolio Home</a>
+        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; margin-top: 20px;">[ Close Menu ]</a>
+    </nav>
 
-<div class="menu-overlay" id="menuOverlay"></div>
+    <div class="content">
+        <h1>DD Lawncare Services</h1>
+        <p>Welcome to the lawn services sample site. This is where your green thumb projects live.</p>
+    </div>
 
-<nav class="menu-panel" id="menuPanel">
-  <a href="/creative/" class="menu-link">Staying in Lane</a>
-  <a href="/designDDtees/" class="menu-link">Style</a>
-  <a href="/lawn/" class="menu-link">Lawn Care</a>
-
-  <span class="menu-link disabled">Spiritual (Coming Summer 2026)</span>
-  <span class="menu-link disabled">Physical (Coming 2027)</span>
-  <span class="menu-link disabled">Mental (Coming Winter 2026)</span>
-
-  <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
-</nav>
-
-    <a href="/ddynastia-hub/">← Back to Main Hub</a>
-
-    <h1>DD Lawncare Services</h1>
-    <p>Welcome to the lawn services site.</p>
+    <script>
+        function toggleMenu() {
+            document.getElementById('mainBody').classList.toggle('menu-open');
+        }
+    </script>
 
 </body>
 </html>
