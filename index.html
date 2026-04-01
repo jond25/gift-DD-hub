@@ -7,117 +7,135 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* 1. GLOBAL SETTINGS */
         :root {
             --color-primary: #0A192F; 
             --color-secondary: #00FFC0; 
-            --color-accent: #3A86FF; 
             --color-light: #F4F4F9;
-            --header-bg: #0A192F; /* Set explicitly for visibility */
-            --header-text: #ffffff;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: 'Arial', sans-serif;
-            color: var(--color-light);
             background-color: var(--color-primary);
-            line-height: 1.6;
-            scroll-behavior: smooth;
+            color: var(--color-light);
+            font-family: sans-serif;
         }
 
-        /* 2. TOP BAR & HAMBURGER */
+        /* HEADER */
         .top-bar {
             position: sticky;
             top: 0;
-            z-index: 1000;
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            padding: 15px 20px;
-            background: rgba(10, 25, 47, 0.95);
-            backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
-            border-bottom: 1px solid rgba(0, 255, 192, 0.1);
+            align-items: center;
+            padding: 20px;
+            background: rgba(10, 25, 47, 0.9);
+            border-bottom: 1px solid var(--color-secondary);
+            z-index: 1000;
         }
 
-        .top-bar.shrink { padding: 8px 15px; }
-
         .logo {
-            font-size: 1.5em;
-            font-weight: 900;
+            font-weight: bold;
+            font-size: 1.2rem;
             color: var(--color-secondary);
         }
 
+        /* MENU TOGGLE BUTTON */
         .hamburger {
-            width: 28px;
-            height: 20px;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
-            cursor: pointer;
+            gap: 5px;
         }
 
         .hamburger span {
             display: block;
+            width: 25px;
             height: 3px;
             background: var(--color-secondary);
-            border-radius: 2px;
-            transition: 0.3s;
         }
 
-        .back-hub {
+        /* HERO SECTION */
+        .hero {
+            height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 3rem;
+            color: var(--color-light);
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 1.2rem;
+            color: var(--color-secondary);
+            margin-bottom: 30px;
+        }
+
+        .cta {
+            padding: 15px 30px;
+            background: var(--color-secondary);
+            color: var(--color-primary);
             text-decoration: none;
-            color: var(--header-text);
-            font-size: 13px;
-            padding: 5px 12px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.4);
-            background: rgba(255,255,255,0.05);
+            font-weight: bold;
+            border-radius: 5px;
         }
 
-        /* 3. SLIDE-OUT MENU */
-        .menu-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.7);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 1001;
-        }
-
+        /* SLIDE OUT MENU */
         .menu-panel {
             position: fixed;
             top: 0;
-            right: -300px; /* Hide off-screen */
+            right: -300px;
             width: 300px;
             height: 100%;
-            background: #112240; /* Slightly lighter navy */
-            padding: 40px 25px;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
-            transition: right 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            z-index: 1002;
+            background: #112240;
+            padding: 50px 20px;
+            transition: 0.3s;
+            z-index: 2000;
         }
 
-        /* State Classes */
-        body.menu-open { overflow: hidden; }
-        body.menu-open .menu-overlay { opacity: 1; pointer-events: auto; }
-        body.menu-open .menu-panel { right: 0; }
+        body.menu-open .menu-panel {
+            right: 0;
+        }
 
         .menu-link {
+            display: block;
+            color: white;
             text-decoration: none;
-            color: var(--color-light);
-            font-size: 1.1em;
-            padding: 10px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 15px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
         }
+    </style>
+</head>
+<body>
 
-        .menu-link:hover { color: var(--color-secondary); }
-        .menu-link.disabled { opacity: 0.4; pointer-events: none; }
+    <div class="top-bar">
+        <div class="logo">Design for Impact</div>
+        <div class="hamburger" onclick="document.body.classList.toggle('menu-open')">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
 
-        /* 4. SECTIONS & UTILITIES
+    <nav class="menu-panel">
+        <a href="#" class="menu-link">Staying in Lane</a>
+        <a href="#" class="menu-link">Style</a>
+        <a href="#" class="menu-link">Lawn Care</a>
+        <a href="#" class="menu-link" onclick="document.body.classList.remove('menu-open')">Close Menu</a>
+    </nav>
+
+    <section class="hero">
+        <h1>Design & Code That Converts</h1>
+        <p>Your Vision, Digitally Gifted.</p>
+        <a href="#" class="cta">Start Your Project Today</a>
+    </section>
+
+</body>
+</html>
