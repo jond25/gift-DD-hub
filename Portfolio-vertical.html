@@ -3,219 +3,206 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Design for Impact</title>
+    <title>Sample Sites | Design for Impact</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* 1. GLOBAL VARIABLES & RESET */
+        /* --- 1. CORE THEME --- */
         :root {
             --color-primary: #0A192F; 
             --color-secondary: #00FFC0; 
             --color-accent: #3A86FF; 
             --color-light: #F4F4F9;
-            --header-bg: #0A192F; /* Explicitly set this for the menu */
-            --header-text: #ffffff;
+            --font-main: 'Arial', sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
+        
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: var(--font-main);
             color: var(--color-light);
             background-color: var(--color-primary);
             line-height: 1.6;
-            scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
-        /* 2. NEW TOP BAR & HAMBURGER */
-        .top-bar {
+        /* --- 2. THE TOP BAR --- */
+        header {
+            background-color: rgba(10, 25, 47, 0.95);
             position: sticky;
             top: 0;
             z-index: 1000;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 15px 25px;
-            background: rgba(10, 25, 47, 0.95);
             backdrop-filter: blur(5px);
-            transition: all 0.3s ease;
             border-bottom: 1px solid rgba(0, 255, 192, 0.1);
         }
 
-        .top-bar.shrink { padding: 8px 20px; }
-
-        .logo {
-            font-size: 1.5em;
-            font-weight: 900;
-            color: var(--color-secondary);
-            text-shadow: 0 0 5px rgba(0, 255, 192, 0.3);
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
         }
 
+        .back-hub {
+            color: var(--color-secondary);
+            border: 1px solid var(--color-secondary);
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .back-hub:hover { background: var(--color-secondary); color: var(--color-primary); }
+
+        .logo { font-size: 1.4em; font-weight: 900; color: var(--color-secondary); }
+
+        /* HAMBURGER ICON */
         .hamburger {
-            width: 30px;
-            height: 20px;
+            cursor: pointer;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            cursor: pointer;
+            width: 25px;
+            height: 18px;
         }
 
         .hamburger span {
             display: block;
             height: 3px;
             width: 100%;
-            background: var(--color-secondary);
+            background-color: var(--color-secondary);
             border-radius: 2px;
             transition: 0.3s;
         }
 
-        /* 3. SLIDE-OUT MENU */
-        .menu-overlay {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.7);
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.3s ease;
-            z-index: 1001;
-        }
-
+        /* --- 3. THE SLIDE-OUT PANEL --- */
         .menu-panel {
             position: fixed;
             top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100%;
-            background: #112240;
-            padding: 40px 30px;
-            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
-            transition: right 0.3s ease;
+            right: -100%; /* Hidden by default */
+            width: 100%;
+            height: 100vh;
+            background-color: var(--color-primary);
             display: flex;
             flex-direction: column;
-            gap: 20px;
-            z-index: 1002;
+            justify-content: center;
+            align-items: center;
+            transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+            z-index: 2000;
         }
 
-        /* State Classes */
-        body.menu-open { overflow: hidden; }
-        body.menu-open .menu-overlay { opacity: 1; pointer-events: auto; }
+        /* Desktop width adjustment for the panel */
+        @media (min-width: 768px) {
+            .menu-panel { width: 350px; right: -350px; border-left: 1px solid rgba(0, 255, 192, 0.1); }
+        }
+
         body.menu-open .menu-panel { right: 0; }
 
         .menu-link {
-            text-decoration: none;
+            font-size: 1.5rem;
             color: var(--color-light);
-            font-size: 1.1em;
-            font-weight: 500;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 10px;
-        }
-
-        .menu-link:hover { color: var(--color-secondary); }
-        .menu-link.disabled { opacity: 0.4; pointer-events: none; }
-
-        /* 4. SECTIONS & UI */
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 80px 0; min-height: 80vh; display: flex; align-items: center; }
-        
-        h2 { font-size: 2.5em; margin-bottom: 40px; text-align: center; border-bottom: 2px solid var(--color-secondary); display: inline-block; }
-
-        .cta-button {
-            display: inline-block;
-            padding: 15px 30px;
-            background-color: var(--color-secondary);
-            color: var(--color-primary);
+            text-decoration: none;
+            margin: 15px 0;
+            text-transform: uppercase;
             font-weight: bold;
-            border-radius: 5px;
             transition: 0.3s;
         }
+        .menu-link:hover { color: var(--color-secondary); }
 
-        /* Spinner & Popup */
-        .spinner { border: 4px solid #ddd; border-top: 4px solid #198754; border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite; margin: 15px auto; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        
-        #successPopup { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 2000; }
-        .popup-box { background: white; padding: 30px; border-radius: 10px; text-align: center; color: #333; }
+        .close-btn {
+            position: absolute;
+            top: 25px;
+            right: 25px;
+            font-size: 2rem;
+            color: var(--color-secondary);
+            cursor: pointer;
+        }
+
+        /* --- 4. CONTENT GRID --- */
+        .content-area {
+            padding: 100px 20px;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        h1 { font-size: 2.5em; margin-bottom: 10px; color: var(--color-light); }
+        p.subtitle { color: var(--color-secondary); margin-bottom: 50px; font-weight: bold; }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .site-card {
+            background: #112240;
+            padding: 50px 30px;
+            border-radius: 12px;
+            text-decoration: none;
+            color: var(--color-light);
+            border-top: 4px solid transparent;
+            transition: 0.4s;
+            box-shadow: 0 10px 30px -15px rgba(2, 12, 27, 0.7);
+        }
+
+        .site-card:hover {
+            transform: translateY(-10px);
+            border-top-color: var(--color-secondary);
+            background: #1d2d50;
+        }
+
+        .site-card h3 { color: var(--color-secondary); margin-bottom: 10px; font-size: 1.4rem; }
     </style>
 </head>
+<body id="body">
 
-<body>
+    <header>
+        <nav>
+            <a href="https://ddynastia.com" class="back-hub">Back to Hub</a>
+            <div class="logo">Portfolio</div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
+    </header>
 
-    <div class="top-bar" id="topBar">
-        <div class="logo">Design for Impact</div>
-        <div class="hamburger" id="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
-
-    <div class="menu-overlay" id="menuOverlay"></div>
     <nav class="menu-panel" id="menuPanel">
-        <h3 style="color: var(--color-secondary); margin-bottom: 10px;">Menu</h3>
+        <div class="close-btn" onclick="toggleMenu()">&times;</div>
         <a href="/creative/" class="menu-link">Staying in Lane</a>
         <a href="/designDDtees/" class="menu-link">Style</a>
         <a href="/lawn/" class="menu-link">Lawn Care</a>
-        <span class="menu-link disabled">Spiritual (Summer 2026)</span>
-        <span class="menu-link disabled">Physical (2027)</span>
-        <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
+        <a href="/sample-sites.html" class="menu-link" style="color: var(--color-secondary);">Portfolio Home</a>
     </nav>
 
-    <section id="hero" class="container">
-        <div style="text-align: center; width: 100%;">
-            <h1 id="animated-text" style="font-size: 3.5em; color: var(--color-light);">Design & Code That Converts</h1>
-            <p style="font-size: 1.5em; margin: 20px 0 40px;">Your Vision, Digitally Gifted.</p>
-            <a href="https://forms.gle/QoNwNjqTcypDnoD46" class="cta-button">Start Your Project Today</a>
-        </div>
-    </section>
+    <main class="content-area">
+        <h1>Our Live Work</h1>
+        <p class="subtitle">Experience the "Digital Gift" in Action</p>
 
-    <div id="successPopup">
-        <div class="popup-box">
-            <h3 style="color:#198754;">Message Sent!</h3>
-            <p>I’ll get back to you shortly.</p>
-            <button onclick="document.getElementById('successPopup').style.display='none'" style="margin-top:15px; padding: 10px 20px; cursor:pointer;">Close</button>
+        <div class="grid">
+            <a href="/creative/" class="site-card">
+                <h3>Staying in Lane</h3>
+                <p>Creative UX & Brand Strategy</p>
+            </a>
+            <a href="/designDDtees/" class="site-card">
+                <h3>Style</h3>
+                <p>Fashion & Digital Merchandise</p>
+            </a>
+            <a href="/lawn/" class="site-card">
+                <h3>Lawn Care</h3>
+                <p>Service-Based Business Solution</p>
+            </a>
         </div>
-    </div>
+    </main>
 
     <script>
-        // 1. MENU LOGIC
-        const body = document.body;
-        const hamburger = document.getElementById('hamburger');
-        const overlay = document.getElementById('menuOverlay');
-        const topBar = document.getElementById('topBar');
-
         function toggleMenu() {
-            body.classList.toggle('menu-open');
+            document.getElementById('body').classList.toggle('menu-open');
         }
-
-        hamburger.addEventListener('click', toggleMenu);
-        overlay.addEventListener('click', toggleMenu);
-
-        // Close menu when clicking a link
-        document.querySelectorAll('.menu-link').forEach(link => {
-            link.addEventListener('click', () => body.classList.remove('menu-open'));
-        });
-
-        // 2. SCROLL EFFECT
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                topBar.classList.add('shrink');
-            } else {
-                topBar.classList.remove('shrink');
-            }
-        });
-
-        // 3. HERO TEXT ANIMATION
-        const heroText = document.getElementById('animated-text');
-        const text = heroText.innerText;
-        heroText.innerHTML = '';
-        text.split('').forEach((char, i) => {
-            const span = document.createElement('span');
-            span.innerText = char;
-            span.style.opacity = '0';
-            span.style.transition = 'opacity 0.1s ease';
-            heroText.appendChild(span);
-            setTimeout(() => span.style.opacity = '1', i * 50);
-        });
     </script>
+
 </body>
 </html>
