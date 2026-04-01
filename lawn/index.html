@@ -4,16 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>gift'DD Lawncare | Keep The Snakes Out Your Grass!</title>
-    
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* --- 1. HUB NAVIGATION STYLES (Navy/Neon) --- */
+        /* --- 1. HUB NAVIGATION (Navy/Neon) --- */
         :root {
             --hub-navy: #0A192F;
             --hub-neon: #00FFC0;
-            --hub-light: #F4F4F9;
         }
 
         .top-bar {
@@ -25,7 +23,7 @@
             padding: 10px 20px;
             position: sticky;
             top: 0;
-            z-index: 2000; /* Higher than Bootstrap sticky-top */
+            z-index: 2000; /* Stays above Bootstrap nav */
             border-bottom: 1px solid rgba(0, 255, 192, 0.2);
         }
 
@@ -43,7 +41,6 @@
         .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
         .hamburger span { display: block; width: 25px; height: 3px; background: var(--hub-neon); transition: 0.3s; }
 
-        /* SLIDE OUT MENU */
         .menu-panel {
             position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
             background: var(--hub-navy); z-index: 3000;
@@ -51,16 +48,19 @@
             transition: 0.5s ease-in-out;
         }
         @media (min-width: 768px) { .menu-panel { width: 350px; right: -350px; } }
+        body.menu-open { overflow: hidden; }
         body.menu-open .menu-panel { right: 0; }
+        
         .menu-link { color: white; text-decoration: none; font-size: 1.5rem; margin: 15px 0; text-transform: uppercase; }
         .menu-link:hover { color: var(--hub-neon); }
-        .menu-link.active { color: var(--hub-neon); font-weight: bold; }
 
         /* --- 2. ORIGINAL LAWN CARE STYLES --- */
         .jumbotron {
-            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1533467647142-f4639d731bc9?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1533467647142-f4639d731bc9?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
             background-size: cover;
-            color: white; padding: 8rem 0; text-shadow: 2px 2px 4px #000000;
+            color: white;
+            padding: 8rem 0;
+            text-shadow: 2px 2px 4px #000000;
         }
         .section-padding { padding: 4rem 0; }
         .card-service { transition: transform 0.3s ease-in-out; }
@@ -72,7 +72,7 @@
 
     <div class="top-bar">
         <a href="https://ddynastia.com" class="back-hub">Back to Hub</a>
-        <div class="fw-bold text-white">Gift'DD Hub Navigation</div>
+        <div class="fw-bold text-white">Gift'DD Hub</div>
         <div class="hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </div>
@@ -80,121 +80,3 @@
 
     <nav class="menu-panel">
         <a href="/creative/" class="menu-link">Staying in Lane</a>
-        <a href="/designDDtees/" class="menu-link">Style</a>
-        <a href="/lawn/" class="menu-link active">Lawn Care</a>
-        <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
-        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.9rem; color: var(--hub-neon);">[ CLOSE MENU ]</a>
-    </nav>
-
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success">
-        <div class="container">
-            <a class="navbar-brand fw-bold" href="#">gift'DD Lawncare</a>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link active" href="#">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#quote-form">Get a Quote</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
-
-    <header class="jumbotron text-center">
-        <div class="container">
-            <h1 class="display-2 fw-bolder">We Don't Just Cut Grass, We Cultivate Confidence.</h1>
-            <p class="lead">Serving Anne Arundel, Howard, and Baltimore County Areas.</p>
-            <h2 class="mt-4 display-6 text-warning">"Keep The Snakes Out Your Grass: Clean Edges, Clear Mind."</h2>
-            <a href="https://sites.google.com/ddynastia.com/giftddlawncare/home-page" target="_blank" class="btn btn-warning btn-lg mt-3 fw-bold shadow">Get Your Free Rough Estimate!</a>
-        </div>
-    </header>
-
-    <section id="services" class="section-padding">
-        <div class="container text-center">
-            <h2 class="display-4 mb-5 text-success">Comprehensive Care. No Gaps.</h2>
-            <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card card-service h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title text-success">Mow, Edge & Trim</h5>
-                            <p class="card-text">Precision cuts tailored to your grass type and season. Crisp edges and careful trimming.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-service h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title text-success">Feed & Weed</h5>
-                            <p class="card-text">Custom fertilization and expert weed control plans based on your soil biology.</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card card-service h-100 shadow">
-                        <div class="card-body">
-                            <h5 class="card-title text-success">Seasonal Cleanup</h5>
-                            <p class="card-text">Spring rejuvenation and fall leaf removal. Aeration and dethatching available.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="quote-form" class="section-padding bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5 display-5 text-success">Get Your Rough Estimate Instantly!</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="card p-4 shadow-lg">
-                        <form>
-                            <div class="mb-3">
-                                <label class="form-label">Approximate Lawn Size</label>
-                                <select class="form-select" id="lawnSize">
-                                    <option value="1500">Small Lot (Up to 1,500 sq ft)</option>
-                                    <option value="3000">Medium Lot (3,000 sq ft)</option>
-                                    <option value="5000">Large Lot (5,000 sq ft)</option>
-                                </select>
-                            </div>
-                            <div class="mb-3">
-                                <label class="form-label">Service Needed</label>
-                                <select class="form-select" id="serviceType">
-                                    <option value="1.0">Standard Weekly Mow</option>
-                                    <option value="1.6">Full Service (Mow + Feed)</option>
-                                </select>
-                            </div>
-                            <button type="button" class="btn btn-success w-100 fw-bold" onclick="calculateEstimate()">Calculate</button>
-                            <div id="estimateResult" class="alert alert-info mt-4 text-center d-none"></div>
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <footer class="bg-dark text-white pt-5 pb-4 text-center">
-        <p>Copyright ©2026 All rights reserved by gift'DD Lawncare.</p>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
-    <script>
-        // MENU TOGGLE
-        function toggleMenu() {
-            document.getElementById('mainBody').classList.toggle('menu-open');
-        }
-
-        // CALCULATOR LOGIC
-        function calculateEstimate() {
-            const size = document.getElementById('lawnSize').value;
-            const multiplier = parseFloat(document.getElementById('serviceType').value);
-            const resultDiv = document.getElementById('estimateResult');
-            
-            let base = (size == '1500') ? 45 : (size == '3000') ? 65 : 85;
-            let total = (base * multiplier).toFixed(2);
-
-            resultDiv.innerHTML = `Rough Estimate: <strong>$${total} per visit</strong>`;
-            resultDiv.classList.remove('d-none');
-        }
-    </script>
-</body>
-</html>
