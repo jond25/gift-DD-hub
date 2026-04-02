@@ -93,7 +93,11 @@
         }
         .service-card i { font-size: 2.5em; color: var(--color-accent); margin-bottom: 15px; display: block; }
 
-        /* CONTACT */
+        /* CONTACT LINKS */
+        .social-links a { color: var(--color-light); transition: 0.3s; margin-right: 15px; text-decoration: none; }
+        .social-links a:hover { color: var(--color-secondary); }
+
+        /* CONTACT LAYOUT */
         .contact-content { display: flex; gap: 40px; margin-top: 50px; text-align: left; align-items: flex-start; width: 100%; }
         .contact-info { flex: 1; border-right: 1px solid rgba(255, 255, 255, 0.1); padding-right: 20px; }
         .contact-form-container { flex: 1; }
@@ -202,8 +206,13 @@
                 <h4 style="color: var(--color-secondary); margin-bottom: 20px;">Contact Information</h4>
                 <p><i class="fas fa-envelope"></i> Email: giftdd.llc@gmail.com</p>
                 <p><i class="fas fa-phone"></i> Phone: (202) 709-3063</p>
+                
                 <h4 style="color: var(--color-secondary); margin-top: 30px; margin-bottom: 20px;">Connect with Us</h4>
-                <div style="font-size: 1.5rem;"><i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i class="fab fa-linkedin"></i></div>
+                <div class="social-links" style="font-size: 1.5rem;">
+                    <a href="#" target="_blank"><i class="fab fa-facebook"></i></a>
+                    <a href="https://www.instagram.com/designed_giftdd?igsh=MWI0NzU1ajNncjJv&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/gift-dd-llc-consultant-services-a20250271?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
             </div>
             <div class="contact-form-container">
                 <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST" class="contact-form">
@@ -236,14 +245,13 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const heroText = document.querySelector('.animated-text');
-            const textContent = heroText.textContent.trim();
+            const text = heroText.textContent.trim();
             heroText.innerHTML = '';
             
-            textContent.split('').forEach((char, i) => {
+            text.split('').forEach((char, i) => {
                 const span = document.createElement('span');
                 span.textContent = char === ' ' ? '\u00A0' : char;
                 
-                // Break logic for mobile (Design & Code | That Converts)
                 if (i === 14 && window.innerWidth <= 768) {
                     const br = document.createElement('br');
                     heroText.appendChild(br);
