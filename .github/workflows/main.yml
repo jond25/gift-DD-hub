@@ -1,16 +1,39 @@
 name: Gift'DD Sync Queue
+
 on:
   push:
     branches: [ main ]
 
-# This is the "Traffic Controller"
+# THE TRAFFIC CONTROLLER
+# This ensures that if you commit 5 times quickly, 
+# GitHub will run them one-by-one in order.
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: false  # Set to FALSE to queue jobs; TRUE would cancel old ones.
+  cancel-in-progress: false 
 
 jobs:
-  deploy:
+  execute-sync:
     runs-on: ubuntu-latest
+    # Added a timeout to prevent a stuck job from holding the queue forever
+    timeout-minutes: 5 
+
     steps:
-      - name: Acknowledge Data
-        run: echo "System synchronized. Job queued and executing."
+      - name: 1. Pull Latest Data
+        uses: actions/checkout@v4
+
+      - name: 2. Initialize System Sequence
+        run: |
+          echo ">> ACCESSING ARCHIVE: ${{ github.sha }}"
+          echo ">> STATUS: QUEUE CLEARED. INITIALIZING EXECUTION."
+
+      - name: 3. Verify Integrity
+        run: |
+          echo ">> SCANNING REPOSITORY FOR UPDATES..."
+          # This is where your system "thinks" or builds. 
+          # We add a small sleep so you can actually see the queue in the Actions tab.
+          sleep 10 
+
+      - name: 4. Finalize Synchronization
+        run: |
+          echo ">> SYNC COMPLETE."
+          echo ">> NEXT JOB IN QUEUE IS NOW AUTHORIZED TO FIRE."
