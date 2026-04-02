@@ -16,6 +16,7 @@
             --hub-neon: #00FFC0;
             --hub-light: #F4F4F9;
             --lawn-green: #198754;
+            --color-secondary: #FF4D4D; /* Red divider match */
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,7 +27,7 @@
             overflow-x: hidden;
         }
 
-        /* CLEAN NAV: Floating Burger Circle */
+        /* UNIVERSAL NAVIGATION: Floating Burger Circle */
         .floating-burger {
             position: fixed; 
             top: 25px; 
@@ -54,7 +55,7 @@
             transition: 0.3s; 
         }
 
-        /* Slide-out Menu Panel */
+        /* Universal Side-out Menu Panel */
         .menu-panel {
             position: fixed; 
             top: 0; 
@@ -101,7 +102,7 @@
             background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1533467647142-f4639d731bc9?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
             background-size: cover;
             color: white;
-            min-height: 100vh; /* Full screen start */
+            min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -151,7 +152,7 @@
         <a href="/lawn/" class="menu-link" style="color: var(--hub-neon);">Lawn Care Service</a>
         <a href="/technical/" class="menu-link">Technical Service</a>
         
-        <hr style="width: 40px; border: 1px solid var(--hub-neon); opacity: 0.3; margin: 20px 0;">
+        <hr style="width: 40px; border: 1px solid var(--color-secondary); margin: 20px 0;">
 
         <div class="menu-link-muted">Spiritual Service</div>
         <div class="menu-link-muted">Physical Service</div>
