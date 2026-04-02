@@ -10,117 +10,200 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
+        /* --- 1. CORE STYLE THEME --- */
         :root {
-            --hub-navy: #0A192F;
-            --hub-neon: #00FFC0;
-            --primary-color: #A3A3FF; 
-            --secondary-color: #FF6B6B; 
-            --background-dark: #121212; 
-            --text-light: #F8F8F8;
+            --primary-color: #A3A3FF;    /* Periwinkle */
+            --secondary-color: #FF6B6B;  /* Coral */
+            --background-dark: #0A192F;  /* Matches Hub Navy */
+            --text-light: #F4F4F9;
             --font-primary: 'Montserrat', sans-serif;
             --font-secondary: 'Playfair Display', serif;
         }
 
-        /* --- HUB NAV STYLES --- */
-        .top-bar {
-            background-color: var(--hub-navy);
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 10px 20px; position: sticky; top: 0; z-index: 2000;
-            border-bottom: 1px solid rgba(0, 255, 192, 0.2);
-        }
-        .back-hub {
-            color: var(--hub-neon); text-decoration: none; border: 1px solid var(--hub-neon);
-            padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; transition: 0.3s;
-        }
-        .back-hub:hover { background: var(--hub-neon); color: var(--hub-navy); }
-        .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
-        .hamburger span { display: block; width: 25px; height: 3px; background: var(--hub-neon); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        body {
+            background-color: var(--background-dark);
+            color: var(--text-light);
+            font-family: var(--font-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 { font-family: var(--font-secondary); font-weight: 700; }
+
+        /* --- 2. FLOATING HAMBURGER --- */
+        .floating-burger {
+            position: fixed; top: 25px; right: 25px; z-index: 5000;
+            background: var(--background-dark); width: 55px; height: 55px;
+            border-radius: 50%; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; cursor: pointer;
+            box-shadow: 0 0 15px rgba(163, 163, 255, 0.4); border: 2px solid var(--primary-color);
+        }
+        .floating-burger span { display: block; width: 28px; height: 3px; background-color: var(--primary-color); margin: 3px 0; transition: 0.3s; }
+
+        /* Side Menu Panel */
         .menu-panel {
-            position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-            background: var(--hub-navy); z-index: 3000; display: flex;
-            flex-direction: column; justify-content: center; align-items: center;
-            transition: 0.5s ease-in-out;
+            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
+            background: #112240; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; transition: 0.4s ease-in-out;
+            z-index: 6000; box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
-        @media (min-width: 768px) { .menu-panel { width: 350px; right: -350px; } }
         body.menu-open .menu-panel { right: 0; }
-        .menu-link { color: white; text-decoration: none; font-size: 1.5rem; margin: 15px 0; text-transform: uppercase; }
+        .menu-link { font-size: 1.2rem; color: var(--text-light); text-decoration: none; margin: 15px 0; text-transform: uppercase; font-weight: bold; }
+        .menu-link:hover { color: var(--primary-color); }
 
-        /* --- STELLAR DESIGN STYLES --- */
-        body { background-color: var(--background-dark); color: var(--text-light); font-family: var(--font-primary); }
+        /* --- 3. LAYOUT COMPONENTS --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
         #hero-section {
-            height: 80vh; display: flex; align-items: center; justify-content: center; text-align: center;
-            background-image: linear-gradient(rgba(18,18,18,0.7), rgba(18,18,18,0.7)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop');
-            background-size: cover;
+            height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
+            background-image: linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.8)), url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop');
+            background-size: cover; background-position: center;
         }
-        .btn-primary-custom { background: var(--primary-color); color: #000; font-weight: bold; padding: 12px 30px; border: none; transition: 0.3s; }
-        .btn-primary-custom:hover { background: var(--secondary-color); transform: translateY(-3px); }
+
+        .btn-primary-custom {
+            background-color: var(--primary-color); color: #000; font-weight: bold;
+            padding: 15px 40px; border-radius: 5px; transition: 0.3s; border: none; text-decoration: none; display: inline-block;
+        }
+        .btn-primary-custom:hover { background-color: var(--secondary-color); transform: translateY(-3px); color: #000; }
+
+        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+        /* Bio Details */
+        #about-intro { padding: 100px 0; }
+
+        /* Process Steps */
+        .process-step { border-left: 2px solid var(--primary-color); padding-left: 1.5rem; margin-bottom: 2rem; position: relative; }
+        .process-step::before {
+            content: attr(data-step); position: absolute; left: -18px; top: 0;
+            background: var(--primary-color); color: #000; width: 36px; height: 36px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800;
+        }
 
         /* Gallery Grid */
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; padding: 40px 0; }
-        .portfolio-item { height: 300px; overflow: hidden; border-radius: 8px; cursor: pointer; background: #222; }
-        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.4s; }
-        .portfolio-item:hover img { transform: scale(1.1); }
+        .portfolio-item { height: 350px; overflow: hidden; border-radius: 8px; cursor: pointer; border: 1px solid rgba(163, 163, 255, 0.1); }
+        .portfolio-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+        .portfolio-item:hover img { transform: scale(1.08); }
 
-        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: 0.8s all ease; }
-        .is-visible { opacity: 1; transform: translateY(0); }
-
+        /* Lightbox */
         #lightbox {
-            display: none; position: fixed; z-index: 5000; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); justify-content: center; align-items: center;
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.9);
+            z-index: 7000; justify-content: center; align-items: center; cursor: zoom-out;
         }
-        #lightbox img { max-width: 90%; max-height: 80%; border: 3px solid var(--primary-color); }
+        #lightbox img { max-width: 90%; max-height: 80%; border: 2px solid var(--primary-color); border-radius: 5px; }
     </style>
 </head>
 <body id="mainBody">
 
-    <div class="top-bar">
-        <a href="https://ddynastia.com" class="back-hub">Back to Hub</a>
-        <div class="logo fw-bold" style="color: var(--hub-neon);">Gift'DD Styles</div>
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span><span></span><span></span>
-        </div>
+    <div class="floating-burger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
     </div>
 
-    <nav class="menu-panel">
+    <nav class="menu-panel" id="sideMenu">
+        <a href="https://ddynastia.com/index.html" class="menu-link">Back to Hub</a>
         <a href="/creative/index.html" class="menu-link">Staying in Lane</a>
-        <a href="/design'DDtees/index.html" class="menu-link" style="color: var(--hub-neon);">Style</a>
+        <a href="/style/index.html" class="menu-link" style="color: var(--primary-color);">Style</a>
         <a href="/lawn/index.html" class="menu-link">Lawn Care</a>
-        <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
-        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; color: var(--hub-neon); margin-top:30px;">[ CLOSE ]</a>
+        <hr style="width: 50%; border: 1px solid rgba(163, 163, 255, 0.1); margin: 10px 0;">
+        <a href="#" class="menu-link" style="opacity: 0.4; pointer-events: none; font-size: 1rem;">Spiritual (2026)</a>
+        <a href="#" class="menu-link" style="opacity: 0.4; pointer-events: none; font-size: 1rem;">Mental (2026)</a>
+        <a href="#" class="menu-link" style="opacity: 0.4; pointer-events: none; font-size: 1rem;">Physical (2027)</a>
+        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; color: var(--secondary-color); margin-top: 20px;">[ CLOSE ]</a>
     </nav>
 
     <header id="hero-section">
         <div class="container">
-            <h1 class="display-1 mb-4">Design That Tells Your Story.</h1>
-            <p class="lead mb-5 fs-4 fw-light">Strategic branding and visceral realities.</p>
-            <a href="#portfolio" class="btn btn-primary-custom btn-lg shadow">View Our Designs</a>
+            <h1 class="display-1 mb-4 reveal-on-scroll">Design That Tells <br>Your Story.</h1>
+            <p class="lead mb-5 fs-4 fw-light reveal-on-scroll">Strategic branding and visceral realities.</p>
+            <a href="#portfolio" class="btn btn-primary-custom btn-lg shadow">View Creative Gallery</a>
         </div>
     </header>
 
-    <main class="container py-5">
-        <section id="about" class="reveal-on-scroll">
-            <h2 class="display-4 mb-4">I turn visions into visceral realities.</h2>
-            <p class="lead">3 Years of high-impact design solutions blending market strategy with unconventional artistry.</p>
+    <main class="container">
+        
+        <section id="about-intro" class="reveal-on-scroll">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <span class="text-uppercase fw-bold" style="color: var(--primary-color);">Creative Director</span>
+                    <h2 class="display-4 my-3">I turn visions into visceral realities.</h2>
+                    <p class="lead">For three years, I have specialized in cutting-edge visual branding, focusing on delivering distinctive, high-impact design solutions.</p>
+                </div>
+                <div class="col-lg-6">
+                    <div class="portfolio-item" style="cursor: default;">
+                        <img src="IMG_2310.jpg" alt="Featured Design Work">
+                    </div>
+                </div>
+            </div>
         </section>
 
-        <section id="portfolio">
-            <h2 class="text-center display-5 my-5">Creative Gallery</h2>
+        <section id="benefits" class="py-5">
+            <h2 class="text-center display-5 mb-5 reveal-on-scroll">The Art & Strategy Behind The Work</h2>
+            <div class="row text-center g-4">
+                <div class="col-md-4 reveal-on-scroll">
+                    <h1 class="display-3">🎨</h1>
+                    <h3 class="h4" style="color: var(--secondary-color);">Strategic Branding</h3>
+                    <p class="small">Define your market position with an identity that connects deeply with your ideal audience.</p>
+                </div>
+                <div class="col-md-4 reveal-on-scroll">
+                    <h1 class="display-3">✨</h1>
+                    <h3 class="h4" style="color: var(--secondary-color);">Visual Storytelling</h3>
+                    <p class="small">We craft narratives into visuals, ensuring every design element drives engagement.</p>
+                </div>
+                <div class="col-md-4 reveal-on-scroll">
+                    <h1 class="display-3">🛠️</h1>
+                    <h3 class="h4" style="color: var(--secondary-color);">Seamless Execution</h3>
+                    <p class="small">Receive polished, production-ready assets across all platforms without the technical hassle.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="workflow" class="py-5 reveal-on-scroll">
+            <h2 class="text-center display-5 mb-5">Structured Creative Workflow</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="process-step" data-step="1">
+                        <h3 class="h4" style="color: var(--primary-color);">Discovery & Strategy</h3>
+                        <p>In-depth sessions to understand your goals, audience, and competitive landscape.</p>
+                    </div>
+                    <div class="process-step" data-step="2">
+                        <h3 class="h4" style="color: var(--primary-color);">Conceptual Design</h3>
+                        <p>Development of mood boards and initial prototypes, iterating based on your feedback.</p>
+                    </div>
+                    <div class="process-step" data-step="3">
+                        <h3 class="h4" style="color: var(--primary-color);">Finalization & Launch</h3>
+                        <p>Polishing master files and providing a comprehensive brand guide for consistent implementation.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="portfolio" class="py-5">
+            <h2 class="text-center display-5 mb-4 reveal-on-scroll">Creative Gallery</h2>
             <div class="portfolio-grid">
-                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2310.JPG"></div>
-                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2053.JPG"></div>
-                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2066.JPG"></div>
-                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2336.JPG"></div>
-                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2382.JPG"></div>
-                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2388.JPG"></div>
-                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2399.JPG"></div>
-                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2400.JPG"></div>
-                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2517.JPG"></div>
-                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2664.JPG"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2310.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2053.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2336.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2382.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2388.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2400.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2601.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2664.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2668.jpg"></div>
                 <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2736.JPG"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2739.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2748.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2771.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2779.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_2817.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_3077.jpg"></div>
                 <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_3258.JPG"></div>
                 <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_3501.JPG"></div>
-                </div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="IMG_3513.jpg"></div>
+                <div class="portfolio-item" onclick="openLightbox(this)"><img src="image000000.JPG"></div>
+            </div>
         </section>
     </main>
 
@@ -128,9 +211,17 @@
         <img id="lightbox-img" src="">
     </div>
 
+    <footer class="py-5 text-center border-top" style="border-color: rgba(163, 163, 255, 0.1) !important;">
+        <div class="container">
+            <h2 class="mb-4">Ready to Elevate Your Brand?</h2>
+            <a href="mailto:giftdd.llc@gmail.com" class="btn btn-primary-custom mb-4">Start Your Project Today</a>
+            <p class="text-white-50 small">&copy; 2025 gift'DD Designs. All Rights Reserved. Without Recourse.</p>
+        </div>
+    </footer>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function toggleMenu() { document.getElementById('mainBody').classList.toggle('menu-open'); }
+        function toggleMenu() { document.body.classList.toggle('menu-open'); }
         
         function openLightbox(item) {
             const src = item.querySelector('img').src;
@@ -138,7 +229,6 @@
             document.getElementById('lightbox').style.display = 'flex';
         }
 
-        // Scroll Reveal
         document.addEventListener("DOMContentLoaded", function() {
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
