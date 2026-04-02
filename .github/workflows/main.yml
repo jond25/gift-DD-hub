@@ -1,4 +1,16 @@
+name: Gift'DD Sync Queue
+on:
+  push:
+    branches: [ main ]
+
+# This is the "Traffic Controller"
 concurrency:
-    group: ${{ github.workflow }}-$
-{{ github.ref }}defaults:
-    Cancel-in-progress: false
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false  # Set to FALSE to queue jobs; TRUE would cancel old ones.
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Acknowledge Data
+        run: echo "System synchronized. Job queued and executing."
