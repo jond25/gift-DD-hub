@@ -291,4 +291,349 @@
         #success-gui {
             display: none;
             text-align: center;
-            padding: 80px 4
+            padding: 80px 40px;
+            border: 3px solid var(--hub-neon);
+            background: rgba(0, 255, 192, 0.05);
+            font-family: var(--font-code);
+            border-radius: 12px;
+            animation: terminalIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes terminalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        #success-gui i { 
+            font-size: 6rem; 
+            color: var(--hub-neon); 
+            margin-bottom: 30px; 
+        }
+
+        /* Scroll Reveal Utility */
+        .reveal-on-scroll { 
+            opacity: 0; 
+            transform: translateY(40px); 
+            transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+        }
+
+        .reveal-on-scroll.is-visible { 
+            opacity: 1; 
+            transform: translateY(0); 
+        }
+
+        /* --- 9. RESPONSIVE DESIGN --- */
+        @media (max-width: 992px) { .hero-lane h1 { font-size: 3.5rem; } }
+        @media (max-width: 768px) { 
+            .hero-lane h1 { font-size: 2.8rem; } 
+            .terminal-window { padding: 30px 20px; }
+            .section-padding { padding: 80px 0; }
+            .menu-panel { width: 100%; }
+        }
+    </style>
+</head>
+<body id="mainBody">
+
+    <div class="floating-burger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
+
+    <nav class="menu-panel" id="sideMenu">
+        <a href="https://ddynastia.com" class="menu-link">The Hub</a>
+        <a href="/creative/index.html" class="menu-link" style="color: var(--hub-neon);">Staying in Lane Service</a>
+        <a href="/style/index.html" class="menu-link">Style Service</a>
+        <a href="/lawn/index.html" class="menu-link">Lawn Care Service</a>
+        
+        <hr style="width: 50%; border: 1px solid rgba(0, 255, 192, 0.2); margin: 30px 0;">
+        
+        <div class="menu-link-muted">Spiritual Service</div>
+        <div class="menu-link-muted">Physical Service</div>
+        <div class="menu-link-muted">Mental Service</div>
+
+        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; color: var(--hub-neon); margin-top: 40px;">[ CLOSE_MENU ]</a>
+    </nav>
+
+    <header class="hero-lane">
+        <div class="container reveal-on-scroll">
+            <i class="bi bi-compass-fill" style="font-size: 4rem; color: var(--hub-neon);"></i>
+            <h1 class="display-1 fw-bold mt-4">Focus & Flow</h1>
+            <p class="lead fs-3 opacity-75 mt-3">Identifying core competencies. Maximizing absolute impact.</p>
+            <a href="#deep-dive" class="btn btn-outline-light btn-lg mt-5 px-5 py-3 rounded-pill fw-bold">Initialize Deep Dive</a>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="text-center mb-5 display-4 fw-bold reveal-on-scroll">The Three Pillars</h2>
+            <div class="row g-5">
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="card card-modern p-5">
+                        <h3 class="h4 fw-bold text-primary mb-4">01. Identify Your Zone</h3>
+                        <p class="text-muted">Clearly articulate what you are uniquely qualified to do. Understand your role's specific responsibilities and the boundaries of your expertise to maintain absolute focus.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="card card-modern p-5">
+                        <h3 class="h4 fw-bold text-primary mb-4">02. Trust Collaboration</h3>
+                        <p class="text-muted">Offer support, not takeover. Trust your teammates to manage their specific domains and provide constructive, structured feedback only when invited to do so.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="card card-modern p-5">
+                        <h3 class="h4 fw-bold text-primary mb-4">03. Maximize Efficiency</h3>
+                        <p class="text-muted">Focusing your energy prevents burnout and ensures that your contributions are meaningful, high-quality, and strategically on point with the larger mission.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="creative-workflow" class="section-padding bg-white">
+        <div class="container text-center reveal-on-scroll">
+            <h2 class="display-4 fw-bold mb-5">Our Structured Creative Workflow</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-9 text-start">
+                    <div class="workflow-step" data-step="1">
+                        <h3 class="h4 fw-bold text-primary">Discovery & Strategy</h3>
+                        <p class="text-muted">In-depth sessions to understand goals, audience, and the competitive landscape. This stage defines the project's visual north star and strategic boundaries.</p>
+                    </div>
+                    <div class="workflow-step" data-step="2">
+                        <h3 class="h4 fw-bold text-primary">Conceptual Design</h3>
+                        <p class="text-muted">Development of initial concepts, mood boards, and prototypes. We iterate based on your feedback to refine the core feel without stepping out of project scope.</p>
+                    </div>
+                    <div class="workflow-step" data-step="3">
+                        <h3 class="h4 fw-bold text-primary">Finalization & Launch</h3>
+                        <p class="text-muted">Polishing master files and providing a comprehensive brand guide for consistent implementation across all channels. We ensure a seamless transition to the final product.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="deep-dive" class="section-padding" style="background-color: #050b16;">
+        <div class="container">
+            <div class="terminal-window reveal-on-scroll">
+                <h2 class="terminal-header">>> Lane Definitions Initialization...</h2>
+                <p class="mb-5"><span style="color: #98c379;">[SYSTEM] Philosophy Check:</span> Depth triumphs over superficial breadth. Mastering a single lane creates exponential value compared to drifting across five.</p>
+                
+                <div id="laneDetails">
+                    <div class="lane-item lane-analytical">
+                        <h4 style="color: #e5c07b;">Analytical Lane</h4>
+                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Data interpretation, trend forecasting, and strategic insights.</p>
+                        <p class="small opacity-50">Roles: Data Scientists, Financial Analysts, Strategic Planners.</p>
+                    </div>
+
+                    <div class="lane-item lane-creative">
+                        <h4 style="color: #98c379;">Creative Lane</h4>
+                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Visual design, branding, and imaginative problem-solving.</p>
+                        <p class="small opacity-50">Roles: Graphic Designers, Art Directors, Content Strategists.</p>
+                    </div>
+
+                    <div class="lane-item lane-technical">
+                        <h4 style="color: #61afef;">Technical Lane</h4>
+                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> System architecture, code development, and infrastructure.</p>
+                        <p class="small opacity-50">Roles: Software Engineers, Cloud Architects, Technical Leads.</p>
+                    </div>
+
+                    <div class="lane-item lane-relational">
+                        <h4 style="color: #c678dd;">Relational Lane</h4>
+                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Building connections, negotiation, and client success.</p>
+                        <p class="small opacity-50">Roles: Account Managers, HR Professionals, Client Advocates.</p>
+                    </div>
+
+                    <div class="lane-item lane-operational">
+                        <h4 style="color: #e06c75;">Operational Lane</h4>
+                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Process optimization, logistics, and resource allocation.</p>
+                        <p class="small opacity-50">Roles: Ops Managers, Supply Chain Directors, Project Coordinators.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding bg-white">
+        <div class="container">
+            <h2 class="text-center mb-5 display-5 fw-bold reveal-on-scroll">Action Plan for Lane Maintenance</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-10">
+                    <div class="accordion shadow-lg" id="laneAccordion">
+                        
+                        <div class="accordion-item reveal-on-scroll">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tip1">
+                                    Tip 1: Create a Responsibility Matrix (RACI)
+                                </button>
+                            </h2>
+                            <div id="tip1" class="accordion-collapse collapse show" data-bs-parent="#laneAccordion">
+                                <div class="accordion-body">
+                                    Define who is <strong>Responsible</strong>, <strong>Accountable</strong>, <strong>Consulted</strong>, and <strong>Informed</strong> for every key project task. This visual aid clarifies boundaries immediately and prevents overlapping efforts.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item reveal-on-scroll">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip2">
+                                    Tip 2: Practice "Gentle Redirection"
+                                </button>
+                            </h2>
+                            <div id="tip2" class="accordion-collapse collapse" data-bs-parent="#laneAccordion">
+                                <div class="accordion-body">
+                                    When someone asks you to step into their lane, use phrases like: "My best contribution here would be providing guidance on X, but [Owner's Name] has the final say in this domain."
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item reveal-on-scroll">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip3">
+                                    Tip 3: Set "Meeting Endpoints"
+                                </button>
+                            </h2>
+                            <div id="tip3" class="accordion-collapse collapse" data-bs-parent="#laneAccordion">
+                                <div class="accordion-body">
+                                    Before every meeting, identify the non-negotiable outcome. If the discussion veers off course into other people's lanes, bring it back by stating, "To make sure we hit our endpoint, let's focus on deciding X."
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item reveal-on-scroll">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip4">
+                                    Tip 4: The "Critical vs. Convenient" Check
+                                </button>
+                            </h2>
+                            <div id="tip4" class="accordion-collapse collapse" data-bs-parent="#laneAccordion">
+                                <div class="accordion-body">
+                                    Ask yourself: "Is this task critical for my lane's success, or just convenient for someone else's?" If it's the latter, politely suggest the proper channel or owner.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="accordion-item reveal-on-scroll">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip5">
+                                    Tip 5: Schedule Weekly "Boundary Reviews"
+                                </button>
+                            </h2>
+                            <div id="tip5" class="accordion-collapse collapse" data-bs-parent="#laneAccordion">
+                                <div class="accordion-body">
+                                    Dedicate 15 minutes each week to review recent tasks. Identify moments where your lane was crossed and proactively address those boundary issues in one-on-one settings.
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-terminal">
+        <div class="container" style="max-width: 800px;">
+            <div id="contact-wrapper">
+                <div class="text-center mb-5 reveal-on-scroll">
+                    <h2 class="display-4 fw-bold">Inquire About This Framework Service</h2>
+                    <p class="opacity-50 font-monospace">>> SYSTEM READY FOR INPUT // ENCRYPTED_CHANNEL</p>
+                </div>
+                
+                <div id="success-gui">
+                    <i class="bi bi-shield-check"></i>
+                    <h3>Data Transmitted Successfully</h3>
+                    <p class="mt-4 font-monospace opacity-75">>> Request Logged at Studio Level. <br>Personnel will contact you via provided Protocol Shortly.</p>
+                </div>
+
+                <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST" class="form-terminal">
+                    <div class="reveal-on-scroll">
+                        <input type="text" name="name" class="form-control w-100" placeholder="[ User_ID / Name ]" required>
+                    </div>
+                    <div class="reveal-on-scroll">
+                        <input type="email" name="email" class="form-control w-100" placeholder="[ Contact_Protocol (Email) ]" required>
+                    </div>
+                    <div class="reveal-on-scroll">
+                        <textarea name="message" class="form-control w-100" rows="6" placeholder="[ Input_Message_Data... ]" required></textarea>
+                    </div>
+                    <div class="reveal-on-scroll">
+                        <button type="submit" id="submitBtn" class="btn-terminal">EXECUTE SUBMISSION</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="py-5 text-center border-top bg-dark text-white">
+        <div class="container">
+            <p class="mb-4 small opacity-50">
+                &copy; 2025 gift'DD Consultant Services. All Rights Reserved. <br> 
+                Without Recourse. No part of this publication may be reproduced, distributed, or transmitted without prior written permission.
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        /** Side Menu Logic **/
+        function toggleMenu() { 
+            document.body.classList.toggle('menu-open'); 
+        }
+
+        /** AJAX Form Submission Logic (Clean GUI) **/
+        const contactForm = document.getElementById('contactForm');
+        const successGui = document.getElementById('success-gui');
+        const submitBtn = document.getElementById('submitBtn');
+        const contactHeader = document.querySelector('.contact-terminal .text-center');
+
+        if(contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault(); 
+                
+                submitBtn.innerText = "TRANSMITTING DATA...";
+                submitBtn.disabled = true;
+
+                const formData = new FormData(contactForm);
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        contactForm.style.display = 'none'; 
+                        contactHeader.style.display = 'none'; 
+                        successGui.style.display = 'block'; 
+                    } else {
+                        alert("ERROR: System Fault during transmission.");
+                        submitBtn.innerText = "RE-EXECUTE SUBMISSION";
+                        submitBtn.disabled = false;
+                    }
+                } catch (error) {
+                    alert("ERROR: Terminal Connection Interrupted.");
+                    submitBtn.innerText = "RE-EXECUTE SUBMISSION";
+                    submitBtn.disabled = false;
+                }
+            });
+        }
+
+        /** Scroll Reveal Observer Logic **/
+        document.addEventListener("DOMContentLoaded", function() {
+            const observerOptions = {
+                threshold: 0.15,
+                rootMargin: "0px 0px -50px 0px"
+            };
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, observerOptions);
+
+            const revealItems = document.querySelectorAll('.reveal-on-scroll');
+            revealItems.forEach((el) => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
