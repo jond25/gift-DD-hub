@@ -1,0 +1,4 @@
+concurrency:
+    group: ${{ github.workflow }}-$
+{{ github.ref }}defaults:
+    Cancel-in-progress: false
