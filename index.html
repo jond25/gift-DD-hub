@@ -3,201 +3,187 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SAMPLE'DD | Gift'DD Portfolio</title>
+    <title>SAMPLE'DD | Gift'DD Creative Studio</title>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. CORE THEME --- */
+        /* --- 1. CORE THEME & RETRO-MODERN VARIABLES --- */
         :root {
-            --color-primary: #0A192F; 
-            --color-secondary: #00FFC0; 
-            --color-light: #F4F4F9;
+            --color-bg: #0A192F;         /* Stern Navy */
+            --color-primary: #00FFC0;    /* 80s Neon Mint */
+            --color-secondary: #FF4D4D;  /* The Red Line */
+            --color-accent: #A3A3FF;     /* 90s Periwinkle */
+            --color-muted: rgba(244, 244, 249, 0.2); /* Greyed out */
+            --color-grid: rgba(0, 255, 192, 0.05);
             --font-main: 'Montserrat', sans-serif;
+            --font-mono: 'Fira Code', monospace;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
             font-family: var(--font-main);
-            color: var(--color-light);
-            background-color: var(--color-primary);
+            color: #F4F4F9;
+            background-color: var(--color-bg);
+            background-image: 
+                linear-gradient(var(--color-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+            background-size: 50px 50px;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        /* --- 2. THE TOP BAR --- */
+        /* --- 2. DECORATIVE RETRO SHAPES --- */
+        .shape { position: absolute; z-index: -1; opacity: 0.5; pointer-events: none; }
+        .circle { width: 300px; height: 300px; border: 2px solid var(--color-accent); border-radius: 50%; top: -100px; left: -100px; }
+        .triangle { 
+            width: 0; height: 0; 
+            border-left: 50px solid transparent; border-right: 50px solid transparent; 
+            border-bottom: 100px solid var(--color-primary); 
+            bottom: 10%; right: 5%; transform: rotate(15deg); 
+        }
+        .squiggle {
+            position: absolute; top: 40%; left: 2%; width: 100px; height: 20px;
+            background: repeating-linear-gradient(45deg, var(--color-secondary), var(--color-secondary) 10px, transparent 10px, transparent 20px);
+        }
+
+        /* --- 3. TOP TOOLBAR NAV --- */
         header {
-            background-color: rgba(10, 25, 47, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
+            background-color: rgba(10, 25, 47, 0.9);
+            position: sticky; top: 0; z-index: 1000;
             backdrop-filter: blur(10px);
-            border-bottom: 1px solid rgba(0, 255, 192, 0.1);
+            border-bottom: 2px solid var(--color-primary);
         }
 
         nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 80px;
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
+            display: flex; justify-content: space-between; align-items: center;
+            height: 70px; max-width: 1200px; margin: 0 auto; padding: 0 30px;
         }
 
-        .logo { 
-            font-size: 1.6rem; 
-            font-weight: 900; 
-            color: var(--color-light); 
-            letter-spacing: 2px;
-        }
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 3px; color: var(--color-primary); }
 
-        .hamburger {
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            width: 30px;
-            height: 20px;
-        }
-        .hamburger span {
-            display: block;
-            height: 3px;
-            width: 100%;
-            background-color: var(--color-secondary);
-            border-radius: 2px;
-            transition: 0.3s;
-        }
+        .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
+        .hamburger span { display: block; height: 3px; width: 25px; background: var(--color-primary); transition: 0.3s; }
 
-        /* --- 3. THE SLIDE-OUT PANEL --- */
+        /* --- 4. THE MENU PANEL --- */
         .menu-panel {
             position: fixed; top: 0; right: -100%; width: 320px; height: 100vh;
-            background-color: var(--color-primary); display: flex; flex-direction: column;
-            justify-content: center; align-items: center; transition: 0.5s ease;
-            z-index: 2000; box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            background-color: var(--color-bg); z-index: 2000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+            border-left: 2px solid var(--color-primary);
         }
         body.menu-open .menu-panel { right: 0; }
-        .menu-link {
-            font-size: 1.3rem; color: var(--color-light); text-decoration: none;
-            margin: 15px 0; text-transform: uppercase; font-weight: bold; transition: 0.3s;
+        
+        .menu-link { 
+            font-size: 1.2rem; color: #fff; text-decoration: none; margin: 12px 0;
+            text-transform: uppercase; font-weight: 900; transition: 0.3s;
+            letter-spacing: 1px;
         }
-        .menu-link:hover { color: var(--color-secondary); padding-left: 10px; }
-        .close-btn { position: absolute; top: 25px; right: 25px; font-size: 2rem; color: var(--color-secondary); cursor: pointer; }
+        .menu-link:hover { color: var(--color-primary); transform: skewX(-5deg); }
+        
+        /* Greyed out style for future services */
+        .menu-link-muted {
+            color: var(--color-muted);
+            cursor: default;
+            pointer-events: none;
+            font-style: italic;
+        }
 
-        /* --- 4. PROJECT STACK (Based on Screenshot) --- */
+        /* --- 5. HERO & ARTISTIC MARKS --- */
         .portfolio-header {
-            text-align: center;
-            padding: 60px 20px 20px;
+            padding: 100px 20px 40px; text-align: center; position: relative;
         }
         .portfolio-header h1 { 
-            font-size: 3rem; 
-            text-transform: uppercase; 
-            letter-spacing: 5px; 
-            margin-bottom: 5px;
+            font-size: 5rem; text-transform: uppercase; font-weight: 900; 
+            letter-spacing: -2px; line-height: 0.9;
         }
-        .red-line {
-            width: 150px;
-            height: 4px;
-            background-color: #FF4D4D; /* Matches red line in pic */
-            margin: 0 auto 50px;
+        .red-line { width: 200px; height: 8px; background-color: var(--color-secondary); margin: 20px auto; }
+        
+        .drafting-mark {
+            font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-primary);
+            position: absolute; opacity: 0.6;
         }
 
-        .stack-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 20px;
-        }
+        /* --- 6. PROJECT STACK --- */
+        .stack-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
 
         .project-row {
-            display: flex;
-            align-items: center;
-            background: rgba(255,255,255,0.03);
-            margin-bottom: 30px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: inherit;
-            transition: 0.3s;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
+            display: flex; align-items: center; background: rgba(255,255,255,0.02);
+            margin-bottom: 40px; position: relative; text-decoration: none; color: inherit;
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.4s;
         }
         .project-row:hover {
-            background: rgba(255,255,255,0.07);
-            transform: scale(1.02);
-            border-color: var(--color-secondary);
+            border-color: var(--color-primary); background: rgba(0, 255, 192, 0.05);
+            transform: translateX(10px);
         }
+
+        .project-row::before { content: ''; position: absolute; top: -5px; left: -5px; width: 20px; height: 20px; border-top: 2px solid var(--color-primary); border-left: 2px solid var(--color-primary); }
+        .project-row::after { content: 'REF_ID: 102'; position: absolute; bottom: 5px; right: 10px; font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-primary); opacity: 0.5; }
 
         .project-thumb {
-            width: 250px;
-            height: 150px;
-            flex-shrink: 0;
-            background-size: cover;
-            background-position: center;
+            width: 350px; height: 200px; background-size: cover; background-position: center;
+            filter: grayscale(100%); transition: 0.5s;
+        }
+        .project-row:hover .project-thumb { filter: grayscale(0%); }
+
+        .project-info { padding: 30px 50px; }
+        .project-info h2 { font-size: 1.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .project-info p { font-size: 0.9rem; opacity: 0.7; max-width: 400px; }
+
+        /* --- 7. HIDDEN G.E.M.s SECTION --- */
+        .gems-section {
+            padding: 100px 20px; text-align: center; max-width: 1000px; margin: 0 auto;
+        }
+        .gems-title {
+            font-size: 3rem; text-transform: uppercase; font-weight: 900;
+            color: var(--color-accent); letter-spacing: 5px; margin-bottom: 10px;
+        }
+        .gems-subtitle {
+            font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-primary);
+            text-transform: uppercase; opacity: 0.8; margin-bottom: 50px;
         }
 
-        .project-info {
-            padding: 20px 40px;
-        }
-        .project-info h2 { 
-            text-transform: uppercase; 
-            font-size: 1.4rem; 
-            margin-bottom: 5px;
-            color: var(--color-light);
-        }
-        .project-info p { font-size: 0.9rem; color: rgba(244, 244, 249, 0.6); }
-
-        /* --- 5. COMING SOON GRID --- */
         .upcoming-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-            max-width: 900px;
-            margin: 50px auto;
-            padding: 0 20px;
-            text-align: center;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
         }
-        .upcoming-item { opacity: 0.4; }
+        .upcoming-item { text-align: center; }
         .placeholder-box {
-            aspect-ratio: 1 / 1;
-            background: rgba(255,255,255,0.05);
-            border: 2px dashed rgba(255,255,255,0.2);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 15px;
-            font-size: 2rem;
+            aspect-ratio: 1 / 1; border: 2px dashed rgba(255,255,255,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; margin-bottom: 20px; transition: 0.3s;
+            position: relative; background: rgba(255,255,255,0.01);
         }
-        .upcoming-item h3 { font-size: 1rem; text-transform: uppercase; margin-bottom: 5px; }
-        .upcoming-item span { font-size: 0.7rem; color: var(--color-secondary); }
+        .upcoming-item h3 { font-size: 1.1rem; text-transform: uppercase; margin-bottom: 5px; }
+        .upcoming-item span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-primary); opacity: 0.7; }
 
-        /* --- 6. FOOTER --- */
+        /* --- 8. FOOTER --- */
         footer {
-            padding: 60px 20px;
-            text-align: center;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            margin-top: 50px;
-            font-size: 0.75rem;
-            color: rgba(244, 244, 249, 0.4);
+            padding: 80px 20px; text-align: center; background: #050b16;
+            border-top: 2px solid var(--color-primary); margin-top: 100px;
         }
-        .legal-text { max-width: 800px; margin: 20px auto 0; line-height: 1.4; }
+        .legal-text { font-size: 0.7rem; opacity: 0.4; max-width: 900px; margin: 30px auto 0; line-height: 1.8; }
 
-        /* Mobile Adjustments */
         @media (max-width: 768px) {
-            .project-row { flex-direction: column; text-align: center; }
-            .project-thumb { width: 100%; height: 200px; }
+            .project-row { flex-direction: column; }
+            .project-thumb { width: 100%; height: 250px; }
             .upcoming-grid { grid-template-columns: 1fr; }
-            .portfolio-header h1 { font-size: 2.2rem; }
+            .portfolio-header h1 { font-size: 3rem; }
+            .gems-title { font-size: 2rem; }
         }
     </style>
 </head>
-<body id="mainBody">
+<body id="body">
+
+    <div class="shape circle"></div>
+    <div class="shape triangle"></div>
+    <div class="shape squiggle"></div>
 
     <header>
         <nav>
-            <div class="logo">GIFT'DD</div>
-            <a href="/technical/" class="back-hub">TECHNICAL HUB</a>
+            <div class="logo">GIFT'DD STUDIO</div>
             <div class="hamburger" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </div>
@@ -205,76 +191,92 @@
     </header>
 
     <nav class="menu-panel">
-        <div class="close-btn" onclick="toggleMenu()">&times;</div>
-        <a href="/creative/" class="menu-link">Staying in Lane</a>
-        <a href="/style/" class="menu-link">Style</a>
-        <a href="/lawn/" class="menu-link">Lawn Care</a>
-        <a href="/technical/" class="menu-link" style="color: var(--color-secondary);">Dev Hub (Technical)</a>
+        <a href="/creative/" class="menu-link">Staying in Lane Service</a>
+        <a href="/style/" class="menu-link">Style Service</a>
+        <a href="/lawn/" class="menu-link">Lawn Care Service</a>
+        
+        <a href="/technical/" class="menu-link" style="color: var(--color-primary); margin-top: 20px; border-top: 1px solid var(--color-grid); padding-top: 20px;">Technical Service</a>
+        
+        <hr style="width: 40px; border: 1px solid var(--color-secondary); margin: 20px 0;">
+
+        <div class="menu-link menu-link-muted">Spiritual Service</div>
+        <div class="menu-link menu-link-muted">Physical Service</div>
+        <div class="menu-link menu-link-muted">Mental Service</div>
+
+        <div style="margin-top: 40px; cursor: pointer; color: var(--color-secondary); font-weight: 900; font-size: 0.8rem;" onclick="toggleMenu()">[ CLOSE SYSTEM ]</div>
     </nav>
 
     <main>
         <div class="portfolio-header">
-            <h1>Sample'DD</h1>
+            <span class="drafting-mark" style="top: 20px; left: 20%;">COORD_X: 44.22</span>
+            <span class="drafting-mark" style="bottom: 0; right: 25%;">COORD_Y: 10.98</span>
+            <h1>SAMPLE'DD</h1>
             <div class="red-line"></div>
+            <p style="font-family: var(--font-mono); color: var(--color-primary); font-size: 0.8rem;">>> ARCHIVE_SELECTION // INITIALIZING...</p>
         </div>
 
         <div class="stack-container">
             <a href="/creative/" class="project-row">
                 <div class="project-thumb" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop');"></div>
                 <div class="project-info">
-                    <h2>Staying In Your Lane</h2>
-                    <p>Guide to revealing the over-stepper. Focus & flow optimization.</p>
+                    <h2>Staying In Lane Service</h2>
+                    <p>Strategic UX framework designed to reveal over-steppers and optimize team flow.</p>
                 </div>
             </a>
 
             <a href="/style/" class="project-row">
                 <div class="project-thumb" style="background-image: url('IMG_2310.jpg');"></div>
                 <div class="project-info">
-                    <h2>Style</h2>
-                    <p>Wear your heart on your sleeve or head. Graphic merchandise storytelling.</p>
+                    <h2>Style Service</h2>
+                    <p>High-impact commemorative apparel and graphic merchandise storytelling.</p>
                 </div>
             </a>
 
             <a href="/lawn/" class="project-row">
                 <div class="project-thumb" style="background-image: url('https://jond25.github.io/ddynastia.com/IMG_6024.jpg');"></div>
                 <div class="project-info">
-                    <h2>Lawn Care</h2>
-                    <p>Keep the snakes out your grass. Clean edges, clear mind.</p>
+                    <h2>Lawn Care Service</h2>
+                    <p>Premium landscape maintenance with 15 years of institutional knowledge.</p>
                 </div>
             </a>
         </div>
 
-        <div class="upcoming-grid">
-            <div class="upcoming-item">
-                <div class="placeholder-box"><i class="fas fa-dove"></i></div>
-                <h3>Spiritual</h3>
-                <span>Coming Spring 2026</span>
+        <section class="gems-section">
+            <h2 class="gems-title">Hidden G.E.M.s</h2>
+            <div class="gems-subtitle">>> Discovery Mode: Active // Future Assets</div>
+
+            <div class="upcoming-grid">
+                <div class="upcoming-item">
+                    <div class="placeholder-box"><i class="fas fa-dove"></i></div>
+                    <h3>Spiritual Service</h3>
+                    <span>In Progress // 2026.Q1</span>
+                </div>
+                <div class="upcoming-item">
+                    <div class="placeholder-box"><i class="fas fa-dumbbell"></i></div>
+                    <h3>Physical Service</h3>
+                    <span>Wireframing // 2027</span>
+                </div>
+                <div class="upcoming-item">
+                    <div class="placeholder-box"><i class="fas fa-brain"></i></div>
+                    <h3>Mental Service</h3>
+                    <span>Drafting // 2026.Q4</span>
+                </div>
             </div>
-            <div class="upcoming-item">
-                <div class="placeholder-box"><i class="fas fa-dumbbell"></i></div>
-                <h3>Physical</h3>
-                <span>Coming 2027</span>
-            </div>
-            <div class="upcoming-item">
-                <div class="placeholder-box"><i class="fas fa-brain"></i></div>
-                <h3>Mental</h3>
-                <span>Coming Fall 2026</span>
-            </div>
-        </div>
+        </section>
     </main>
 
     <footer>
-        <p>&copy; 2025 gift'DD Consultant Services. All Rights Reserved. Without Recourse.</p>
+        <p class="logo" style="font-size: 1.2rem; margin-bottom: 10px;">Gift'DD Consultant Services</p>
+        <p>&copy; 2025-2026. All Rights Reserved. Without Recourse.</p>
         <div class="legal-text">
-            No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law.
+            Proprietary Framework. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods.
         </div>
     </footer>
 
     <script>
         function toggleMenu() {
-            document.body.classList.toggle('menu-open');
+            document.getElementById('body').classList.toggle('menu-open');
         }
     </script>
-
 </body>
 </html>
