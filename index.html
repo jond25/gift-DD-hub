@@ -240,6 +240,18 @@
                 document.getElementById("successPopup").style.display = "flex";
             }
         });
+    /* No change on desktop */
+.mobile-break {
+    display: inline;
+}
+
+/* On mobile (768px and below) */
+@media (max-width: 768px) {
+    .mobile-break {
+        display: block; /* Forces "That Converts" to the next line */
+        margin-top: 5px; /* Optional: adds a tiny bit of space between lines */
+    }
+}
     </script>
 </body>
 </html>
