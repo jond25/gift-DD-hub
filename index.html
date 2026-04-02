@@ -47,7 +47,7 @@
         .menu-link { font-size: 1.2rem; color: var(--color-light); text-decoration: none; margin: 15px 0; text-transform: uppercase; font-weight: bold; }
         .menu-link:hover { color: var(--color-secondary); }
 
-        /* --- 3. REPLICATING YOUR ORIGINAL LAYOUT --- */
+        /* --- 3. LAYOUT & CONTENT --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         section { padding: 100px 0; min-height: 100vh; display: flex; align-items: center; }
 
@@ -61,7 +61,6 @@
         /* HERO */
         #hero { text-align: center; justify-content: center; }
         #hero h1 { font-size: 4em; text-transform: uppercase; text-shadow: 0 0 10px var(--color-accent); margin-bottom: 20px; }
-        
         .animated-text span { opacity: 0; transition: opacity 0.5s ease; display: inline-block; }
 
         .cta-button {
@@ -70,7 +69,7 @@
             text-decoration: none; text-transform: uppercase; transition: 0.3s;
         }
 
-        /* Picture 1: Development Approach */
+        /* Picture 1: Development Approach (Desktop) */
         .process-flow { display: flex; justify-content: space-between; margin-top: 50px; position: relative; width: 100%; }
         .process-flow::before { content: ''; position: absolute; top: 30px; left: 0; right: 0; height: 4px; background-color: var(--color-accent); z-index: 1; }
         .process-step { width: 18%; position: relative; z-index: 2; text-align: center; }
@@ -81,7 +80,7 @@
             color: var(--color-primary); border: 5px solid var(--color-primary);
         }
 
-        /* Picture 4: Services Grid */
+        /* Services Grid */
         .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
         .service-card {
             background-color: #112240; padding: 30px; border-radius: 8px;
@@ -90,7 +89,7 @@
         }
         .service-card i { font-size: 2.5em; color: var(--color-accent); margin-bottom: 15px; display: block; }
 
-        /* Picture 2: Contact Section Layout */
+        /* Contact Section */
         .contact-content { display: flex; gap: 40px; margin-top: 50px; text-align: left; align-items: flex-start; width: 100%; }
         .contact-info { flex: 1; border-right: 1px solid rgba(255, 255, 255, 0.1); padding-right: 20px; }
         .contact-form-container { flex: 1; }
@@ -99,20 +98,24 @@
             background: rgba(0,0,0,0.2); color: white; border-radius: 5px;
         }
 
-        /* --- MOBILE REFINEMENTS (The Surgical Fix) --- */
+        /* --- MOBILE REFINEMENTS --- */
         @media (max-width: 768px) {
             #hero h1 { font-size: 2.3em; line-height: 1.2; }
             
-            /* Development grid fix: 2 per row */
+            /* FIXED: Development Approach centering the 5th item */
             .process-flow { 
-                display: grid !important; 
-                grid-template-columns: repeat(2, 1fr); 
-                gap: 30px 10px; 
+                display: flex !important; 
+                flex-wrap: wrap !important; 
+                justify-content: center !important; 
+                gap: 40px 20px; 
             }
             .process-flow::before { display: none; }
-            .process-step { width: 100% !important; }
+            .process-step { 
+                width: 45% !important; /* Forces 2 per row */
+                min-width: 140px;
+            }
 
-            /* Contact Stack Fix: Ensures vertical layout, no "smushing" */
+            /* Contact Stack Fix */
             .contact-content { 
                 flex-direction: column !important; 
                 gap: 40px; 
@@ -124,6 +127,7 @@
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
                 padding-right: 0 !important; 
                 padding-bottom: 30px !important; 
+                text-align: center;
             }
 
             .contact-form-container { 
@@ -137,7 +141,6 @@
         #successPopup { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 7000; }
         .popup-box { background: white; padding: 30px; border-radius: 10px; text-align: center; color: #333; }
 
-        /* Picture 3: Footer */
         footer { padding: 40px 0; text-align: center; border-top: 1px dashed rgba(244, 244, 249, 0.1); font-size: 0.8em; color: rgba(244, 244, 249, 0.5); }
     </style>
 </head>
@@ -161,7 +164,7 @@
 
     <section id="hero" class="container">
         <div>
-            <h1 class="animated-text">Design & Code That Converts</h1>
+            <h1 class="animated-text" id="heroTitle">Design & Code That Converts</h1>
             <p style="font-size: 1.5em; margin-bottom: 40px;">Your Vision, Digitally Gifted.</p>
             <a href="#contact" class="cta-button">Start Your Project Today</a>
         </div>
@@ -236,12 +239,10 @@
             const textContent = heroText.textContent.trim();
             heroText.innerHTML = '';
             
-            // Rebuilding animation logic with mobile break support
             textContent.split('').forEach((char, i) => {
                 const span = document.createElement('span');
                 span.textContent = char === ' ' ? '\u00A0' : char;
                 
-                // Break logic after "Design & Code " (index 14)
                 if (i === 14 && window.innerWidth <= 768) {
                     const br = document.createElement('br');
                     heroText.appendChild(br);
