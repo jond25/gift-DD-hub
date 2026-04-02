@@ -17,12 +17,17 @@
             --lane-blue: #1a73e8;
             --term-bg: #112240;
             --term-text: #abb2bf;
-            --primary-color: #A3A3FF; /* Purple Disc Color */
+            --primary-color: #A3A3FF; 
             --font-main: 'Montserrat', sans-serif;
             --font-code: 'Fira Code', monospace;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* Base Reset */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
 
         body {
             background-color: #F4F4F9;
@@ -30,97 +35,189 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.6;
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        h1, h2, h3, h4, .navbar-brand {
-            font-family: var(--font-main);
-            font-weight: 800;
+        h1, h2, h3, h4 { 
+            font-family: var(--font-main); 
+            font-weight: 800; 
         }
 
-        /* --- 2. FLOATING NAVIGATION --- */
+        /* --- 2. NAVIGATION OVERLAY --- */
         .floating-burger {
-            position: fixed; top: 25px; right: 25px; z-index: 5000;
-            background: var(--hub-navy); width: 55px; height: 55px;
-            border-radius: 50%; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; cursor: pointer;
+            position: fixed; 
+            top: 25px; 
+            right: 25px; 
+            z-index: 5000;
+            background: var(--hub-navy); 
+            width: 55px; 
+            height: 55px;
+            border-radius: 50%; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            cursor: pointer;
             box-shadow: 0 0 15px rgba(0, 255, 192, 0.4); 
             border: 2px solid var(--hub-neon);
         }
 
         .floating-burger span { 
-            display: block; width: 28px; height: 3px; 
-            background-color: var(--hub-neon); margin: 3px 0; transition: 0.3s; 
+            display: block; 
+            width: 28px; 
+            height: 3px; 
+            background-color: var(--hub-neon); 
+            margin: 3px 0; 
+            transition: 0.3s; 
         }
 
-        /* Side Menu Panel */
         .menu-panel {
-            position: fixed; top: 0; right: -100%; width: 320px; height: 100vh;
-            background: var(--hub-navy); display: flex; flex-direction: column;
-            justify-content: center; align-items: center; 
+            position: fixed; 
+            top: 0; 
+            right: -100%; 
+            width: 320px; 
+            height: 100vh;
+            background: var(--hub-navy); 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
             transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-            z-index: 6000; box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            z-index: 6000; 
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            border-left: 2px solid var(--hub-neon);
         }
 
-        body.menu-open .menu-panel { right: 0; }
+        body.menu-open .menu-panel { 
+            right: 0; 
+        }
 
         .menu-link { 
-            font-size: 1.2rem; color: white; text-decoration: none; 
-            margin: 15px 0; text-transform: uppercase; font-weight: bold; transition: 0.3s;
+            font-size: 1.2rem; 
+            color: white; 
+            text-decoration: none; 
+            margin: 15px 0; 
+            text-transform: uppercase; 
+            font-weight: bold; 
+            transition: 0.3s;
+            letter-spacing: 1px;
         }
-        .menu-link:hover { color: var(--hub-neon); padding-left: 10px; }
 
-        /* --- 3. HERO SECTION (SMUSH-PROOF) --- */
+        .menu-link:hover { 
+            color: var(--hub-neon); 
+            padding-left: 10px; 
+        }
+
+        .menu-link-muted {
+            color: rgba(255,255,255,0.2);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin: 12px 0;
+            font-style: italic;
+            cursor: default;
+        }
+
+        /* --- 3. HERO SECTION (BLUEPRINT THEME) --- */
         .hero-lane {
-            min-height: 80vh;
-            background: linear-gradient(rgba(26, 115, 232, 0.9), rgba(10, 25, 47, 0.95)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover; background-position: center; background-attachment: fixed;
-            color: white; display: flex; align-items: center; justify-content: center;
-            text-align: center; padding: 100px 20px;
+            min-height: 85vh;
+            background: linear-gradient(rgba(26, 115, 232, 0.9), rgba(10, 25, 47, 0.95)), 
+                        url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover; 
+            background-position: center; 
+            background-attachment: fixed;
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            text-align: center; 
+            padding: 100px 20px;
+            position: relative;
         }
-        .hero-lane h1 { font-size: 4rem; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
 
-        /* --- 4. CONTENT CARDS & SECTIONS --- */
-        .section-padding { padding: 80px 0; }
-
-        .card-modern {
-            border: none; border-left: 5px solid var(--lane-blue);
-            transition: all 0.3s ease; background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05); height: 100%;
+        .hero-lane h1 { 
+            font-size: 5rem; 
+            text-shadow: 0 4px 15px rgba(0,0,0,0.4); 
+            letter-spacing: -2px;
+            line-height: 1;
         }
-        .card-modern:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
 
-        /* --- 5. THE WORKFLOW SECTION (NEWLY ADDED) --- */
+        /* --- 4. THE THREE PILLARS --- */
+        .section-padding { 
+            padding: 100px 0; 
+        }
+
+        .card-modern { 
+            border: none; 
+            border-left: 5px solid var(--lane-blue); 
+            transition: all 0.4s ease; 
+            background: white; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); 
+            height: 100%; 
+        }
+
+        .card-modern:hover { 
+            transform: translateY(-10px); 
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1); 
+        }
+
+        /* --- 5. THE CREATIVE WORKFLOW --- */
         .workflow-step { 
             border-left: 3px solid var(--primary-color); 
-            padding-left: 2.5rem; margin-bottom: 4rem; position: relative; 
+            padding-left: 2.5rem; 
+            margin-bottom: 4rem; 
+            position: relative; 
         }
 
         .workflow-step::before {
             content: attr(data-step); 
-            position: absolute; left: -22px; top: 0;
-            background: var(--primary-color); color: #000; 
-            width: 44px; height: 44px; border-radius: 50%; 
-            display: flex; align-items: center; justify-content: center; 
-            font-weight: 800; box-shadow: 0 0 15px var(--primary-color);
+            position: absolute; 
+            left: -22px; 
+            top: 0;
+            background: var(--primary-color); 
+            color: #000; 
+            width: 44px; 
+            height: 44px; 
+            border-radius: 50%; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 800; 
+            box-shadow: 0 0 15px var(--primary-color);
         }
 
-        /* --- 6. THE TERMINAL (DEEP DIVE AREA) --- */
-        .terminal-window {
-            background-color: var(--term-bg); border-radius: 12px;
-            padding: 40px; font-family: var(--font-code); color: var(--term-text);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.1);
+        /* --- 6. THE TERMINAL (BLUEPRINT DATA) --- */
+        .terminal-window { 
+            background-color: var(--term-bg); 
+            border-radius: 12px; 
+            padding: 50px; 
+            font-family: var(--font-code); 
+            color: var(--term-text); 
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            position: relative;
         }
 
-        .terminal-header {
-            color: #61afef; border-bottom: 2px solid #56b6c2;
-            padding-bottom: 15px; margin-bottom: 25px; font-weight: bold;
+        .terminal-header { 
+            color: #61afef; 
+            border-bottom: 2px solid #56b6c2; 
+            padding-bottom: 20px; 
+            margin-bottom: 35px; 
+            font-weight: bold; 
         }
 
-        .lane-item {
-            border-left: 4px solid; padding: 20px; margin: 20px 0;
-            background: rgba(255,255,255,0.03); transition: 0.3s;
+        .lane-item { 
+            border-left: 4px solid; 
+            padding: 25px; 
+            margin: 30px 0; 
+            background: rgba(255,255,255,0.02); 
+            transition: 0.3s; 
         }
-        .lane-item:hover { transform: translateX(10px); background: rgba(97, 175, 239, 0.08); }
+
+        .lane-item:hover { 
+            transform: translateX(10px); 
+            background: rgba(97, 175, 239, 0.08); 
+        }
 
         .lane-analytical { border-color: #e5c07b; }
         .lane-creative { border-color: #98c379; }
@@ -129,238 +226,69 @@
         .lane-operational { border-color: #e06c75; }
 
         /* --- 7. ACTION PLAN ACCORDION --- */
-        .accordion-button { font-weight: 700; color: var(--hub-navy); border-left: 5px solid #f90; }
-
-        .accordion-button:not(.collapsed) {
-            background-color: #e6f0ff; color: var(--lane-blue);
-            border-left: 5px solid var(--lane-blue);
+        .accordion-item { border: none; margin-bottom: 15px; border-radius: 8px !important; overflow: hidden; }
+        
+        .accordion-button { 
+            font-weight: 700; 
+            color: var(--hub-navy); 
+            border-left: 6px solid #f90; 
+            padding: 25px;
+            font-size: 1.1rem;
         }
 
-        /* --- 8. CONTACT TERMINAL --- */
-        .contact-terminal { background: #0f172a; color: white; padding: 80px 0; }
-
-        .form-terminal input, .form-terminal textarea {
-            background: #1e293b; border: 1px solid #334155;
-            color: var(--hub-neon); font-family: var(--font-code);
-            padding: 15px; margin-bottom: 20px;
+        .accordion-button:not(.collapsed) { 
+            background-color: #e6f0ff; 
+            color: var(--lane-blue); 
+            border-left: 6px solid var(--lane-blue); 
         }
 
-        .btn-terminal {
-            background: var(--hub-neon); color: var(--hub-navy);
-            font-weight: 800; border: none; padding: 15px; width: 100%;
-            transition: 0.3s;
+        /* --- 8. CONTACT TERMINAL & SUCCESS GUI --- */
+        .contact-terminal { 
+            background: #0f172a; 
+            color: white; 
+            padding: 120px 0; 
         }
-        .btn-terminal:hover { filter: brightness(1.2); letter-spacing: 2px; }
 
-        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
-        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
-
-        @media (max-width: 768px) {
-            .hero-lane h1 { font-size: 2.5rem; }
-            .terminal-window { padding: 20px; }
+        .form-terminal input, 
+        .form-terminal textarea { 
+            background: #1e293b; 
+            border: 1px solid #334155; 
+            color: var(--hub-neon); 
+            font-family: var(--font-code); 
+            padding: 20px; 
+            margin-bottom: 25px; 
+            border-radius: 5px;
         }
-    </style>
-</head>
-<body id="mainBody">
 
-    <div class="floating-burger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-    </div>
+        .form-terminal input:focus, 
+        .form-terminal textarea:focus {
+            background: #232f45;
+            border-color: var(--hub-neon);
+            outline: none;
+            box-shadow: 0 0 15px rgba(0, 255, 192, 0.3);
+        }
 
-    <nav class="menu-panel" id="sideMenu">
-        <a href="https://ddynastia.com" class="menu-link">The Hub</a>
-        <a href="/creative/index.html" class="menu-link" style="color: var(--hub-neon);">Staying in Lane Service</a>
-        <a href="/style/index.html" class="menu-link">Style Service</a>
-        <a href="/lawn/index.html" class="menu-link">Lawn Care Service</a>
-        <hr style="width: 50%; border: 1px solid rgba(0, 255, 192, 0.1); margin: 20px 0;">
-        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; color: var(--hub-neon);">[ CLOSE MENU ]</a>
-    </nav>
+        .btn-terminal { 
+            background: var(--hub-neon); 
+            color: var(--hub-navy); 
+            font-weight: 900; 
+            border: none; 
+            padding: 20px; 
+            width: 100%; 
+            transition: 0.4s; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 5px;
+        }
 
-    <header class="hero-lane">
-        <div class="container reveal-on-scroll">
-            <i class="bi bi-compass-fill" style="font-size: 4rem; color: var(--hub-neon);"></i>
-            <h1 class="display-1 fw-bold mt-3">Focus & Flow</h1>
-            <p class="lead fs-3 opacity-75">Identifying core competencies. Maximizing absolute impact.</p>
-            <a href="#deep-dive" class="btn btn-outline-light btn-lg mt-4 px-5 py-3 rounded-pill fw-bold">Initialize Deep Dive</a>
-        </div>
-    </header>
+        .btn-terminal:hover { 
+            filter: brightness(1.2); 
+            letter-spacing: 4px; 
+            transform: translateY(-3px);
+        }
 
-    <section class="section-padding">
-        <div class="container">
-            <h2 class="text-center mb-5 display-4 fw-bold">The Three Pillars</h2>
-            <div class="row g-4">
-                <div class="col-md-4 reveal-on-scroll">
-                    <div class="card card-modern p-5">
-                        <h3 class="h4 fw-bold text-primary">01. Identify Your Zone</h3>
-                        <p class="text-muted">Clearly articulate what you are uniquely qualified to do. Understand your role's specific responsibilities and the boundaries of your expertise.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 reveal-on-scroll">
-                    <div class="card card-modern p-5">
-                        <h3 class="h4 fw-bold text-primary">02. Trust Collaboration</h3>
-                        <p class="text-muted">Offer support, not takeover. Trust your teammates to manage their domains and provide constructive feedback only when invited.</p>
-                    </div>
-                </div>
-                <div class="col-md-4 reveal-on-scroll">
-                    <div class="card card-modern p-5">
-                        <h3 class="h4 fw-bold text-primary">03. Maximize Efficiency</h3>
-                        <p class="text-muted">Focusing your energy prevents burnout and ensures that your contributions are meaningful, high-quality, and strategically on point.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="creative-workflow" class="section-padding bg-white">
-        <div class="container text-center reveal-on-scroll">
-            <h2 class="display-4 fw-bold mb-5">Our Structured Creative Workflow</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-9 text-start">
-                    <div class="workflow-step" data-step="1">
-                        <h3 class="h4 fw-bold text-primary">Discovery & Strategy</h3>
-                        <p class="text-muted">In-depth session to understand goals, audience, and competitive landscape. This stage defines the project's visual north star.</p>
-                    </div>
-                    <div class="workflow-step" data-step="2">
-                        <h3 class="h4 fw-bold text-primary">Conceptual Design</h3>
-                        <p class="text-muted">Development of initial concepts, mood boards, and prototypes. We iterate based on your feedback to refine the core feel.</p>
-                    </div>
-                    <div class="workflow-step" data-step="3">
-                        <h3 class="h4 fw-bold text-primary">Finalization & Launch</h3>
-                        <p class="text-muted">Polishing master files and providing a comprehensive brand guide for consistent implementation across all channels.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="deep-dive" class="section-padding" style="background-color: #050b16;">
-        <div class="container">
-            <div class="terminal-window reveal-on-scroll">
-                <h2 class="terminal-header">>> Lane Definitions Initialization...</h2>
-                <p><span style="color: #98c379;">[SYSTEM] Philosophy Check:</span> Depth triumphs over superficial breadth. Mastering a single lane creates more value than drifting across five.</p>
-                
-                <div id="laneDetails" class="mt-5">
-                    <div class="lane-item lane-analytical">
-                        <h4 style="color: #e5c07b;">Analytical Lane</h4>
-                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Data interpretation, trend forecasting, and strategic insights.</p>
-                        <p class="small opacity-50">Examples: Data Scientists, Financial Analysts, Strategic Planners.</p>
-                    </div>
-
-                    <div class="lane-item lane-creative">
-                        <h4 style="color: #98c379;">Creative Lane</h4>
-                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Visual design, branding, and imaginative problem-solving.</p>
-                        <p class="small opacity-50">Examples: Graphic Designers, Art Directors, Content Strategists.</p>
-                    </div>
-
-                    <div class="lane-item lane-technical">
-                        <h4 style="color: #61afef;">Technical Lane</h4>
-                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> System architecture, code development, and infrastructure.</p>
-                        <p class="small opacity-50">Examples: Software Engineers, Cloud Architects, Technical Leads.</p>
-                    </div>
-
-                    <div class="lane-item lane-relational">
-                        <h4 style="color: #c678dd;">Relational Lane</h4>
-                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Building connections, negotiation, and client success.</p>
-                        <p class="small opacity-50">Examples: Account Managers, HR Professionals, Negotiators.</p>
-                    </div>
-
-                    <div class="lane-item lane-operational">
-                        <h4 style="color: #e06c75;">Operational Lane</h4>
-                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Process optimization, logistics, and resource allocation.</p>
-                        <p class="small opacity-50">Examples: Ops Managers, Supply Chain Directors, Project Coordinators.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-padding bg-white">
-        <div class="container">
-            <h2 class="text-center mb-5 fw-bold">Action Plan for Lane Maintenance</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="accordion shadow-sm" id="laneAccordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tip1">
-                                    Tip 1: Create a Responsibility Matrix (RACI)
-                                </button>
-                            </h2>
-                            <div id="tip1" class="accordion-collapse collapse show" data-bs-parent="#laneAccordion">
-                                <div class="accordion-body">
-                                    Define who is Responsible, Accountable, Consulted, and Informed for key tasks. This visual aid clarifies boundaries immediately.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip2">
-                                    Tip 2: Practice "Gentle Redirection"
-                                </button>
-                            </h2>
-                            <div id="tip2" class="accordion-collapse collapse" data-bs-parent="#laneAccordion">
-                                <div class="accordion-body">
-                                    When someone asks you to step into their lane, use phrases like: "My best contribution here would be to offer guidance on X, but [Owner's Name] has the final say."
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip3">
-                                    Tip 3: Set "Meeting Endpoints"
-                                </button>
-                            </h2>
-                            <div id="tip3" class="accordion-collapse collapse" data-bs-parent="#laneAccordion">
-                                <div class="accordion-body">
-                                    Before a meeting, identify the non-negotiable outcome. If the discussion veers off course, bring it back by stating, "To make sure we hit our endpoint, let's focus on deciding X."
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact-terminal">
-        <div class="container" style="max-width: 700px;">
-            <div class="text-center mb-5 reveal-on-scroll">
-                <h2 class="display-5 fw-bold">Inquire About This Framework Service</h2>
-                <p class="opacity-50 font-monospace">>> SYSTEM READY FOR INPUT</p>
-            </div>
-            <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST" class="form-terminal">
-                <input type="text" name="name" class="form-control" placeholder="[ User_ID / Name ]" required>
-                <input type="email" name="email" class="form-control" placeholder="[ Contact_Protocol (Email) ]" required>
-                <textarea name="message" class="form-control" rows="5" placeholder="[ Input_Message_Data... ]" required></textarea>
-                <button type="submit" class="btn-terminal">EXECUTE SUBMISSION</button>
-            </form>
-        </div>
-    </section>
-
-    <footer class="py-5 text-center border-top bg-dark text-white">
-        <div class="container">
-            <p class="mb-4 small">
-                &copy; 2025 gift'DD Consultant Services. All Rights Reserved. <br>
-                Without Recourse. No part of this publication may be reproduced, distributed, or transmitted without prior written permission.
-            </p>
-        </div>
-    </footer>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        function toggleMenu() { document.body.classList.toggle('menu-open'); }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.reveal-on-scroll').forEach((el) => observer.observe(el));
-        });
-    </script>
-</body>
-</html>
+        /* Success GUI Overlay */
+        #success-gui {
+            display: none;
+            text-align: center;
+            padding: 80px 4
