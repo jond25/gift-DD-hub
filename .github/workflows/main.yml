@@ -3,20 +3,27 @@ name: Gift'DD Sync Queue
 on:
   push:
     branches: [ main ]
+  workflow_dispatch:
+
+# System Permissions for Deployment
+permissions:
+  contents: read
+  pages: write
+  id-token: write
 
 # THE TRAFFIC CONTROLLER
-# This ensures that if you commit 5 times quickly, 
-# GitHub will run them one-by-one in order.
+# We use a fixed group "pages" to ensure the website deployment 
+# never overlaps or cancels itself.
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
+  group: "pages"
   cancel-in-progress: false 
 
 jobs:
-  execute-sync:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
-    # Added a timeout to prevent a stuck job from holding the queue forever
-    timeout-minutes: 5 
-
     steps:
       - name: 1. Pull Latest Data
         uses: actions/checkout@v4
@@ -24,16 +31,16 @@ jobs:
       - name: 2. Initialize System Sequence
         run: |
           echo ">> ACCESSING ARCHIVE: ${{ github.sha }}"
-          echo ">> STATUS: QUEUE CLEARED. INITIALIZING EXECUTION."
+          echo ">> STATUS: QUEUE AUTHORIZED."
 
-      - name: 3. Verify Integrity
-        run: |
-          echo ">> SCANNING REPOSITORY FOR UPDATES..."
-          # This is where your system "thinks" or builds. 
-          # We add a small sleep so you can actually see the queue in the Actions tab.
-          sleep 10 
+      - name: 3. Setup Pages Infrastructure
+        uses: actions/configure-pages@v4
 
-      - name: 4. Finalize Synchronization
-        run: |
-          echo ">> SYNC COMPLETE."
-          echo ">> NEXT JOB IN QUEUE IS NOW AUTHORIZED TO FIRE."
+      - name: 4. Package Artifacts
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '.' # Packages your whole project for the web
+
+      - name: 5. Execute Deployment
+        id: deployment
+        uses: actions/deploy-pages@v4
