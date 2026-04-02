@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* --- 1. CORE THEME & RESET --- */
+        /* --- 1. CORE THEME --- */
         :root {
             --color-primary: #0A192F; 
             --color-secondary: #00FFC0; 
@@ -26,49 +26,36 @@
             overflow-x: hidden;
         }
 
-        /* --- 2. HEADER & HAMBURGER NAVIGATION --- */
-        header {
-            background-color: rgba(10, 25, 47, 0.95);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(5px);
-            border-bottom: 1px solid rgba(0, 255, 192, 0.1);
-        }
-
-        nav.top-nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .logo {
-            font-size: 1.6em;
-            font-weight: 900;
-            color: var(--color-secondary);
-        }
-
-        .hamburger {
-            cursor: pointer;
-            z-index: 2001;
+        /* --- 2. NEW FLOATING HAMBURGER (No stagnant bar) --- */
+        .floating-burger {
+            position: fixed;
+            top: 25px;
+            right: 25px;
+            z-index: 4000;
+            background: var(--color-primary);
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
             display: flex;
             flex-direction: column;
-            gap: 5px;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 255, 192, 0.4);
+            border: 2px solid var(--color-secondary);
+            transition: 0.3s;
         }
-
-        .hamburger span {
+        .floating-burger:hover { transform: scale(1.1); }
+        .floating-burger span {
             display: block;
-            width: 25px;
+            width: 28px;
             height: 3px;
             background-color: var(--color-secondary);
+            margin: 3px 0;
             transition: 0.3s;
         }
 
-        /* Slide-out Menu Panel (Hidden by default) */
+        /* Slide-out Menu Panel */
         .menu-panel {
             position: fixed;
             top: 0;
@@ -81,13 +68,11 @@
             justify-content: center;
             align-items: center;
             transition: 0.4s ease-in-out;
-            z-index: 2000;
+            z-index: 5000;
             box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
 
-        body.menu-open .menu-panel { 
-            right: 0; 
-        }
+        body.menu-open .menu-panel { right: 0; }
 
         .menu-link {
             font-size: 1.2rem;
@@ -100,9 +85,9 @@
         }
         .menu-link:hover { color: var(--color-secondary); }
 
-        /* --- 3. ORIGINAL SECTIONS --- */
+        /* --- 3. ALL ORIGINAL RESTORED STYLES --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 80px 0; min-height: 100vh; display: flex; align-items: center; }
+        section { padding: 100px 0; min-height: 100vh; display: flex; align-items: center; }
 
         #hero { text-align: center; justify-content: center; }
         #hero h1 { font-size: 4em; text-transform: uppercase; text-shadow: 0 0 10px var(--color-accent); margin-bottom: 20px; }
@@ -119,31 +104,29 @@
             text-transform: uppercase;
         }
 
-        /* --- 4. FORM & POPUP STYLES --- */
+        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
+        .service-card { background-color: #112240; padding: 30px; border-radius: 8px; border-top: 5px solid var(--color-secondary); }
+
+        /* Form & Popup */
         .spinner { border: 4px solid #ddd; border-top: 4px solid #198754; border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite; margin: 15px auto; display: none; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         .success-banner { margin-top: 20px; padding: 12px; background-color: #198754; color: white; font-weight: bold; border-radius: 6px; text-align: center; }
-        #successPopup { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 3000; }
+        #successPopup { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 6000; }
         .popup-box { background: white; padding: 30px; border-radius: 10px; text-align: center; color: #333; }
         .contact-form input, .contact-form textarea { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid var(--color-accent); background: rgba(0,0,0,0.2); color: white; border-radius: 5px; }
     </style>
 </head>
 <body id="mainBody">
 
-    <header>
-        <nav class="top-nav">
-            <div class="logo">Gift'DD Hub</div>
-            <div class="hamburger" id="menuBtn">
-                <span></span><span></span><span></span>
-            </div>
-        </nav>
-    </header>
+    <div class="floating-burger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+    </div>
 
     <nav class="menu-panel" id="sideMenu">
         <a href="/creative/index.html" class="menu-link">Staying in Lane</a>
-        <a href="/design'DDtees/index.html" class="menu-link">Style</a>
+        <a href="/designDDtees/index.html" class="menu-link">Style</a>
         <a href="/lawn/index.html" class="menu-link">Lawn Care</a>
-        <a href="/Portfolio-vertical.html" class="menu-link">Portfolio</a>
+        <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
         <a href="#" class="menu-link" style="opacity: 0.5;">Spiritual (Soon)</a>
         <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; color: var(--color-secondary); margin-top: 20px;">[ CLOSE ]</a>
     </nav>
@@ -153,6 +136,38 @@
             <h1 class="animated-text">Design & Code That Converts</h1>
             <p style="font-size: 1.5em; margin-bottom: 40px;">Your Vision, Digitally Gifted.</p>
             <a href="#contact" class="cta-button">Start Your Project Today</a>
+        </div>
+    </section>
+
+    <section id="about">
+        <div class="container text-center">
+            <h2 style="font-size: 2.5em; border-bottom: 2px solid var(--color-secondary); display: inline-block; padding-bottom: 10px; margin-bottom: 40px;">About Gift'DD Digital Designs</h2>
+            <p style="max-width: 800px; margin: 0 auto; font-size: 1.1em; color: rgba(244, 244, 249, 0.8);">
+                We combine creative UX with robust, fast code. Trust us to craft a digital presence that is professional and approachable. Our mission is simple: captivate your audience while ensuring modern digital success.
+            </p>
+        </div>
+    </section>
+
+    <section id="services" style="background-color: #112240;">
+        <div class="container text-center">
+            <h2 style="font-size: 2.5em; border-bottom: 2px solid var(--color-secondary); display: inline-block; padding-bottom: 10px; margin-bottom: 40px;">Our Core Services</h2>
+            <div class="services-grid">
+                <div class="service-card">
+                    <i class="fas fa-desktop" style="font-size: 2.5em; color: var(--color-accent); margin-bottom: 15px;"></i>
+                    <h3 style="color: var(--color-secondary); margin-bottom: 15px;">Custom Design</h3>
+                    <p>Clean, responsive code tailored exactly to your brand goals.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-shopping-cart" style="font-size: 2.5em; color: var(--color-accent); margin-bottom: 15px;"></i>
+                    <h3 style="color: var(--color-secondary); margin-bottom: 15px;">E-commerce</h3>
+                    <p>Launch stores with confidence on Shopify and WooCommerce.</p>
+                </div>
+                <div class="service-card">
+                    <i class="fas fa-tools" style="font-size: 2.5em; color: var(--color-accent); margin-bottom: 15px;"></i>
+                    <h3 style="color: var(--color-secondary); margin-bottom: 15px;">Maintenance</h3>
+                    <p>Keep your site secure, fast, and up-to-date with our support.</p>
+                </div>
+            </div>
         </div>
     </section>
 
@@ -170,7 +185,7 @@
         </div>
     </section>
 
-    <footer style="padding: 20px 0; text-align: center; opacity: 0.5; font-size: 0.8em;">
+    <footer style="padding: 40px 0; text-align: center; opacity: 0.5; font-size: 0.8em; border-top: 1px solid rgba(0, 255, 192, 0.1);">
         <p>© 2025 Gift'DD Consultant Services. All Rights Reserved.</p>
     </footer>
 
@@ -178,19 +193,13 @@
         <div class="popup-box">
             <h3 style="color:#198754;">Message Sent!</h3>
             <p>I'll get back to you shortly.</p>
-            <button onclick="closePopup()" style="margin-top:20px; padding:10px 20px; cursor:pointer; background:#198754; color:white; border:none; border-radius:5px;">Close</button>
+            <button onclick="document.getElementById('successPopup').style.display='none'" style="margin-top:20px; padding:10px 20px; cursor:pointer; background:#198754; color:white; border:none; border-radius:5px;">Close</button>
         </div>
     </div>
 
     <script>
-        // 1. MENU TOGGLE
-        const menuBtn = document.getElementById('menuBtn');
-        function toggleMenu() {
-            document.body.classList.toggle('menu-open');
-        }
-        menuBtn.addEventListener('click', toggleMenu);
+        function toggleMenu() { document.body.classList.toggle('menu-open'); }
 
-        // 2. HERO ANIMATION
         document.addEventListener('DOMContentLoaded', () => {
             const heroText = document.querySelector('.animated-text');
             const text = heroText.textContent.trim();
@@ -203,7 +212,6 @@
             });
         });
 
-        // 3. FORMSPREE LOGIC
         const form = document.getElementById("contactForm");
         form.addEventListener("submit", async function(e) {
             e.preventDefault();
@@ -221,8 +229,6 @@
                 setTimeout(() => document.getElementById("successBanner").style.display = "none", 5000);
             }
         });
-
-        function closePopup() { document.getElementById("successPopup").style.display = "none"; }
     </script>
 </body>
 </html>
