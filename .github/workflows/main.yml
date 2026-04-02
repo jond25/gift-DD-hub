@@ -5,17 +5,17 @@ on:
     branches: [ main ]
   workflow_dispatch:
 
-# System Permissions for Deployment
+# System Permissions
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# THE TRAFFIC CONTROLLER
-# We use a fixed group "pages" to ensure the website deployment 
-# never overlaps or cancels itself.
+# THE STRICT TRAFFIC CONTROLLER
+# We use a hard-coded string 'global_pages_queue' to ensure every 
+# single push to this repo joins the exact same line.
 concurrency:
-  group: "pages"
+  group: 'global_pages_queue'
   cancel-in-progress: false 
 
 jobs:
@@ -30,17 +30,22 @@ jobs:
 
       - name: 2. Initialize System Sequence
         run: |
-          echo ">> ACCESSING ARCHIVE: ${{ github.sha }}"
-          echo ">> STATUS: QUEUE AUTHORIZED."
+          echo ">> ARCHIVE ID: ${{ github.sha }}"
+          echo ">> QUEUE STATUS: ACTIVE. PROCEEDING TO EXECUTION."
 
-      - name: 3. Setup Pages Infrastructure
+      - name: 3. Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: 4. Package Artifacts
+      - name: 4. Package Assets
         uses: actions/upload-pages-artifact@v3
         with:
-          path: '.' # Packages your whole project for the web
+          path: '.'
 
       - name: 5. Execute Deployment
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: 6. Finalize & Signal Next Job
+        run: |
+          echo ">> SUCCESSION SIGNAL SENT."
+          echo ">> TERMINATING CURRENT RUN TO CLEAR PATH FOR SUCCESSOR."
