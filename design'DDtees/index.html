@@ -44,52 +44,31 @@
             font-weight: 700; 
         }
 
-        /* --- 3. TOP NAVIGATION BAR (NEW) --- */
-        .top-nav-bar {
-            background-color: rgba(10, 25, 47, 0.95);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 15px 30px;
-            position: fixed;
-            top: 0;
-            width: 100%;
-            z-index: 4000;
-            border-bottom: 1px solid rgba(163, 163, 255, 0.2);
-            backdrop-filter: blur(10px);
-        }
-
-        .back-hub-btn {
-            color: var(--primary-color);
-            text-decoration: none;
-            border: 1px solid var(--primary-color);
-            padding: 6px 20px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            transition: 0.3s;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .back-hub-btn:hover { 
-            background: var(--primary-color); 
-            color: var(--background-dark); 
-        }
-
-        .hamburger { 
-            cursor: pointer; 
+        /* --- 3. FLOATING NAVIGATION (REPLACED STAGNANT BAR) --- */
+        .floating-burger {
+            position: fixed; 
+            top: 25px; 
+            right: 25px; 
+            z-index: 5000;
+            background: var(--background-dark); 
+            width: 55px; 
+            height: 55px;
+            border-radius: 50%; 
             display: flex; 
-            flex-direction: column; 
-            gap: 6px; 
-            z-index: 5001; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(163, 163, 255, 0.4); 
+            border: 2px solid var(--primary-color);
         }
 
-        .hamburger span { 
+        .floating-burger span { 
             display: block; 
-            width: 30px; 
+            width: 28px; 
             height: 3px; 
-            background: var(--primary-color); 
+            background-color: var(--primary-color); 
+            margin: 3px 0; 
             transition: 0.3s; 
         }
 
@@ -106,7 +85,7 @@
             justify-content: center; 
             align-items: center; 
             transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-            z-index: 5000; 
+            z-index: 6000; 
             box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
 
@@ -130,24 +109,24 @@
             padding-left: 10px;
         }
 
-        /* --- 4. HERO SECTION FIX (PREVENT SMUSHING) --- */
+        /* --- 4. HERO SECTION FIX --- */
         #hero-section {
-            min-height: 100vh; /* Changed from height to min-height */
+            min-height: 100vh; 
             display: flex; 
             flex-direction: column;
             align-items: center; 
             justify-content: center; 
             text-align: center;
-            padding: 150px 0 100px 0; /* Added breathing room for PC */
+            padding: 150px 0 100px 0; 
             background-image: linear-gradient(rgba(10, 25, 47, 0.7), rgba(10, 25, 47, 0.85)), 
                               url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop');
             background-size: cover; 
             background-position: center;
-            background-attachment: fixed; /* Parallax feel on PC */
+            background-attachment: fixed; 
         }
 
         #hero-section h1 {
-            font-size: 4.5rem; /* Large headline for PC */
+            font-size: 4.5rem; 
             max-width: 900px;
             margin: 0 auto;
         }
@@ -174,7 +153,6 @@
             box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
         }
 
-        /* Reveal Animations */
         .reveal-on-scroll { 
             opacity: 0; 
             transform: translateY(40px); 
@@ -329,15 +307,11 @@
 </head>
 <body id="mainBody">
 
-    <header class="top-nav-bar">
-        <a href="https://ddynastia.com/index.html" class="back-hub-btn">Back to Hub</a>
-        <div class="fw-bold d-none d-md-block" style="color: var(--primary-color); letter-spacing: 2px;">GIFT'DD DESIGN STUDIO</div>
-        <div class="hamburger" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </header>
+    <div class="floating-burger" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
 
     <nav class="menu-panel" id="sideMenu">
         <a href="https://ddynastia.com/index.html" class="menu-link">Back to Hub</a>
