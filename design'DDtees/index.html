@@ -6,9 +6,7 @@
     <title>Stellar Designs | Graphic Storytelling & Visual Branding</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
@@ -24,11 +22,7 @@
         }
 
         /* Essential Reset */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
             background-color: var(--background-dark);
@@ -39,7 +33,6 @@
             scroll-behavior: smooth;
         }
 
-        /* Typography Hierarchy */
         h1, h2, h3, h4 { 
             font-family: var(--font-secondary); 
             font-weight: 700; 
@@ -47,216 +40,72 @@
 
         /* --- 2. NAVIGATION (HUB STYLE) --- */
         .floating-burger {
-            position: fixed; 
-            top: 25px; 
-            right: 25px; 
-            z-index: 5000;
-            background: var(--background-dark); 
-            width: 55px; 
-            height: 55px;
-            border-radius: 50%; 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center; 
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(163, 163, 255, 0.4); 
-            border: 2px solid var(--primary-color);
+            position: fixed; top: 25px; right: 25px; z-index: 5000;
+            background: var(--background-dark); width: 55px; height: 55px;
+            border-radius: 50%; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; cursor: pointer;
+            box-shadow: 0 0 15px rgba(163, 163, 255, 0.4); border: 2px solid var(--primary-color);
         }
+        .floating-burger span { display: block; width: 28px; height: 3px; background-color: var(--primary-color); margin: 3px 0; transition: 0.3s; }
 
-        .floating-burger span { 
-            display: block; 
-            width: 28px; 
-            height: 3px; 
-            background-color: var(--primary-color); 
-            margin: 3px 0; 
-            transition: 0.3s; 
-        }
-
-        /* Slide-out Menu Navigation */
         .menu-panel {
-            position: fixed; 
-            top: 0; 
-            right: -100%; 
-            width: 300px; 
-            height: 100vh;
-            background: #112240; 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center; 
-            transition: 0.4s ease-in-out;
-            z-index: 6000; 
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
+            background: #112240; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; transition: 0.4s ease-in-out;
+            z-index: 6000; box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
+        body.menu-open .menu-panel { right: 0; }
+        .menu-link { font-size: 1.2rem; color: var(--text-light); text-decoration: none; margin: 15px 0; text-transform: uppercase; font-weight: bold; transition: 0.3s; }
+        .menu-link:hover { color: var(--primary-color); }
 
-        body.menu-open .menu-panel { 
-            right: 0; 
-        }
-
-        .menu-link { 
-            font-size: 1.2rem; 
-            color: var(--text-light); 
-            text-decoration: none; 
-            margin: 15px 0; 
-            text-transform: uppercase; 
-            font-weight: bold; 
-            transition: 0.3s;
-        }
-
-        .menu-link:hover { 
-            color: var(--primary-color); 
-        }
-
-        /* --- 3. CUSTOM BUTTONS & UI --- */
+        /* --- 3. CUSTOM UI & ANIMATIONS --- */
         .btn-primary-custom {
-            background-color: var(--primary-color); 
-            color: #000; 
-            font-weight: bold;
-            padding: 15px 40px; 
-            border-radius: 5px; 
-            transition: 0.3s; 
-            border: none; 
-            text-decoration: none; 
-            display: inline-block;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
+            background-color: var(--primary-color); color: #000; font-weight: bold;
+            padding: 15px 40px; border-radius: 5px; transition: 0.3s; border: none; 
+            text-decoration: none; display: inline-block; text-transform: uppercase; letter-spacing: 1.5px;
         }
+        .btn-primary-custom:hover { background-color: var(--secondary-color); transform: translateY(-3px); color: #000; box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4); }
 
-        .btn-primary-custom:hover { 
-            background-color: var(--secondary-color); 
-            transform: translateY(-3px); 
-            color: #000; 
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
-        }
-
-        /* Scroll Reveal Animation Styles */
-        .reveal-on-scroll { 
-            opacity: 0; 
-            transform: translateY(30px); 
-            transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-        }
-
-        .reveal-on-scroll.is-visible { 
-            opacity: 1; 
-            transform: translateY(0); 
-        }
+        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
         /* --- 4. SECTION SPECIFIC STYLING --- */
-        .container { 
-            max-width: 1200px; 
-            margin: 0 auto; 
-            padding: 0 20px; 
-        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         
         #hero-section {
-            height: 100vh; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            text-align: center;
+            height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center;
             background-image: linear-gradient(rgba(10, 25, 47, 0.6), rgba(10, 25, 47, 0.8)), 
                               url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1964&auto=format&fit=crop');
-            background-size: cover; 
-            background-position: center;
+            background-size: cover; background-position: center;
         }
 
-        /* Portfolio & Gallery Items */
-        .portfolio-grid { 
-            display: grid; 
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
-            gap: 30px; 
-            padding: 40px 0; 
-        }
-
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; padding: 40px 0; }
         .portfolio-item { 
-            height: 400px; 
-            overflow: hidden; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            border: 1px solid rgba(163, 163, 255, 0.1); 
-            background-color: var(--card-bg);
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            height: 400px; overflow: hidden; border-radius: 8px; cursor: pointer; 
+            border: 1px solid rgba(163, 163, 255, 0.1); background-color: var(--card-bg); box-shadow: 0 10px 30px rgba(0,0,0,0.3);
         }
+        .portfolio-item img, .portfolio-item video { width: 100%; height: 100%; object-fit: cover; transition: 0.6s ease-in-out; }
+        .portfolio-item:hover img { transform: scale(1.1); }
+        .gallery-hidden { display: none; }
 
-        .portfolio-item img, .portfolio-item video { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            transition: 0.6s ease-in-out; 
-        }
-
-        .portfolio-item:hover img { 
-            transform: scale(1.1); 
-        }
-        
-        .gallery-hidden { 
-            display: none; 
-        }
-
-        /* Workflow Steps */
-        .process-step { 
-            border-left: 2px solid var(--primary-color); 
-            padding-left: 2rem; 
-            margin-bottom: 3rem; 
-            position: relative; 
-        }
-
+        /* REINVENTED WORKFLOW STYLES */
+        .process-step { border-left: 2px solid var(--primary-color); padding-left: 2rem; margin-bottom: 3rem; position: relative; }
         .process-step::before {
-            content: attr(data-step); 
-            position: absolute; 
-            left: -20px; 
-            top: 0;
-            background: var(--primary-color); 
-            color: #000; 
-            width: 40px; 
-            height: 40px;
-            border-radius: 50%; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            font-weight: 800;
-            box-shadow: 0 0 10px var(--primary-color);
+            content: attr(data-step); position: absolute; left: -20px; top: 0;
+            background: var(--primary-color); color: #000; width: 40px; height: 40px;
+            border-radius: 50%; display: flex; align-items: center; justify-content: center; 
+            font-weight: 800; box-shadow: 0 0 10px var(--primary-color);
         }
 
-        /* Lightbox Overlay */
-        #lightbox { 
-            display: none; 
-            position: fixed; 
-            inset: 0; 
-            background: rgba(0,0,0,0.95); 
-            z-index: 7000; 
-            justify-content: center; 
-            align-items: center; 
-            cursor: zoom-out; 
-        }
+        #lightbox { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95); z-index: 7000; justify-content: center; align-items: center; cursor: zoom-out; }
+        #lightbox img { max-width: 90%; max-height: 85%; border: 3px solid var(--primary-color); border-radius: 8px; }
 
-        #lightbox img { 
-            max-width: 90%; 
-            max-height: 85%; 
-            border: 3px solid var(--primary-color); 
-            border-radius: 8px;
-        }
-
-        /* Testimonials Block */
-        .testimonial-box {
-            background-color: var(--card-bg);
-            padding: 40px;
-            border-left: 5px solid var(--primary-color);
-            border-radius: 5px;
-            margin-bottom: 30px;
-        }
-
-        /* --- 5. RESPONSIVE DESIGN --- */
-        @media (max-width: 992px) {
-            #hero-section h1 { font-size: 3.5rem; }
-        }
+        .testimonial-box { background-color: var(--card-bg); padding: 40px; border-left: 5px solid var(--primary-color); border-radius: 5px; margin-bottom: 30px; }
 
         @media (max-width: 768px) {
             #hero-section h1 { font-size: 2.8rem; }
             .portfolio-item { height: 350px; }
             section { padding: 80px 0 !important; }
-            .process-step { padding-left: 1.5rem; }
         }
     </style>
 </head>
@@ -291,25 +140,15 @@
                     <span class="text-uppercase fw-bold" style="color: var(--primary-color); letter-spacing: 3px;">Creative Director</span>
                     <h2 class="display-4 my-3">I turn visions into visceral realities.</h2>
                     <p class="lead">For three years, I have specialized in cutting-edge visual branding, focusing on delivering distinctive, high-impact design solutions.</p>
-                    <p class="small fst-italic text-white-50">Deep market strategy blended with unconventional artistry ensuring every project is strategically effective.</p>
                 </div>
-                
                 <div class="col-lg-6">
                     <div id="bioShowcase" class="carousel slide portfolio-item shadow-lg" data-bs-ride="carousel">
                         <div class="carousel-inner" style="height: 100%;">
-                          <div class="carousel-item active" style="height: 100%;">
-                            <img src="IMG_2310.jpg" class="d-block w-100" alt="Artsy Mockup 1">
-                          </div>
-                          <div class="carousel-item" style="height: 100%;">
-                            <img src="IMG_2053.jpg" class="d-block w-100" alt="Artsy Mockup 2">
-                          </div>
+                          <div class="carousel-item active" style="height: 100%;"><img src="IMG_2310.jpg" class="d-block w-100"></div>
+                          <div class="carousel-item" style="height: 100%;"><img src="IMG_2053.jpg" class="d-block w-100"></div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#bioShowcase" data-bs-slide="prev">
-                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#bioShowcase" data-bs-slide="next">
-                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        </button>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#bioShowcase" data-bs-slide="prev"><span class="carousel-control-prev-icon"></span></button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#bioShowcase" data-bs-slide="next"><span class="carousel-control-next-icon"></span></button>
                     </div>
                 </div>
             </div>
@@ -321,7 +160,7 @@
                 <div class="col-md-4 reveal-on-scroll">
                     <h1 class="display-3" style="margin-bottom: 25px;">🎨</h1>
                     <h3 class="h4" style="color: var(--secondary-color);">Strategic Branding</h3>
-                    <p class="small">Define your market position with a brand identity that connects deeply with your ideal audience for immediate recognition.</p>
+                    <p class="small">Define your market position with an identity that connects deeply with your ideal audience for immediate recognition.</p>
                 </div>
                 <div class="col-md-4 reveal-on-scroll">
                     <h1 class="display-3" style="margin-bottom: 25px;">✨</h1>
@@ -337,20 +176,20 @@
         </section>
 
         <section id="workflow" class="py-5 reveal-on-scroll">
-            <h2 class="text-center display-5 mb-5">Our Structured Creative Workflow</h2>
+            <h2 class="text-center display-5 mb-5">Our Product Creation Workflow</h2>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
                     <div class="process-step" data-step="1">
-                        <h3 class="h4" style="color: var(--primary-color);">Discovery & Strategy</h3>
-                        <p>In-depth session to understand goals, audience, and competitive landscape. This stage defines the project's visual north star.</p>
+                        <h3 class="h4" style="color: var(--primary-color);">Canvas & Concept Selection</h3>
+                        <p>Every design needs the right home. Whether it’s hats, shirts, bags, or coasters, we identify the physical medium that carries your vision best. We select the textures and materials that align with your brand’s feel.</p>
                     </div>
                     <div class="process-step" data-step="2">
-                        <h3 class="h4" style="color: var(--primary-color);">Conceptual Design</h3>
-                        <p>Development of initial concepts, mood boards, and prototypes. We iterate based on your feedback to refine the core feel.</p>
+                        <h3 class="h4" style="color: var(--primary-color);">Prototyping & Visual Mockups</h3>
+                        <p>We bridge the gap between digital art and physical products. Through high-fidelity mockups, you’ll see exactly how your design interacts with the product—checking placement, scale, and color accuracy before a single thread is sewn or ink is dropped.</p>
                     </div>
                     <div class="process-step" data-step="3">
-                        <h3 class="h4" style="color: var(--primary-color);">Finalization & Launch</h3>
-                        <p>Polishing master files and providing a comprehensive brand guide for consistent implementation across all channels.</p>
+                        <h3 class="h4" style="color: var(--primary-color);">Master Assets & Print Delivery</h3>
+                        <p>The final stage is all about precision. We deliver high-resolution, production-ready vector files optimized specifically for manufacturing. From magnetic surfaces to fabric textures, your art is delivered ready to live on any product with crystal clarity.</p>
                     </div>
                 </div>
             </div>
@@ -365,14 +204,12 @@
                 <div class="portfolio-item gallery-item" onclick="openLightbox(this)"><img src="IMG_2382.jpg"></div>
                 <div class="portfolio-item gallery-item" onclick="openLightbox(this)"><img src="IMG_2388.jpg"></div>
                 <div class="portfolio-item gallery-item" onclick="openLightbox(this)"><img src="IMG_2400.jpg"></div>
-                
                 <div class="portfolio-item gallery-item gallery-hidden" onclick="openLightbox(this)"><img src="IMG_2601.jpg"></div>
                 <div class="portfolio-item gallery-item gallery-hidden" onclick="openLightbox(this)"><img src="IMG_2664.jpg"></div>
                 <div class="portfolio-item gallery-item gallery-hidden" onclick="openLightbox(this)"><img src="IMG_2668.jpg"></div>
                 <div class="portfolio-item gallery-item gallery-hidden" onclick="openLightbox(this)"><img src="IMG_2736.JPG"></div>
                 <div class="portfolio-item gallery-item gallery-hidden" onclick="openLightbox(this)"><img src="IMG_2739.jpg"></div>
                 <div class="portfolio-item gallery-item gallery-hidden" onclick="openLightbox(this)"><img src="IMG_2748.jpg"></div>
-                
                 <div class="portfolio-item gallery-item gallery-hidden" onclick="openLightbox(this)"><img src="IMG_2771.jpg"></div>
                 <div class="portfolio-item gallery-item gallery-hidden" onclick="openLightbox(this)"><img src="IMG_2779.jpg"></div>
                 <div class="portfolio-item gallery-item gallery-hidden" onclick="openLightbox(this)"><img src="IMG_2817.jpg"></div>
@@ -381,12 +218,8 @@
                 <div class="portfolio-item gallery-item gallery-hidden" onclick="openLightbox(this)"><img src="IMG_3501.JPG"></div>
                 <div class="portfolio-item gallery-item gallery-hidden" onclick="openLightbox(this)"><img src="image000000.JPG"></div>
             </div>
-            
             <div class="text-center mt-5">
-                <button id="loadMoreBtn" class="btn btn-outline-primary btn-lg" 
-                        style="border-color: var(--primary-color); color: var(--primary-color); padding: 15px 50px;">
-                    LOAD MORE DESIGNS
-                </button>
+                <button id="loadMoreBtn" class="btn btn-outline-primary btn-lg" style="border-color: var(--primary-color); color: var(--primary-color); padding: 15px 50px;">LOAD MORE DESIGNS</button>
             </div>
         </section>
 
@@ -415,12 +248,8 @@
                 <div class="col-lg-6 order-lg-2 special-feature-content">
                     <span class="text-uppercase fw-bold" style="color: var(--secondary-color); letter-spacing: 2px;">Living Tributes</span>
                     <h2 class="display-4 my-3">Legacy Commemorative Apparel</h2>
-                    <p class="lead">
-                        Transform cherished memories into living tributes. We specialize in bringing your most precious photographs to life on high-impact apparel. 
-                    </p>
-                    <p>
-                        Ensure the legacy of your loved ones remains vibrant and close to your heart. It’s more than a shirt—it’s a visceral way to honor a lasting impact and keep their spirit present.
-                    </p>
+                    <p class="lead">Transform cherished memories into living tributes. We specialize in bringing your most precious photographs to life on high-impact apparel.</p>
+                    <p>Ensure the legacy of your loved ones remains vibrant and close to your heart. It’s more than a shirt—it’s a visceral way to honor a lasting impact and keep their spirit present.</p>
                 </div>
                 <div class="col-lg-6 order-lg-1">
                     <div class="portfolio-item shadow-lg" style="height: auto; border: 2px solid var(--secondary-color);">
@@ -435,25 +264,18 @@
 
         <section id="contact-cta" class="py-5 text-center reveal-on-scroll" style="background-color: var(--primary-color); border-radius: 10px; margin: 100px 0;">
             <div class="container py-5">
-                <h2 class="display-3 mb-4 fw-bold" style="color: #000;">Ready to Elevate Your Brand?</h2>
-                <p class="lead mb-5 fs-4" style="color: #000; max-width: 700px; margin: 0 auto;">
-                    Let's collaborate on your next visual masterpiece. Schedule a free consultation today.
-                </p>
-                <a href="mailto:giftdd.llc@gmail.com" class="btn btn-dark btn-lg px-5 py-3 shadow-lg" style="text-transform: uppercase; font-weight: 800;">
-                    Contact Us Now
-                </a>
+                <h2 class="display-3 mb-4 fw-bold" style="color: #000;">Ready to Create Your Product?</h2>
+                <p class="lead mb-5 fs-4" style="color: #000; max-width: 700px; margin: 0 auto;">From shirts to coasters, let's collaborate on your next physical masterpiece. Schedule a consultation today.</p>
+                <a href="mailto:giftdd.llc@gmail.com" class="btn btn-dark btn-lg px-5 py-3 shadow-lg" style="text-transform: uppercase; font-weight: 800;">Contact Us Now</a>
             </div>
         </section>
-
     </main>
 
-    <div id="lightbox" onclick="this.style.display='none'">
-        <img id="lightbox-img" src="">
-    </div>
+    <div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src=""></div>
 
     <footer class="py-5 text-center border-top" style="border-color: rgba(163, 163, 255, 0.1) !important; background-color: #070e1a;">
         <div class="container">
-            <p class="mb-4 text-white-50 small">&copy; 2025 gift'DD Designs. All Rights Reserved. Without Recourse. No part of this work may be reproduced or transmitted without prior written permission.</p>
+            <p class="mb-4 text-white-50 small">&copy; 2025 gift'DD Designs. All Rights Reserved. No part of this work may be reproduced or transmitted without prior written permission.</p>
             <ul class="list-inline">
                 <li class="list-inline-item mx-3"><a href="#" class="text-white-50 text-decoration-none">Privacy Policy</a></li>
                 <li class="list-inline-item mx-3"><a href="#" class="text-white-50 text-decoration-none">Terms of Service</a></li>
@@ -463,64 +285,26 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    
     <script>
-        /**
-         * Navigation Menu Toggle
-         */
-        function toggleMenu() { 
-            document.body.classList.toggle('menu-open'); 
-        }
+        function toggleMenu() { document.body.classList.toggle('menu-open'); }
+        function openLightbox(item) { const img = item.querySelector('img'); if(img) { document.getElementById('lightbox-img').src = img.src; document.getElementById('lightbox').style.display = 'flex'; } }
         
-        /**
-         * Lightbox Integration for Gallery
-         */
-        function openLightbox(item) {
-            const img = item.querySelector('img');
-            if(img) {
-                document.getElementById('lightbox-img').src = img.src;
-                document.getElementById('lightbox').style.display = 'flex';
-            }
-        }
-
-        /**
-         * Gallery "Load More" Controller
-         */
         const loadMoreBtn = document.getElementById('loadMoreBtn');
         if(loadMoreBtn) {
             loadMoreBtn.addEventListener('click', function() {
                 const hiddenItems = document.querySelectorAll('.gallery-hidden');
-                
-                // Unhide the next 6 items
                 for(let i = 0; i < 6 && i < hiddenItems.length; i++) {
                     hiddenItems[i].classList.remove('gallery-hidden');
                     hiddenItems[i].classList.add('reveal-on-scroll', 'is-visible');
                 }
-                
-                // Remove button if everything is visible
-                if(document.querySelectorAll('.gallery-hidden').length === 0) {
-                    this.style.display = 'none';
-                }
+                if(document.querySelectorAll('.gallery-hidden').length === 0) { this.style.display = 'none'; }
             });
         }
 
-        /**
-         * Smooth Intersection Observer for Scroll Reveals
-         */
         document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: "0px 0px -50px 0px"
-            };
-
             const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, observerOptions);
-
+                entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.add('is-visible'); } });
+            }, { threshold: 0.1 });
             document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
         });
     </script>
