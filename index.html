@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     
     <style>
-        /* --- 1. CORE THEME --- */
+        /* --- 1. CORE THEME (Your Original Colors) --- */
         :root {
             --color-primary: #0A192F; 
             --color-secondary: #00FFC0; 
@@ -26,12 +26,12 @@
             overflow-x: hidden;
         }
 
-        /* --- 2. NEW FLOATING HAMBURGER (No stagnant bar) --- */
+        /* --- 2. FLOATING HAMBURGER (The requested fix) --- */
         .floating-burger {
             position: fixed;
             top: 25px;
             right: 25px;
-            z-index: 4000;
+            z-index: 5000;
             background: var(--color-primary);
             width: 55px;
             height: 55px;
@@ -43,9 +43,7 @@
             cursor: pointer;
             box-shadow: 0 0 15px rgba(0, 255, 192, 0.4);
             border: 2px solid var(--color-secondary);
-            transition: 0.3s;
         }
-        .floating-burger:hover { transform: scale(1.1); }
         .floating-burger span {
             display: block;
             width: 28px;
@@ -68,7 +66,7 @@
             justify-content: center;
             align-items: center;
             transition: 0.4s ease-in-out;
-            z-index: 5000;
+            z-index: 6000;
             box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
 
@@ -81,39 +79,79 @@
             margin: 15px 0;
             text-transform: uppercase;
             font-weight: bold;
-            transition: 0.3s;
         }
         .menu-link:hover { color: var(--color-secondary); }
 
-        /* --- 3. ALL ORIGINAL RESTORED STYLES --- */
+        /* --- 3. REPLICATING YOUR 4 PICTURES (Original CSS) --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        section { padding: 100px 0; min-height: 100vh; display: flex; align-items: center; }
-
-        #hero { text-align: center; justify-content: center; }
-        #hero h1 { font-size: 4em; text-transform: uppercase; text-shadow: 0 0 10px var(--color-accent); margin-bottom: 20px; }
-        .animated-text span { opacity: 0; transition: opacity 0.5s ease; display: inline-block; }
-
-        .cta-button {
+        
+        /* The specific green underline from your screenshot */
+        h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            border-bottom: 2px solid var(--color-secondary);
             display: inline-block;
-            padding: 15px 30px;
-            background-color: var(--color-secondary);
-            color: var(--color-primary);
-            font-weight: bold;
-            border-radius: 5px;
-            text-decoration: none;
-            text-transform: uppercase;
+            padding-bottom: 10px;
         }
 
-        .services-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin-top: 50px; }
-        .service-card { background-color: #112240; padding: 30px; border-radius: 8px; border-top: 5px solid var(--color-secondary); }
+        .section-header { text-align: center; width: 100%; margin-bottom: 50px; }
 
-        /* Form & Popup */
-        .spinner { border: 4px solid #ddd; border-top: 4px solid #198754; border-radius: 50%; width: 32px; height: 32px; animation: spin 1s linear infinite; margin: 15px auto; display: none; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        .success-banner { margin-top: 20px; padding: 12px; background-color: #198754; color: white; font-weight: bold; border-radius: 6px; text-align: center; }
-        #successPopup { position: fixed; inset: 0; background: rgba(0,0,0,0.8); display: none; justify-content: center; align-items: center; z-index: 6000; }
-        .popup-box { background: white; padding: 30px; border-radius: 10px; text-align: center; color: #333; }
-        .contact-form input, .contact-form textarea { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid var(--color-accent); background: rgba(0,0,0,0.2); color: white; border-radius: 5px; }
+        /* Picture 4: Our Core Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        .service-card {
+            background-color: #112240;
+            padding: 30px;
+            border-radius: 8px;
+            border-top: 5px solid var(--color-secondary);
+            text-align: left;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .service-card i { font-size: 2.5em; color: var(--color-accent); margin-bottom: 15px; display: block; }
+
+        /* Picture 1: Development Approach */
+        .process-flow {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 50px;
+            position: relative;
+        }
+        .process-flow::before {
+            content: '';
+            position: absolute;
+            top: 30px; left: 0; right: 0;
+            height: 4px;
+            background-color: var(--color-accent);
+            z-index: 1;
+        }
+        .process-step { width: 18%; position: relative; z-index: 2; text-align: center; }
+        .step-circle {
+            width: 60px; height: 60px;
+            background-color: var(--color-secondary);
+            border-radius: 50%;
+            margin: 0 auto 15px;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: bold; color: var(--color-primary);
+            border: 5px solid var(--color-primary);
+        }
+
+        /* Picture 2: Contact Section */
+        .contact-content { display: flex; gap: 40px; margin-top: 50px; text-align: left; }
+        .contact-info { flex: 1; border-right: 1px solid rgba(255, 255, 255, 0.1); padding-right: 20px; }
+        .contact-form-container { flex: 1; }
+        .contact-form input, .contact-form textarea {
+            width: 100%; padding: 12px; margin-bottom: 20px;
+            border: 1px solid var(--color-accent);
+            background: rgba(0,0,0,0.2); color: white; border-radius: 5px;
+        }
+
+        /* Picture 3: Footer */
+        footer { padding: 40px 0; text-align: center; border-top: 1px dashed rgba(244, 244, 249, 0.1); font-size: 0.8em; color: rgba(244, 244, 249, 0.5); }
     </style>
 </head>
 <body id="mainBody">
@@ -122,12 +160,11 @@
         <span></span><span></span><span></span>
     </div>
 
-    <nav class="menu-panel" id="sideMenu">
+    <nav class="menu-panel">
         <a href="/creative/index.html" class="menu-link">Staying in Lane</a>
         <a href="/designDDtees/index.html" class="menu-link">Style</a>
         <a href="/lawn/index.html" class="menu-link">Lawn Care</a>
         <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
-        <a href="#" class="menu-link" style="opacity: 0.5;">Spiritual (Soon)</a>
         <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; color: var(--color-secondary); margin-top: 20px;">[ CLOSE ]</a>
     </nav>
 
@@ -139,67 +176,59 @@
         </div>
     </section>
 
-    <section id="about">
-        <div class="container text-center">
-            <h2 style="font-size: 2.5em; border-bottom: 2px solid var(--color-secondary); display: inline-block; padding-bottom: 10px; margin-bottom: 40px;">About Gift'DD Digital Designs</h2>
-            <p style="max-width: 800px; margin: 0 auto; font-size: 1.1em; color: rgba(244, 244, 249, 0.8);">
-                We combine creative UX with robust, fast code. Trust us to craft a digital presence that is professional and approachable. Our mission is simple: captivate your audience while ensuring modern digital success.
-            </p>
+    <section id="process">
+        <div class="container">
+            <div class="section-header"><h2>Our Development Approach</h2></div>
+            <div class="process-flow">
+                <div class="process-step"><div class="step-circle">1</div><h6>Strategy</h6><p class="small">Define goals & audience needs.</p></div>
+                <div class="process-step"><div class="step-circle">2</div><h6>Design</h6><p class="small">Crafting engaging, fun UX/UI mockups.</p></div>
+                <div class="process-step"><div class="step-circle">3</div><h6>Development</h6><p class="small">Writing robust, clean, and fast code.</p></div>
+                <div class="process-step"><div class="step-circle">4</div><h6>Launch</h6><p class="small">Testing, deployment, and going live.</p></div>
+                <div class="process-step"><div class="step-circle">5</div><h6>Support</h6><p class="small">Ongoing maintenance and growth.</p></div>
+            </div>
         </div>
     </section>
 
-    <section id="services" style="background-color: #112240;">
-        <div class="container text-center">
-            <h2 style="font-size: 2.5em; border-bottom: 2px solid var(--color-secondary); display: inline-block; padding-bottom: 10px; margin-bottom: 40px;">Our Core Services</h2>
+    <section id="services" style="background-color: #0A192F;">
+        <div class="container">
+            <div class="section-header"><h2>Our Core Services</h2></div>
             <div class="services-grid">
-                <div class="service-card">
-                    <i class="fas fa-desktop" style="font-size: 2.5em; color: var(--color-accent); margin-bottom: 15px;"></i>
-                    <h3 style="color: var(--color-secondary); margin-bottom: 15px;">Custom Design</h3>
-                    <p>Clean, responsive code tailored exactly to your brand goals.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-shopping-cart" style="font-size: 2.5em; color: var(--color-accent); margin-bottom: 15px;"></i>
-                    <h3 style="color: var(--color-secondary); margin-bottom: 15px;">E-commerce</h3>
-                    <p>Launch stores with confidence on Shopify and WooCommerce.</p>
-                </div>
-                <div class="service-card">
-                    <i class="fas fa-tools" style="font-size: 2.5em; color: var(--color-accent); margin-bottom: 15px;"></i>
-                    <h3 style="color: var(--color-secondary); margin-bottom: 15px;">Maintenance</h3>
-                    <p>Keep your site secure, fast, and up-to-date with our support.</p>
-                </div>
+                <div class="service-card"><i class="fas fa-desktop"></i><h3>Custom Design</h3><p>From stunning mockups to clean code.</p></div>
+                <div class="service-card"><i class="fas fa-shopping-cart"></i><h3>E-commerce</h3><p>Shopify and WooCommerce solutions.</p></div>
+                <div class="service-card"><i class="fas fa-tools"></i><h3>Maintenance</h3><p>Site security and updates.</p></div>
+                <div class="service-card"><i class="fas fa-chart-line"></i><h3>Strategy</h3><p>Build a path to digital excellence.</p></div>
             </div>
         </div>
     </section>
 
     <section id="contact" class="container">
-        <div style="width: 100%; max-width: 600px; margin: 0 auto;">
-            <h2 style="text-align: center; margin-bottom: 40px; color: var(--color-secondary);">Get in Touch</h2>
-            <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST" class="contact-form">
-                <input type="text" name="name" placeholder="Your Name" required>
-                <input type="email" name="_replyto" placeholder="Your Email" required>
-                <textarea name="message" placeholder="How can I help?" required rows="5"></textarea>
-                <button type="submit" class="cta-button" id="submitBtn" style="width: 100%;">Send Message</button>
-                <div id="loadingSpinner" class="spinner"></div>
-                <div id="successBanner" class="success-banner" style="display:none;">✔ Message Sent Successfully!</div>
-            </form>
+        <div class="section-header"><h2>Get a Free Consultation</h2><p>Ready to combine fun design with robust performance? Let's talk!</p></div>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h5 style="color: var(--color-secondary); margin-bottom: 20px;">Contact Information</h5>
+                <p><i class="fas fa-envelope"></i> Email: giftdd.llc@gmail.com</p>
+                <p><i class="fas fa-phone"></i> Phone: (202) 709-3063</p>
+                <div class="mt-4"><i class="fab fa-facebook"></i> <i class="fab fa-instagram"></i> <i class="fab fa-linkedin"></i></div>
+            </div>
+            <div class="contact-form-container">
+                <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST">
+                    <label>Name:</label><input type="text" name="name" required>
+                    <label>Email:</label><input type="email" name="email" required>
+                    <label>Message:</label><textarea name="message" rows="4" required></textarea>
+                    <button type="submit" class="cta-button" style="width: 100%;">Send Message</button>
+                </form>
+            </div>
         </div>
     </section>
 
-    <footer style="padding: 40px 0; text-align: center; opacity: 0.5; font-size: 0.8em; border-top: 1px solid rgba(0, 255, 192, 0.1);">
-        <p>© 2025 Gift'DD Consultant Services. All Rights Reserved.</p>
-    </footer>
-
-    <div id="successPopup">
-        <div class="popup-box">
-            <h3 style="color:#198754;">Message Sent!</h3>
-            <p>I'll get back to you shortly.</p>
-            <button onclick="document.getElementById('successPopup').style.display='none'" style="margin-top:20px; padding:10px 20px; cursor:pointer; background:#198754; color:white; border:none; border-radius:5px;">Close</button>
+    <footer>
+        <div class="container">
+            <p>Copyright © 2025 Gift'DD Consultant Services. All Rights Reserved. No part of this publication may be reproduced...</p>
         </div>
-    </div>
+    </footer>
 
     <script>
         function toggleMenu() { document.body.classList.toggle('menu-open'); }
-
         document.addEventListener('DOMContentLoaded', () => {
             const heroText = document.querySelector('.animated-text');
             const text = heroText.textContent.trim();
@@ -210,24 +239,6 @@
                 heroText.appendChild(span);
                 setTimeout(() => span.style.opacity = 1, i * 50);
             });
-        });
-
-        const form = document.getElementById("contactForm");
-        form.addEventListener("submit", async function(e) {
-            e.preventDefault();
-            document.getElementById("loadingSpinner").style.display = "block";
-            const response = await fetch(form.action, {
-                method: "POST",
-                body: new FormData(form),
-                headers: { "Accept": "application/json" }
-            });
-            document.getElementById("loadingSpinner").style.display = "none";
-            if (response.ok) {
-                form.reset();
-                document.getElementById("successBanner").style.display = "block";
-                document.getElementById("successPopup").style.display = "flex";
-                setTimeout(() => document.getElementById("successBanner").style.display = "none", 5000);
-            }
         });
     </script>
 </body>
