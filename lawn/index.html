@@ -69,6 +69,7 @@
             align-items: center;
             transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
             box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            border-left: 2px solid var(--hub-neon);
         }
 
         body.menu-open .menu-panel { right: 0; }
@@ -76,13 +77,24 @@
         .menu-link { 
             color: white; 
             text-decoration: none; 
-            font-size: 1.4rem; 
-            margin: 15px 0; 
+            font-size: 1.2rem; 
+            margin: 12px 0; 
             text-transform: uppercase; 
             font-weight: 800; 
             transition: 0.3s; 
+            letter-spacing: 1px;
         }
         .menu-link:hover { color: var(--hub-neon); padding-left: 10px; }
+
+        .menu-link-muted {
+            color: rgba(244, 244, 249, 0.2);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            font-weight: 800;
+            margin: 12px 0;
+            font-style: italic;
+            cursor: default;
+        }
 
         /* --- 2. LAYOUT COMPONENTS --- */
         .jumbotron {
@@ -133,11 +145,19 @@
     </div>
 
     <nav class="menu-panel">
-        <a href="https://ddynastia.com" class="menu-link">The Hub</a>
-        <a href="/creative/index.html" class="menu-link">Staying in Lane</a>
-        <a href="/style/index.html" class="menu-link">Style</a>
-        <a href="/lawn/index.html" class="menu-link" style="color: var(--hub-neon);">Lawn Care</a>
-        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; color: var(--hub-neon); margin-top:40px;">[ CLOSE ]</a>
+        <a href="/" class="menu-link">The Hub</a>
+        <a href="/creative/" class="menu-link">Staying in Lane Service</a>
+        <a href="/style/" class="menu-link">Style Service</a>
+        <a href="/lawn/" class="menu-link" style="color: var(--hub-neon);">Lawn Care Service</a>
+        <a href="/technical/" class="menu-link">Technical Service</a>
+        
+        <hr style="width: 40px; border: 1px solid var(--hub-neon); opacity: 0.3; margin: 20px 0;">
+
+        <div class="menu-link-muted">Spiritual Service</div>
+        <div class="menu-link-muted">Physical Service</div>
+        <div class="menu-link-muted">Mental Service</div>
+
+        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; color: var(--hub-neon); margin-top:40px;">[ CLOSE_MENU ]</a>
     </nav>
 
     <header class="jumbotron text-center">
