@@ -62,9 +62,6 @@
         #hero { text-align: center; justify-content: center; }
         #hero h1 { font-size: 4em; text-transform: uppercase; text-shadow: 0 0 10px var(--color-accent); margin-bottom: 20px; }
         
-        /* FIX for Title Break on Mobile */
-        .mobile-break-wrap { display: block; } 
-
         .animated-text span { opacity: 0; transition: opacity 0.5s ease; display: inline-block; }
 
         .cta-button {
@@ -74,7 +71,7 @@
         }
 
         /* Picture 1: Development Approach */
-        .process-flow { display: flex; justify-content: space-between; margin-top: 50px; position: relative; }
+        .process-flow { display: flex; justify-content: space-between; margin-top: 50px; position: relative; width: 100%; }
         .process-flow::before { content: ''; position: absolute; top: 30px; left: 0; right: 0; height: 4px; background-color: var(--color-accent); z-index: 1; }
         .process-step { width: 18%; position: relative; z-index: 2; text-align: center; }
         .step-circle {
@@ -93,8 +90,8 @@
         }
         .service-card i { font-size: 2.5em; color: var(--color-accent); margin-bottom: 15px; display: block; }
 
-        /* Picture 2: Contact Section */
-        .contact-content { display: flex; gap: 40px; margin-top: 50px; text-align: left; }
+        /* Picture 2: Contact Section Layout */
+        .contact-content { display: flex; gap: 40px; margin-top: 50px; text-align: left; align-items: flex-start; width: 100%; }
         .contact-info { flex: 1; border-right: 1px solid rgba(255, 255, 255, 0.1); padding-right: 20px; }
         .contact-form-container { flex: 1; }
         .contact-form input, .contact-form textarea {
@@ -102,28 +99,36 @@
             background: rgba(0,0,0,0.2); color: white; border-radius: 5px;
         }
 
-        /* --- MOBILE REFINEMENTS (Surgical Additions) --- */
+        /* --- MOBILE REFINEMENTS (The Surgical Fix) --- */
         @media (max-width: 768px) {
-            #hero h1 { font-size: 2.5em; }
+            #hero h1 { font-size: 2.3em; line-height: 1.2; }
             
-            /* 1. Development grid: 2 per row to fill space */
+            /* Development grid fix: 2 per row */
             .process-flow { 
                 display: grid !important; 
                 grid-template-columns: repeat(2, 1fr); 
-                gap: 30px; 
+                gap: 30px 10px; 
             }
             .process-flow::before { display: none; }
-            .process-step { width: 100%; }
+            .process-step { width: 100% !important; }
 
-            /* 2. Contact: Stack Info and Form, Header on top */
-            .contact-content { flex-direction: column; text-align: center; }
-            .contact-info { 
-                border-right: none; 
-                border-bottom: 1px solid rgba(255,255,255,0.1); 
-                padding-right: 0; 
-                padding-bottom: 30px; 
+            /* Contact Stack Fix: Ensures vertical layout, no "smushing" */
+            .contact-content { 
+                flex-direction: column !important; 
+                gap: 40px; 
             }
-            .contact-form-container { margin-top: 20px; }
+            
+            .contact-info { 
+                width: 100% !important; 
+                border-right: none !important; 
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1); 
+                padding-right: 0 !important; 
+                padding-bottom: 30px !important; 
+            }
+
+            .contact-form-container { 
+                width: 100% !important; 
+            }
         }
 
         /* SPINNER & POPUP */
@@ -146,6 +151,7 @@
         <a href="/creative/index.html" class="menu-link">Staying in Lane</a>
         <a href="/designDDtees/index.html" class="menu-link">Style</a>
         <a href="/lawn/index.html" class="menu-link">Lawn Care</a>
+        <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
         <hr style="width: 50%; border: 1px solid rgba(0, 255, 192, 0.1); margin: 10px 0;">
         <a href="#" class="menu-link" style="opacity: 0.4; pointer-events: none; font-size: 1rem;">Spiritual (Summer 2026)</a>
         <a href="#" class="menu-link" style="opacity: 0.4; pointer-events: none; font-size: 1rem;">Mental (Winter 2026)</a>
@@ -155,7 +161,7 @@
 
     <section id="hero" class="container">
         <div>
-            <h1 class="animated-text" id="heroTitle">Design & Code That Converts</h1>
+            <h1 class="animated-text">Design & Code That Converts</h1>
             <p style="font-size: 1.5em; margin-bottom: 40px;">Your Vision, Digitally Gifted.</p>
             <a href="#contact" class="cta-button">Start Your Project Today</a>
         </div>
@@ -227,16 +233,15 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             const heroText = document.querySelector('.animated-text');
-            const text = heroText.textContent.trim();
+            const textContent = heroText.textContent.trim();
             heroText.innerHTML = '';
             
-            // Logic to handle character animation while respecting the mobile line break
-            text.split('').forEach((char, i) => {
+            // Rebuilding animation logic with mobile break support
+            textContent.split('').forEach((char, i) => {
                 const span = document.createElement('span');
                 span.textContent = char === ' ' ? '\u00A0' : char;
                 
-                // If we hit the word "That", we inject a wrapper for mobile
-                // "Design & Code " is 14 characters
+                // Break logic after "Design & Code " (index 14)
                 if (i === 14 && window.innerWidth <= 768) {
                     const br = document.createElement('br');
                     heroText.appendChild(br);
