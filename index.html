@@ -15,7 +15,7 @@
             --color-primary: #00FFC0;    /* 80s Neon Mint */
             --color-secondary: #FF4D4D;  /* The Red Line */
             --color-accent: #A3A3FF;     /* 90s Periwinkle */
-            --color-muted: rgba(244, 244, 249, 0.2); /* Greyed out */
+            --color-muted: rgba(244, 244, 249, 0.2); 
             --color-grid: rgba(0, 255, 192, 0.05);
             --font-main: 'Montserrat', sans-serif;
             --font-mono: 'Fira Code', monospace;
@@ -27,6 +27,7 @@
             font-family: var(--font-main);
             color: #F4F4F9;
             background-color: var(--color-bg);
+            /* Background Grid - Blueprint Style */
             background-image: 
                 linear-gradient(var(--color-grid) 1px, transparent 1px),
                 linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
@@ -36,142 +37,152 @@
         }
 
         /* --- 2. DECORATIVE RETRO SHAPES --- */
-        .shape { position: absolute; z-index: -1; opacity: 0.5; pointer-events: none; }
-        .circle { width: 300px; height: 300px; border: 2px solid var(--color-accent); border-radius: 50%; top: -100px; left: -100px; }
+        .shape { position: absolute; z-index: -1; opacity: 0.4; pointer-events: none; }
+        .circle { width: 400px; height: 400px; border: 1px solid var(--color-accent); border-radius: 50%; top: -150px; left: -100px; }
         .triangle { 
             width: 0; height: 0; 
-            border-left: 50px solid transparent; border-right: 50px solid transparent; 
-            border-bottom: 100px solid var(--color-primary); 
-            bottom: 10%; right: 5%; transform: rotate(15deg); 
-        }
-        .squiggle {
-            position: absolute; top: 40%; left: 2%; width: 100px; height: 20px;
-            background: repeating-linear-gradient(45deg, var(--color-secondary), var(--color-secondary) 10px, transparent 10px, transparent 20px);
+            border-left: 60px solid transparent; border-right: 60px solid transparent; 
+            border-bottom: 120px solid var(--color-primary); 
+            bottom: 15%; right: 5%; transform: rotate(-20deg); 
         }
 
-        /* --- 3. TOP TOOLBAR NAV --- */
+        /* --- 3. TOP TOOLBAR --- */
         header {
             background-color: rgba(10, 25, 47, 0.9);
             position: sticky; top: 0; z-index: 1000;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
             border-bottom: 2px solid var(--color-primary);
         }
 
         nav {
             display: flex; justify-content: space-between; align-items: center;
-            height: 70px; max-width: 1200px; margin: 0 auto; padding: 0 30px;
+            height: 80px; max-width: 1200px; margin: 0 auto; padding: 0 30px;
         }
 
-        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 3px; color: var(--color-primary); }
+        .logo { font-size: 1.6rem; font-weight: 900; letter-spacing: 4px; color: var(--color-primary); }
 
-        .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
-        .hamburger span { display: block; height: 3px; width: 25px; background: var(--color-primary); transition: 0.3s; }
+        .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 7px; }
+        .hamburger span { display: block; height: 3px; width: 30px; background: var(--color-primary); transition: 0.3s; }
 
         /* --- 4. THE MENU PANEL --- */
         .menu-panel {
-            position: fixed; top: 0; right: -100%; width: 320px; height: 100vh;
+            position: fixed; top: 0; right: -100%; width: 350px; height: 100vh;
             background-color: var(--color-bg); z-index: 2000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-            border-left: 2px solid var(--color-primary);
+            border-left: 3px solid var(--color-primary);
+            box-shadow: -20px 0 50px rgba(0,0,0,0.5);
         }
         body.menu-open .menu-panel { right: 0; }
         
         .menu-link { 
-            font-size: 1.2rem; color: #fff; text-decoration: none; margin: 12px 0;
+            font-size: 1.3rem; color: #fff; text-decoration: none; margin: 15px 0;
             text-transform: uppercase; font-weight: 900; transition: 0.3s;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
         }
-        .menu-link:hover { color: var(--color-primary); transform: skewX(-5deg); }
-        
-        /* Greyed out style for future services */
-        .menu-link-muted {
-            color: var(--color-muted);
-            cursor: default;
-            pointer-events: none;
-            font-style: italic;
-        }
+        .menu-link:hover { color: var(--color-primary); transform: translateX(10px); }
+        .menu-link-muted { color: var(--color-muted); cursor: default; pointer-events: none; font-style: italic; margin: 15px 0; text-transform: uppercase; font-weight: 900; }
 
-        /* --- 5. HERO & ARTISTIC MARKS --- */
+        /* --- 5. HERO HEADER --- */
         .portfolio-header {
-            padding: 100px 20px 40px; text-align: center; position: relative;
+            padding: 120px 20px 60px; text-align: center; position: relative;
         }
         .portfolio-header h1 { 
-            font-size: 5rem; text-transform: uppercase; font-weight: 900; 
-            letter-spacing: -2px; line-height: 0.9;
+            font-size: 6rem; text-transform: uppercase; font-weight: 900; 
+            letter-spacing: -3px; line-height: 0.85; margin-bottom: 0;
         }
-        .red-line { width: 200px; height: 8px; background-color: var(--color-secondary); margin: 20px auto; }
+        .red-line { width: 250px; height: 10px; background-color: var(--color-secondary); margin: 25px auto; }
         
         .drafting-mark {
-            font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-primary);
-            position: absolute; opacity: 0.6;
+            font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-primary);
+            position: absolute; opacity: 0.5; text-transform: uppercase;
         }
 
-        /* --- 6. PROJECT STACK --- */
-        .stack-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
+        /* --- 6. PROJECT STACK (The Buttons) --- */
+        .stack-container { max-width: 1000px; margin: 0 auto; padding: 20px 20px 100px; }
 
+        /* The functional button wrapper */
         .project-row {
-            display: flex; align-items: center; background: rgba(255,255,255,0.02);
-            margin-bottom: 40px; position: relative; text-decoration: none; color: inherit;
-            border: 1px solid rgba(255,255,255,0.1); transition: 0.4s;
-        }
-        .project-row:hover {
-            border-color: var(--color-primary); background: rgba(0, 255, 192, 0.05);
-            transform: translateX(10px);
+            display: flex; align-items: center; background: rgba(255,255,255,0.01);
+            margin-bottom: 45px; position: relative; text-decoration: none; color: inherit;
+            border: 1px solid rgba(255,255,255,0.08); transition: 0.4s ease-in-out;
+            overflow: hidden;
         }
 
-        .project-row::before { content: ''; position: absolute; top: -5px; left: -5px; width: 20px; height: 20px; border-top: 2px solid var(--color-primary); border-left: 2px solid var(--color-primary); }
-        .project-row::after { content: 'REF_ID: 102'; position: absolute; bottom: 5px; right: 10px; font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-primary); opacity: 0.5; }
+        /* Hover Effect: Border glows and drafting marks appear */
+        .project-row:hover {
+            border-color: var(--color-primary);
+            background: rgba(0, 255, 192, 0.04);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+        }
+
+        /* corner drafting marks */
+        .project-row::before { 
+            content: ''; position: absolute; top: 0; left: 0; width: 30px; height: 30px; 
+            border-top: 3px solid var(--color-primary); border-left: 3px solid var(--color-primary); 
+            opacity: 0; transition: 0.3s;
+        }
+        .project-row:hover::before { opacity: 1; top: -5px; left: -5px; }
 
         .project-thumb {
-            width: 350px; height: 200px; background-size: cover; background-position: center;
-            filter: grayscale(100%); transition: 0.5s;
+            width: 400px; height: 220px; background-size: cover; background-position: center;
+            filter: grayscale(100%); transition: 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
+            flex-shrink: 0;
         }
-        .project-row:hover .project-thumb { filter: grayscale(0%); }
+        .project-row:hover .project-thumb { filter: grayscale(0%); transform: scale(1.05); }
 
-        .project-info { padding: 30px 50px; }
-        .project-info h2 { font-size: 1.8rem; text-transform: uppercase; margin-bottom: 10px; }
-        .project-info p { font-size: 0.9rem; opacity: 0.7; max-width: 400px; }
+        .project-info { padding: 40px; }
+        .project-info h2 { font-size: 1.8rem; text-transform: uppercase; margin-bottom: 12px; color: #fff; }
+        .project-info p { font-size: 0.95rem; opacity: 0.6; max-width: 450px; line-height: 1.5; }
 
         /* --- 7. HIDDEN G.E.M.s SECTION --- */
         .gems-section {
             padding: 100px 20px; text-align: center; max-width: 1000px; margin: 0 auto;
+            border-top: 1px solid var(--color-grid);
         }
         .gems-title {
-            font-size: 3rem; text-transform: uppercase; font-weight: 900;
-            color: var(--color-accent); letter-spacing: 5px; margin-bottom: 10px;
+            font-size: 3.5rem; text-transform: uppercase; font-weight: 900;
+            color: var(--color-accent); letter-spacing: 8px; margin-bottom: 5px;
         }
         .gems-subtitle {
-            font-family: var(--font-mono); font-size: 0.8rem; color: var(--color-primary);
-            text-transform: uppercase; opacity: 0.8; margin-bottom: 50px;
+            font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-primary);
+            text-transform: uppercase; opacity: 0.7; margin-bottom: 60px;
         }
 
         .upcoming-grid {
-            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;
         }
         .upcoming-item { text-align: center; }
         .placeholder-box {
-            aspect-ratio: 1 / 1; border: 2px dashed rgba(255,255,255,0.2);
+            aspect-ratio: 1 / 1; border: 2px dashed rgba(255,255,255,0.15);
             display: flex; align-items: center; justify-content: center;
-            font-size: 3rem; margin-bottom: 20px; transition: 0.3s;
-            position: relative; background: rgba(255,255,255,0.01);
+            font-size: 3.5rem; margin-bottom: 25px; background: rgba(255,255,255,0.01);
+            color: var(--color-muted);
         }
-        .upcoming-item h3 { font-size: 1.1rem; text-transform: uppercase; margin-bottom: 5px; }
-        .upcoming-item span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-primary); opacity: 0.7; }
+        .upcoming-item h3 { font-size: 1.1rem; text-transform: uppercase; margin-bottom: 8px; color: #fff; }
+        .upcoming-item span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-primary); opacity: 0.6; }
 
         /* --- 8. FOOTER --- */
         footer {
-            padding: 80px 20px; text-align: center; background: #050b16;
-            border-top: 2px solid var(--color-primary); margin-top: 100px;
+            padding: 100px 20px; text-align: center; background: #050b16;
+            border-top: 3px solid var(--color-primary); margin-top: 100px;
         }
-        .legal-text { font-size: 0.7rem; opacity: 0.4; max-width: 900px; margin: 30px auto 0; line-height: 1.8; }
+        .legal-text { font-size: 0.75rem; opacity: 0.3; max-width: 900px; margin: 40px auto 0; line-height: 2; }
+
+        /* Mobile Breakpoints */
+        @media (max-width: 992px) {
+            .portfolio-header h1 { font-size: 4rem; }
+            .project-thumb { width: 300px; }
+        }
 
         @media (max-width: 768px) {
-            .project-row { flex-direction: column; }
+            .project-row { flex-direction: column; text-align: center; }
             .project-thumb { width: 100%; height: 250px; }
+            .project-info { padding: 30px 20px; }
             .upcoming-grid { grid-template-columns: 1fr; }
-            .portfolio-header h1 { font-size: 3rem; }
-            .gems-title { font-size: 2rem; }
+            .portfolio-header h1 { font-size: 3.2rem; }
+            .gems-title { font-size: 2.2rem; }
         }
     </style>
 </head>
@@ -179,11 +190,10 @@
 
     <div class="shape circle"></div>
     <div class="shape triangle"></div>
-    <div class="shape squiggle"></div>
 
     <header>
         <nav>
-            <div class="logo">GIFT'DD STUDIO</div>
+            <div class="logo">GIFT'DD</div>
             <div class="hamburger" onclick="toggleMenu()">
                 <span></span><span></span><span></span>
             </div>
@@ -194,33 +204,33 @@
         <a href="/creative/" class="menu-link">Staying in Lane Service</a>
         <a href="/style/" class="menu-link">Style Service</a>
         <a href="/lawn/" class="menu-link">Lawn Care Service</a>
+        <a href="/technical/" class="menu-link" style="color: var(--color-primary); border-top: 1px solid rgba(0,255,192,0.2); padding-top: 20px; margin-top: 20px;">Technical Service</a>
         
-        <a href="/technical/" class="menu-link" style="color: var(--color-primary); margin-top: 20px; border-top: 1px solid var(--color-grid); padding-top: 20px;">Technical Service</a>
-        
-        <hr style="width: 40px; border: 1px solid var(--color-secondary); margin: 20px 0;">
+        <hr style="width: 40px; border: 1px solid var(--color-secondary); margin: 30px 0;">
 
-        <div class="menu-link menu-link-muted">Spiritual Service</div>
-        <div class="menu-link menu-link-muted">Physical Service</div>
-        <div class="menu-link menu-link-muted">Mental Service</div>
+        <div class="menu-link-muted">Spiritual Service</div>
+        <div class="menu-link-muted">Physical Service</div>
+        <div class="menu-link-muted">Mental Service</div>
 
-        <div style="margin-top: 40px; cursor: pointer; color: var(--color-secondary); font-weight: 900; font-size: 0.8rem;" onclick="toggleMenu()">[ CLOSE SYSTEM ]</div>
+        <div style="margin-top: 50px; cursor: pointer; color: var(--color-secondary); font-weight: 900; font-size: 0.8rem;" onclick="toggleMenu()">[ SHUTDOWN_SYSTEM ]</div>
     </nav>
 
     <main>
         <div class="portfolio-header">
-            <span class="drafting-mark" style="top: 20px; left: 20%;">COORD_X: 44.22</span>
-            <span class="drafting-mark" style="bottom: 0; right: 25%;">COORD_Y: 10.98</span>
+            <span class="drafting-mark" style="top: 10%; left: 15%;">COORD_X: 44.22</span>
+            <span class="drafting-mark" style="bottom: 10%; right: 15%;">COORD_Y: 10.98</span>
             <h1>SAMPLE'DD</h1>
             <div class="red-line"></div>
-            <p style="font-family: var(--font-mono); color: var(--color-primary); font-size: 0.8rem;">>> ARCHIVE_SELECTION // INITIALIZING...</p>
+            <p style="font-family: var(--font-mono); color: var(--color-primary); font-size: 0.85rem; letter-spacing: 2px;">>> ACCESSING_DIVISIONS // SELECT_CORE</p>
         </div>
 
         <div class="stack-container">
+            
             <a href="/creative/" class="project-row">
                 <div class="project-thumb" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop');"></div>
                 <div class="project-info">
                     <h2>Staying In Lane Service</h2>
-                    <p>Strategic UX framework designed to reveal over-steppers and optimize team flow.</p>
+                    <p>Guide to revealing the over-stepper. Strategic UX framework and workflow optimization for high-output teams.</p>
                 </div>
             </a>
 
@@ -228,7 +238,7 @@
                 <div class="project-thumb" style="background-image: url('IMG_2310.jpg');"></div>
                 <div class="project-info">
                     <h2>Style Service</h2>
-                    <p>High-impact commemorative apparel and graphic merchandise storytelling.</p>
+                    <p>Graphic merchandise storytelling. High-impact commemorative apparel from conceptual vision to physical print.</p>
                 </div>
             </a>
 
@@ -236,9 +246,18 @@
                 <div class="project-thumb" style="background-image: url('https://jond25.github.io/ddynastia.com/IMG_6024.jpg');"></div>
                 <div class="project-info">
                     <h2>Lawn Care Service</h2>
-                    <p>Premium landscape maintenance with 15 years of institutional knowledge.</p>
+                    <p>The One-Man Army approach to premium landscape maintenance. 15 years of institutional knowledge on every blade.</p>
                 </div>
             </a>
+
+            <a href="/technical/" class="project-row">
+                <div class="project-thumb" style="background-image: url('https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2068&auto=format&fit=crop');"></div>
+                <div class="project-info">
+                    <h2>Technical Service</h2>
+                    <p>Architecture of high-performance backend systems, data visualization dashboards, and Hub-based technical navigation.</p>
+                </div>
+            </a>
+
         </div>
 
         <section class="gems-section">
@@ -266,10 +285,10 @@
     </main>
 
     <footer>
-        <p class="logo" style="font-size: 1.2rem; margin-bottom: 10px;">Gift'DD Consultant Services</p>
-        <p>&copy; 2025-2026. All Rights Reserved. Without Recourse.</p>
+        <p class="logo" style="font-size: 1.4rem; margin-bottom: 15px;">Gift'DD Studio</p>
+        <p>&copy; 2025-2026. Gift'DD Consultant Services. All Rights Reserved. Without Recourse.</p>
         <div class="legal-text">
-            Proprietary Framework. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods.
+            Proprietary Studio Framework. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the studio.
         </div>
     </footer>
 
@@ -278,5 +297,6 @@
             document.getElementById('body').classList.toggle('menu-open');
         }
     </script>
+
 </body>
 </html>
