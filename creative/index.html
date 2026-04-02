@@ -3,61 +3,223 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staying In Lane | Focus & Flow</title>
+    <title>Staying In Lane | Focus, Flow & Strategic Impact</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Fira+Code:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- 1. GLOBAL THEME & VARIABLES --- */
         :root {
             --hub-navy: #0A192F;
             --hub-neon: #00FFC0;
             --lane-blue: #1a73e8;
+            --term-bg: #112240;
+            --term-text: #abb2bf;
+            --primary-color: #A3A3FF;
+            --font-main: 'Montserrat', sans-serif;
+            --font-code: 'Fira Code', monospace;
         }
 
-        body { font-family: 'Inter', sans-serif; background-color: #f7f7f7; color: #333; }
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+        }
 
-        /* FLOATING HAMBURGER (Sticks to screen) */
+        body {
+            background-color: #F4F4F9;
+            color: #333;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, .navbar-brand {
+            font-family: var(--font-main);
+            font-weight: 800;
+        }
+
+        /* --- 2. FLOATING NAVIGATION --- */
         .floating-burger {
-            position: fixed; top: 20px; right: 20px; z-index: 4000;
-            background: var(--hub-navy); width: 50px; height: 50px;
-            border-radius: 50%; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; cursor: pointer;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3); border: 2px solid var(--hub-neon);
+            position: fixed; 
+            top: 25px; 
+            right: 25px; 
+            z-index: 5000;
+            background: var(--hub-navy); 
+            width: 55px; 
+            height: 55px;
+            border-radius: 50%; 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(0, 255, 192, 0.4); 
+            border: 2px solid var(--hub-neon);
         }
-        .floating-burger span { width: 25px; height: 3px; background: var(--hub-neon); margin: 2px 0; transition: 0.3s; }
 
-        /* SLIDE MENU */
+        .floating-burger span { 
+            display: block; 
+            width: 28px; 
+            height: 3px; 
+            background-color: var(--hub-neon); 
+            margin: 3px 0; 
+            transition: 0.3s; 
+        }
+
+        /* Slide-out Menu Panel */
         .menu-panel {
-            position: fixed; top: 0; right: -100%; width: 300px; height: 100vh;
-            background: var(--hub-navy); z-index: 5000; display: flex;
-            flex-direction: column; justify-content: center; align-items: center;
-            transition: 0.5s ease-in-out;
+            position: fixed; 
+            top: 0; 
+            right: -100%; 
+            width: 320px; 
+            height: 100vh;
+            background: var(--hub-navy); 
+            display: flex; 
+            flex-direction: column;
+            justify-content: center; 
+            align-items: center; 
+            transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+            z-index: 6000; 
+            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
         }
+
         body.menu-open .menu-panel { right: 0; }
-        .menu-link { color: white; text-decoration: none; font-size: 1.2rem; margin: 15px 0; text-transform: uppercase; }
-        .menu-link:hover { color: var(--hub-neon); }
 
-        /* BACK HUB BUTTON (Not sticky, just at top) */
-        .hub-btn-container { padding: 20px; }
-        .back-hub {
-            display: inline-block; color: var(--lane-blue); border: 2px solid var(--lane-blue);
-            padding: 8px 20px; border-radius: 25px; text-decoration: none; font-weight: bold;
+        .menu-link { 
+            font-size: 1.2rem; 
+            color: white; 
+            text-decoration: none; 
+            margin: 15px 0; 
+            text-transform: uppercase; 
+            font-weight: bold; 
+            transition: 0.3s;
         }
-        .back-hub:hover { background: var(--lane-blue); color: white; }
 
-        /* LANE CONTENT STYLES */
-        .header-section { background-color: var(--lane-blue); color: white; padding: 80px 0; }
-        .card-modern { border-left: 5px solid var(--lane-blue); transition: 0.3s; height: 100%; }
-        .card-modern:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
-        
-        /* FORM STYLES */
-        .contact-section { padding: 80px 0; background: #fff; border-top: 1px solid #ddd; }
-        .form-control { border: 1px solid var(--lane-blue); margin-bottom: 15px; }
-        .btn-lane { background: var(--lane-blue); color: white; width: 100%; font-weight: bold; }
+        .menu-link:hover { color: var(--hub-neon); padding-left: 10px; }
 
-        .spinner { border: 4px solid #ddd; border-top: 4px solid var(--hub-neon); border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; margin: 10px auto; display: none; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
+        /* --- 3. HERO SECTION (SMUSH-PROOF) --- */
+        .hero-lane {
+            min-height: 80vh;
+            background: linear-gradient(rgba(26, 115, 232, 0.9), rgba(10, 25, 47, 0.95)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 100px 20px;
+        }
+
+        .hero-lane h1 { font-size: 4rem; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
+
+        /* --- 4. CONTENT CARDS --- */
+        .section-padding { padding: 80px 0; }
+
+        .card-modern {
+            border: none;
+            border-left: 5px solid var(--lane-blue);
+            transition: all 0.3s ease;
+            background: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 100%;
+        }
+
+        .card-modern:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        /* --- 5. THE TERMINAL (DEEP DIVE AREA) --- */
+        .terminal-window {
+            background-color: var(--term-bg);
+            border-radius: 12px;
+            padding: 40px;
+            font-family: var(--font-code);
+            color: var(--term-text);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .terminal-header {
+            color: #61afef;
+            border-bottom: 2px solid #56b6c2;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        .lane-item {
+            border-left: 4px solid;
+            padding: 20px;
+            margin: 20px 0;
+            background: rgba(255,255,255,0.03);
+            transition: 0.3s;
+        }
+
+        .lane-item:hover { transform: translateX(10px); background: rgba(97, 175, 239, 0.08); }
+
+        .lane-analytical { border-color: #e5c07b; }
+        .lane-creative { border-color: #98c379; }
+        .lane-technical { border-color: #61afef; }
+        .lane-relational { border-color: #c678dd; }
+        .lane-operational { border-color: #e06c75; }
+
+        /* --- 6. ACTION PLAN ACCORDION --- */
+        .accordion-button {
+            font-weight: 700;
+            color: var(--hub-navy);
+            border-left: 5px solid #f90;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: #e6f0ff;
+            color: var(--lane-blue);
+            border-left: 5px solid var(--lane-blue);
+        }
+
+        /* --- 7. CONTACT TERMINAL --- */
+        .contact-terminal {
+            background: #0f172a;
+            color: white;
+            padding: 80px 0;
+        }
+
+        .form-terminal input, .form-terminal textarea {
+            background: #1e293b;
+            border: 1px solid #334155;
+            color: var(--hub-neon);
+            font-family: var(--font-code);
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+
+        .btn-terminal {
+            background: var(--hub-neon);
+            color: var(--hub-navy);
+            font-weight: 800;
+            border: none;
+            padding: 15px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn-terminal:hover {
+            filter: brightness(1.2);
+            letter-spacing: 2px;
+        }
+
+        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 768px) {
+            .hero-lane h1 { font-size: 2.5rem; }
+            .terminal-window { padding: 20px; }
+        }
     </style>
 </head>
 <body id="mainBody">
@@ -66,81 +228,177 @@
         <span></span><span></span><span></span>
     </div>
 
-    <nav class="menu-panel">
+    <nav class="menu-panel" id="sideMenu">
+        <a href="https://ddynastia.com" class="menu-link">The Hub</a>
         <a href="/creative/index.html" class="menu-link" style="color: var(--hub-neon);">Staying in Lane</a>
-        <a href="/design'DDtees/index.html" class="menu-link">Style</a>
+        <a href="/style/index.html" class="menu-link">Style</a>
         <a href="/lawn/index.html" class="menu-link">Lawn Care</a>
-        <a href="/sample-sites.html" class="menu-link">Sample Sites</a>
-        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; margin-top: 20px;">[ CLOSE ]</a>
+        <hr style="width: 50%; border: 1px solid rgba(0, 255, 192, 0.1); margin: 20px 0;">
+        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; color: var(--hub-neon);">[ CLOSE MENU ]</a>
     </nav>
 
-    <div class="hub-btn-container">
-        <a href="https://ddynastia.com" class="back-hub">Back to Hub</a>
-    </div>
+    <header class="hero-lane">
+        <div class="container reveal-on-scroll">
+            <i class="bi bi-compass-fill" style="font-size: 4rem; color: var(--hub-neon);"></i>
+            <h1 class="display-1 fw-bold mt-3">Focus & Flow</h1>
+            <p class="lead fs-3 opacity-75">Identifying core competencies. Maximizing absolute impact.</p>
+            <a href="#deep-dive" class="btn btn-outline-light btn-lg mt-4 px-5 py-3 rounded-pill fw-bold">Initialize Deep Dive</a>
+        </div>
+    </header>
 
-    <div class="header-section text-center">
+    <section class="section-padding">
         <div class="container">
-            <i class="bi bi-compass-fill" style="font-size: 3rem;"></i>
-            <h1 class="display-4 fw-bold">Staying In Your Lane: Focus & Flow</h1>
-            <p class="lead">Identifying core competencies and maximizing impact.</p>
-        </div>
-    </div>
-
-    <div class="container py-5">
-        <h2 class="text-center mb-5">The Three Pillars</h2>
-        <div class="row g-4">
-            <div class="col-md-4">
-                <div class="card card-modern p-4">
-                    <h5 class="fw-bold text-primary">Identify Your Zone</h5>
-                    <p>Clearly articulate what you are uniquely qualified to do.</p>
+            <h2 class="text-center mb-5 display-4 fw-bold">The Three Pillars</h2>
+            <div class="row g-4">
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="card card-modern p-5">
+                        <h3 class="h4 fw-bold text-primary">01. Identify Your Zone</h3>
+                        <p class="text-muted">Clearly articulate what you are uniquely qualified to do. Understand your role's specific responsibilities and the boundaries of your expertise.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-modern p-4">
-                    <h5 class="fw-bold text-primary">Trust Collaboration</h5>
-                    <p>Offer support, not takeover. Trust teammates to manage their domains.</p>
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="card card-modern p-5">
+                        <h3 class="h4 fw-bold text-primary">02. Trust Collaboration</h3>
+                        <p class="text-muted">Offer support, not takeover. Trust your teammates to manage their domains and provide constructive feedback only when invited.</p>
+                    </div>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-modern p-4">
-                    <h5 class="fw-bold text-primary">Maximizing Efficiency</h5>
-                    <p>Focusing energy prevents burnout and ensures high-quality output.</p>
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="card card-modern p-5">
+                        <h3 class="h4 fw-bold text-primary">03. Maximize Efficiency</h3>
+                        <p class="text-muted">Focusing your energy prevents burnout and ensures that your contributions are meaningful, high-quality, and strategically on point.</p>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <div class="text-center mt-5">
-            <a href="lane-impacts.html" class="btn btn-primary btn-lg px-5 shadow">Explore Lane Definitions (Deep Dive) &rarr;</a>
+    <section id="deep-dive" class="section-padding" style="background-color: #050b16;">
+        <div class="container">
+            <div class="terminal-window reveal-on-scroll">
+                <h2 class="terminal-header">>> Lane Definitions Initialization...</h2>
+                <p><span style="color: #98c379;">[SYSTEM] Philosophy Check:</span> Depth triumphs over superficial breadth. Mastering a single lane creates more value than drifting across five.</p>
+                
+                <div id="laneDetails" class="mt-5">
+                    <div class="lane-item lane-analytical">
+                        <h4 style="color: #e5c07b;">Analytical Lane</h4>
+                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Data interpretation, trend forecasting, and strategic insights.</p>
+                        <p class="small opacity-50">Examples: Data Scientists, Financial Analysts, Strategic Planners.</p>
+                    </div>
+
+                    <div class="lane-item lane-creative">
+                        <h4 style="color: #98c379;">Creative Lane</h4>
+                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Visual design, branding, and imaginative problem-solving.</p>
+                        <p class="small opacity-50">Examples: Graphic Designers, Art Directors, Content Strategists.</p>
+                    </div>
+
+                    <div class="lane-item lane-technical">
+                        <h4 style="color: #61afef;">Technical Lane</h4>
+                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> System architecture, code development, and infrastructure.</p>
+                        <p class="small opacity-50">Examples: Software Engineers, Cloud Architects, Technical Leads.</p>
+                    </div>
+
+                    <div class="lane-item lane-relational">
+                        <h4 style="color: #c678dd;">Relational Lane</h4>
+                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Building connections, negotiation, and client success.</p>
+                        <p class="small opacity-50">Examples: Account Managers, HR Professionals, Negotiators.</p>
+                    </div>
+
+                    <div class="lane-item lane-operational">
+                        <h4 style="color: #e06c75;">Operational Lane</h4>
+                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Process optimization, logistics, and resource allocation.</p>
+                        <p class="small opacity-50">Examples: Ops Managers, Supply Chain Directors, Project Coordinators.</p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <div class="contact-section">
-        <div class="container" style="max-width: 600px;">
-            <h2 class="text-center mb-4">Inquire About This Framework</h2>
-            <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST">
-                <input type="text" name="name" class="form-control" placeholder="Name" required>
-                <input type="email" name="email" class="form-control" placeholder="Email" required>
-                <textarea name="message" class="form-control" rows="4" placeholder="Your Message" required></textarea>
-                <button type="submit" class="btn btn-lane py-3">Send to Gift'DD</button>
-                <div id="loadingSpinner" class="spinner"></div>
+    <section class="section-padding bg-white">
+        <div class="container">
+            <h2 class="text-center mb-5 fw-bold">Action Plan for Lane Maintenance</h2>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="accordion shadow-sm" id="laneAccordion">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tip1">
+                                    Tip 1: Create a Responsibility Matrix (RACI)
+                                </button>
+                            </h2>
+                            <div id="tip1" class="accordion-collapse collapse show" data-bs-parent="#laneAccordion">
+                                <div class="accordion-body">
+                                    Define who is Responsible, Accountable, Consulted, and Informed for key tasks. This visual aid clarifies boundaries immediately.
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip2">
+                                    Tip 2: Practice "Gentle Redirection"
+                                </button>
+                            </h2>
+                            <div id="tip2" class="accordion-collapse collapse" data-bs-parent="#laneAccordion">
+                                <div class="accordion-body">
+                                    When someone asks you to step into their lane, use phrases like: "My best contribution here would be to offer guidance on X, but [Owner's Name] has the final say."
+                                </div>
+                            </div>
+                        </div>
+                        <div class="accordion-item">
+                            <h2 class="accordion-header">
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip3">
+                                    Tip 3: Set "Meeting Endpoints"
+                                </button>
+                            </h2>
+                            <div id="tip3" class="accordion-collapse collapse" data-bs-parent="#laneAccordion">
+                                <div class="accordion-body">
+                                    Before a meeting, identify the non-negotiable outcome. If the discussion veers off course, bring it back by stating, "To make sure we hit our endpoint, let's focus on deciding X."
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="contact-terminal">
+        <div class="container" style="max-width: 700px;">
+            <div class="text-center mb-5 reveal-on-scroll">
+                <h2 class="display-5 fw-bold">Inquire About This Framework</h2>
+                <p class="opacity-50 font-monospace">>> SYSTEM READY FOR INPUT</p>
+            </div>
+            <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST" class="form-terminal">
+                <input type="text" name="name" class="form-control" placeholder="[ User_ID / Name ]" required>
+                <input type="email" name="email" class="form-control" placeholder="[ Contact_Protocol (Email) ]" required>
+                <textarea name="message" class="form-control" rows="5" placeholder="[ Input_Message_Data... ]" required></textarea>
+                <button type="submit" class="btn-terminal">EXECUTE SUBMISSION</button>
             </form>
         </div>
-    </div>
+    </section>
 
-    <footer class="py-4 text-center border-top small">
-        <p>© 2025 Gift'DD Consultant Services. All Rights Reserved.</p>
+    <footer class="py-5 text-center border-top bg-dark text-white">
+        <div class="container">
+            <p class="mb-4 small">
+                &copy; 2025 gift'DD Consultant Services. All Rights Reserved. <br>
+                Without Recourse. No part of this publication may be reproduced, distributed, or transmitted without prior written permission.
+            </p>
+        </div>
     </footer>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         function toggleMenu() { document.body.classList.toggle('menu-open'); }
 
-        const form = document.getElementById('contactForm');
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            document.getElementById('loadingSpinner').style.display = 'block';
-            const res = await fetch(form.action, { method: 'POST', body: new FormData(form), headers: { 'Accept': 'application/json' }});
-            document.getElementById('loadingSpinner').style.display = 'none';
-            if (res.ok) { alert('Message Sent!'); form.reset(); }
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            document.querySelectorAll('.reveal-on-scroll').forEach((el) => observer.observe(el));
         });
     </script>
 </body>
