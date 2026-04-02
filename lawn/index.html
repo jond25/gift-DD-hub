@@ -7,119 +7,141 @@
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. HUB NAVIGATION (Navy/Neon) --- */
+        /* --- 1. CORE THEME & HUB NAV --- */
         :root {
             --hub-navy: #0A192F;
             --hub-neon: #00FFC0;
             --hub-light: #F4F4F9;
+            --lawn-green: #198754;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--hub-light);
+            overflow-x: hidden;
+            transition: 0.3s;
+        }
+
+        /* Fixed Top Bar Fix */
         .top-bar {
             background-color: var(--hub-navy);
-            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 20px;
-            position: sticky;
+            padding: 15px 30px;
+            position: fixed;
             top: 0;
-            z-index: 2000;
-            border-bottom: 1px solid rgba(0, 255, 192, 0.2);
+            width: 100%;
+            z-index: 4000;
+            border-bottom: 2px solid var(--hub-neon);
         }
 
         .back-hub {
             color: var(--hub-neon);
             text-decoration: none;
             border: 1px solid var(--hub-neon);
-            padding: 4px 12px;
+            padding: 6px 18px;
             border-radius: 20px;
-            font-size: 0.8rem;
+            font-size: 0.85rem;
+            font-weight: 600;
             transition: 0.3s;
         }
         .back-hub:hover { background: var(--hub-neon); color: var(--hub-navy); }
 
-        .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; }
-        .hamburger span { display: block; width: 25px; height: 3px; background: var(--hub-neon); transition: 0.3s; }
+        .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 5px; z-index: 5001; }
+        .hamburger span { display: block; width: 30px; height: 3px; background: var(--hub-neon); transition: 0.3s; }
 
+        /* Side Menu Fix */
         .menu-panel {
-            position: fixed; top: 0; right: -100%; width: 100%; height: 100vh;
-            background: var(--hub-navy); z-index: 3000;
+            position: fixed; top: 0; right: -100%; width: 320px; height: 100vh;
+            background: var(--hub-navy); z-index: 5000;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: 0.5s ease-in-out;
+            transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
         }
-        @media (min-width: 768px) { .menu-panel { width: 350px; right: -350px; } }
-        body.menu-open { overflow: hidden; }
         body.menu-open .menu-panel { right: 0; }
-        
-        .menu-link { color: white; text-decoration: none; font-size: 1.5rem; margin: 15px 0; text-transform: uppercase; }
-        .menu-link:hover { color: var(--hub-neon); }
+        .menu-link { color: white; text-decoration: none; font-size: 1.4rem; margin: 15px 0; text-transform: uppercase; font-weight: 800; transition: 0.3s; }
+        .menu-link:hover { color: var(--hub-neon); padding-left: 10px; }
 
-        /* --- 2. ORIGINAL LAWN CARE STYLES --- */
+        /* --- 2. LAYOUT COMPONENTS --- */
         .jumbotron {
-            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url('https://images.unsplash.com/photo-1533467647142-f4639d731bc9?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1533467647142-f4639d731bc9?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
             background-size: cover;
             color: white;
-            padding: 8rem 0;
-            text-shadow: 2px 2px 4px #000000;
+            padding: 10rem 0 6rem 0;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.8);
         }
-        .section-padding { padding: 4rem 0; }
-        .card-service { transition: transform 0.3s ease-in-out; height: 100%; }
-        .card-service:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,.1); }
-        .garden-alert { background-color: #d1e7dd; border-color: #badbcc; color: #0f5132; }
 
-        /* --- 3. CAROUSEL & LIGHTBOX STYLES --- */
-        .carousel-section { background-color: #050b16; padding: 60px 0; }
-        .carousel-item { height: 450px; background-color: #000; cursor: zoom-in; }
-        .carousel-item img { height: 100%; width: 100%; object-fit: contain; } /* Keeps tools in frame */
+        .section-padding { padding: 5rem 0; }
         
-        .carousel-lightbox {
-            display: none; position: fixed; z-index: 5000;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); justify-content: center; align-items: center;
-        }
-        .carousel-lightbox img { max-width: 95%; max-height: 95%; border: 2px solid var(--hub-neon); }
+        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
+        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
 
-        @media (max-width: 768px) { .carousel-item { height: 300px; } }
+        .card-service { transition: transform 0.3s ease; border: none; border-top: 5px solid var(--lawn-green); }
+        .card-service:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+
+        .garden-alert { background-color: #d1e7dd; border: 2px dashed #0f5132; color: #0f5132; border-radius: 10px; }
+
+        /* --- 3. GALLERY & LIGHTBOX --- */
+        .carousel-section { background-color: #050b16; padding: 80px 0; }
+        .carousel-item { height: 500px; background-color: #000; cursor: zoom-in; }
+        .carousel-item img { height: 100%; width: 100%; object-fit: contain; }
+        
+        #carouselLightbox {
+            display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.95);
+            z-index: 6000; justify-content: center; align-items: center; cursor: zoom-out;
+        }
+        #carouselLightbox img { max-width: 90%; max-height: 85%; border: 3px solid var(--hub-neon); border-radius: 5px; }
+
+        /* --- 4. ESTIMATOR UI --- */
+        .calculator-card { background: white; border-radius: 15px; border-bottom: 8px solid #ffc107; }
+
+        @media (max-width: 768px) {
+            .jumbotron h1 { font-size: 2.2rem; }
+            .carousel-item { height: 350px; }
+            .menu-panel { width: 100%; }
+        }
     </style>
 </head>
 <body id="mainBody">
 
     <div class="top-bar">
         <a href="https://ddynastia.com" class="back-hub">Back to Hub</a>
-        <div class="fw-bold text-white">Gift'DD Hub Navigation</div>
+        <div class="fw-bold text-white d-none d-md-block" style="letter-spacing: 1px;">GIFT'DD LANDSCAPE DIVISION</div>
         <div class="hamburger" onclick="toggleMenu()">
             <span></span><span></span><span></span>
         </div>
     </div>
 
     <nav class="menu-panel">
+        <a href="https://ddynastia.com" class="menu-link">The Hub</a>
         <a href="/creative/index.html" class="menu-link">Staying in Lane</a>
-        <a href="/design'DDtees/index.html" class="menu-link">Style</a>
+        <a href="/style/index.html" class="menu-link">Style</a>
         <a href="/lawn/index.html" class="menu-link" style="color: var(--hub-neon);">Lawn Care</a>
-        <a href="/sample-sites.html" class="menu-link">Portfolio Home</a>
-        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.9rem; color: var(--hub-neon); margin-top:30px;">[ CLOSE ]</a>
+        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; color: var(--hub-neon); margin-top:40px;">[ CLOSE ]</a>
     </nav>
 
     <header class="jumbotron text-center">
-        <div class="container">
-            <h1 class="display-2 fw-bolder">We Don't Just Cut Grass, We Cultivate Confidence.</h1>
-            <p class="lead">Serving Anne Arundel, Howard, and Baltimore County Areas.</p>
-            <h2 class="mt-4 display-6 text-warning">"Keep The Snakes Out Your Grass: Clean Edges, Clear Mind."</h2>
-            <a href="https://sites.google.com/ddynastia.com/giftddlawncare/home-page" target="_blank" class="btn btn-warning btn-lg mt-3 fw-bold shadow">Get Your Free Rough Estimate!</a>
+        <div class="container reveal-on-scroll">
+            <h1 class="display-2 fw-bolder mb-3">We Don't Just Cut Grass, <br>We Cultivate Confidence.</h1>
+            <p class="lead fs-3 mb-4">Serving Anne Arundel, Howard, and Baltimore County Areas.</p>
+            <h2 class="display-6 text-warning fw-bold">"Keep The Snakes Out Your Grass: Clean Edges, Clear Mind."</h2>
+            <a href="#quote-form" class="btn btn-warning btn-lg mt-4 px-5 py-3 fw-bold shadow-lg">Get Your Free Rough Estimate!</a>
         </div>
     </header>
 
     <section class="carousel-section">
-        <div class="container text-center mb-4">
-            <h2 class="text-success">Gallery of Cuts</h2>
-            <p class="text-white-50">Click any image to enlarge and see the detail</p>
+        <div class="container text-center mb-5 reveal-on-scroll">
+            <h2 class="text-success display-4 fw-bold">Gallery of Cuts</h2>
+            <p class="text-white-50">Precision and pride in every stripe. Click to enlarge.</p>
         </div>
-        <div id="lawnCarousel" class="carousel slide container" data-bs-ride="carousel">
-            <div class="carousel-inner rounded shadow-lg">
+        <div id="lawnCarousel" class="carousel slide container reveal-on-scroll" data-bs-ride="carousel">
+            <div class="carousel-inner rounded-4 shadow-lg">
                 <div class="carousel-item active" onclick="zoomImg(this)">
                     <img src="https://jond25.github.io/ddynastia.com/IMG_6024.jpg" alt="Lawn Cut 1">
                 </div>
@@ -142,82 +164,62 @@
         </div>
     </section>
 
-    <section class="section-padding bg-light">
+    <section class="section-padding bg-white">
         <div class="container">
-            <div class="row align-items-center">
-                <div class="col-lg-6">
-                    <h2 class="display-5 text-success">The One-Man Lawn Army</h2>
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6 reveal-on-scroll">
+                    <h2 class="display-5 text-success fw-bold">The One-Man Lawn Army</h2>
                     <p class="lead">That's right, it's just me—your dedicated lawn care specialist with over 15 years experience.</p>
-                    <p>I understand soil biology, weed identification, and proper nutrient cycling. You get boutique service with institutional knowledge.</p>
+                    <p>I understand soil biology, weed identification, and proper nutrient cycling. When you hire Gift'DD, you aren't getting a random crew; you're getting boutique service with institutional knowledge.</p>
                 </div>
-                <div class="col-lg-6 text-center">
-                    <div class="p-3 bg-white shadow rounded">
-                         <i class="fas fa-seedling fa-5x text-success mb-3"></i>
-                         <h4>Expert Care</h4>
-                         <p class="text-muted">From seed-to-shred, I handle every blade personally.</p>
+                <div class="col-lg-6 text-center reveal-on-scroll">
+                    <div class="p-5 bg-light shadow-sm rounded-4 border-start border-5 border-success">
+                         <i class="fas fa-seedling fa-5x text-success mb-4"></i>
+                         <h4 class="fw-bold">Boutique Expert Care</h4>
+                         <p class="text-muted">From seed-to-shred, I handle every single blade personally to ensure the highest standard.</p>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="container mt-4 mb-4">
-        <div class="alert garden-alert text-center fw-bold fs-5" role="alert">
-            Garden Humor Break: What do you call a gardener who is *really* good at digging?<br>
-            A man who knows how to handle his **hoe**!
+    <section class="container my-5 reveal-on-scroll">
+        <div class="alert garden-alert text-center py-4 shadow-sm" role="alert">
+            <h4 class="fw-bold"><i class="fas fa-grin-beam me-2"></i>Garden Humor Break</h4>
+            <p class="fs-5 mb-0">What do you call a gardener who is <em>really</em> good at digging?<br>
+            <strong>A man who knows how to handle his hoe!</strong></p>
         </div>
     </section>
 
-    <section id="services" class="section-padding">
+    <section id="services" class="section-padding bg-light">
         <div class="container text-center">
-            <h2 class="display-4 mb-5 text-success">Comprehensive Care</h2>
+            <h2 class="display-4 mb-5 text-success fw-bold">Comprehensive Care</h2>
             <div class="row g-4">
-                <div class="col-md-4">
-                    <div class="card card-service shadow">
-                        <div class="card-body">
-                            <h5 class="card-title text-success">Mow, Edge & Trim</h5>
-                            <p class="card-text">Precision cuts tailored to your grass type. Crisp edges and careful trimming.</p>
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="card card-service shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <i class="fas fa-cut fa-2x text-success mb-3"></i>
+                            <h5 class="card-title fw-bold">Mow, Edge & Trim</h5>
+                            <p class="card-text">Precision cuts tailored to your grass type. Crisp edges and careful trimming around every obstacle.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card card-service shadow">
-                        <div class="card-body">
-                            <h5 class="card-title text-success">Feed & Weed</h5>
-                            <p class="card-text">Custom fertilization and expert weed control plans based on your soil.</p>
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="card card-service shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <i class="fas fa-vial fa-2x text-success mb-3"></i>
+                            <h5 class="card-title fw-bold">Feed & Weed</h5>
+                            <p class="card-text">Custom fertilization and expert weed control plans based specifically on your local soil profile.</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="card card-service shadow">
-                        <div class="card-body">
-                            <h5 class="card-title text-success">Seasonal Cleanup</h5>
-                            <p class="card-text">Spring rejuvenation and fall leaf removal. Aeration and dethatching available.</p>
+                <div class="col-md-4 reveal-on-scroll">
+                    <div class="card card-service shadow-sm h-100">
+                        <div class="card-body p-4">
+                            <i class="fas fa-leaf fa-2x text-success mb-3"></i>
+                            <h5 class="card-title fw-bold">Seasonal Cleanup</h5>
+                            <p class="card-text">Spring rejuvenation and fall leaf removal. Aeration and dethatching to keep the roots breathing.</p>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="testimonials" class="section-padding bg-light">
-        <div class="container">
-            <h2 class="text-center mb-5 text-success">What Our Clients Say</h2>
-            <div class="row">
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100 p-4 shadow-sm border-0">
-                        <blockquote class="blockquote mb-0">
-                            <p>"My lawn has never looked better. The attention to detail on the edging is incredible!"</p>
-                            <footer class="blockquote-footer mt-2">Jane Doe, <cite title="Source Title">Annapolis, MD</cite></footer>
-                        </blockquote>
-                    </div>
-                </div>
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100 p-4 shadow-sm border-0">
-                        <blockquote class="blockquote mb-0">
-                            <p>"Reliable, professional, and excellent knowledge of fertilization. Highly recommend gift'DD!"</p>
-                            <footer class="blockquote-footer mt-2">John Smith, <cite title="Source Title">Columbia, MD</cite></footer>
-                        </blockquote>
                     </div>
                 </div>
             </div>
@@ -226,31 +228,31 @@
 
     <section id="quote-form" class="section-padding">
         <div class="container">
-            <h2 class="text-center mb-5 display-5 text-success">Get Your Rough Estimate Instantly!</h2>
+            <h2 class="text-center mb-5 display-5 text-success fw-bold">Get Your Rough Estimate Instantly!</h2>
             <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="card p-4 shadow-lg border-0">
-                        <form>
-                            <div class="mb-3">
+                <div class="col-lg-7">
+                    <div class="card calculator-card p-5 shadow-lg border-0 reveal-on-scroll">
+                        <form id="calcForm">
+                            <div class="mb-4">
                                 <label for="lawnSize" class="form-label fw-bold">Approximate Lawn Size (Sq Ft)</label>
-                                <select class="form-select" id="lawnSize">
+                                <select class="form-select form-select-lg" id="lawnSize">
                                     <option value="0" selected disabled>Select an approximate size</option>
-                                    <option value="1500">Small Lot (Up to 1,500 sq ft)</option>
-                                    <option value="3000">Medium Lot (1,501 - 3,000 sq ft)</option>
-                                    <option value="5000">Large Lot (3,001 - 5,000 sq ft)</option>
-                                    <option value="7000">Extra Large Lot (5,001+ sq ft)</option>
+                                    <option value="45">Small Lot (Up to 1,500 sq ft)</option>
+                                    <option value="65">Medium Lot (1,501 - 3,000 sq ft)</option>
+                                    <option value="95">Large Lot (3,001 - 5,000 sq ft)</option>
+                                    <option value="130">Extra Large Lot (5,001+ sq ft)</option>
                                 </select>
                             </div>
-                            <div class="mb-3">
+                            <div class="mb-4">
                                 <label for="serviceType" class="form-label fw-bold">Primary Service Needed</label>
-                                <select class="form-select" id="serviceType">
-                                    <option value="1.0" selected>Standard Weekly Mowing Package</option>
+                                <select class="form-select form-select-lg" id="serviceType">
+                                    <option value="1.0">Standard Weekly Mowing Package</option>
                                     <option value="1.3">Mowing + Basic Feed/Weed</option>
                                     <option value="1.6">Full Service (Mow, Feed, Weed, Trim)</option>
                                 </select>
                             </div>
-                            <button type="button" class="btn btn-warning btn-lg w-100 fw-bold shadow" onclick="calculateEstimate()">Calculate Rough Estimate</button>
-                            <div id="estimateResult" class="alert alert-info mt-4 text-center d-none"></div>
+                            <button type="button" class="btn btn-warning btn-lg w-100 fw-bold py-3 shadow" onclick="calculateEstimate()">Calculate Rough Estimate</button>
+                            <div id="estimateResult" class="alert alert-success mt-4 text-center d-none fw-bold fs-4"></div>
                         </form>
                     </div>
                 </div>
@@ -258,23 +260,29 @@
         </div>
     </section>
 
-    <footer class="bg-dark text-white pt-5 pb-4 text-center">
+    <footer class="bg-dark text-white pt-5 pb-4 text-center border-top border-success border-4">
         <div class="container">
-            <h5 class="text-success text-uppercase fw-bold">gift'DD Lawncare</h5>
-            <p class="small opacity-50 mt-3">Copyright © 2025-2026 gift'DD Consultant Services. All Rights Reserved.</p>
+            <h5 class="text-success text-uppercase fw-bold mb-4">gift'DD Lawncare</h5>
+            <p class="small opacity-75">
+                Copyright &copy; 2025-2026 gift'DD Consultant Services. All Rights Reserved. <br>
+                Without Recourse. No part of this work may be reproduced or transmitted without prior written permission.
+            </p>
+            <div class="mt-4">
+                <a href="mailto:giftdd.llc@gmail.com" class="text-success text-decoration-none mx-2">Email Support</a> | 
+                <a href="https://ddynastia.com" class="text-success text-decoration-none mx-2">Return to Hub</a>
+            </div>
         </div>
     </footer>
 
-    <div class="carousel-lightbox" id="carouselLightbox" onclick="this.style.display='none'">
+    <div id="carouselLightbox" onclick="this.style.display='none'">
         <img id="zoomedImg" src="" alt="Zoomed View">
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
     <script>
-        // 1. Menu Toggle
+        // 1. Fixed Menu Toggle Logic
         function toggleMenu() {
-            document.getElementById('mainBody').classList.toggle('menu-open');
+            document.body.classList.toggle('menu-open');
         }
 
         // 2. Carousel Lightbox Zoom
@@ -286,7 +294,31 @@
             lightbox.style.display = 'flex';
         }
 
-        // 3. Calculator Logic
+        // 3. Calculator Logic (Finished)
         function calculateEstimate() {
-            const size = document.getElementById('lawnSize').value;
-            const serviceMultiplier = parseFloat(document.getElementById('
+            const basePrice = parseFloat(document.getElementById('lawnSize').value);
+            const multiplier = parseFloat(document.getElementById('serviceType').value);
+            const resultDiv = document.getElementById('estimateResult');
+
+            if (isNaN(basePrice) || basePrice === 0) {
+                alert("Please select a lawn size first!");
+                return;
+            }
+
+            const total = (basePrice * multiplier).toFixed(2);
+            resultDiv.classList.remove('d-none');
+            resultDiv.innerHTML = `Estimated Price: $${total}* <br><span style="font-size: 0.8rem; font-weight: normal;">*Subject to final on-site inspection.</span>`;
+        }
+
+        // 4. Scroll Reveal
+        document.addEventListener("DOMContentLoaded", function() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) entry.target.classList.add('is-visible');
+                });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal-on-scroll').forEach(el => observer.observe(el));
+        });
+    </script>
+</body>
+</html>
