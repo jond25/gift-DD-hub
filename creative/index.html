@@ -3,403 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Staying In Lane | Focus, Flow & Strategic Impact</title>
+    <title>SAMPLE'DD | Gift'DD Creative Studio</title>
     
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;800&family=Fira+Code:wght@400;700&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;600;900&family=Fira+Code:wght@400&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. GLOBAL THEME & VARIABLES --- */
+        /* --- 1. CORE THEME & RETRO-MODERN VARIABLES --- */
         :root {
-            --hub-navy: #0A192F;
-            --hub-neon: #00FFC0;
-            --lane-blue: #1a73e8;
-            --term-bg: #112240;
-            --term-text: #abb2bf;
-            --primary-color: #A3A3FF;
+            --color-bg: #0A192F;         /* Stern Navy */
+            --color-primary: #00FFC0;    /* 80s Neon Mint */
+            --color-secondary: #FF4D4D;  /* The Red Line */
+            --color-accent: #A3A3FF;     /* 90s Periwinkle */
+            --color-grid: rgba(0, 255, 192, 0.05);
             --font-main: 'Montserrat', sans-serif;
-            --font-code: 'Fira Code', monospace;
+            --font-mono: 'Fira Code', monospace;
         }
 
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-        }
-
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body {
-            background-color: #F4F4F9;
-            color: #333;
-            font-family: 'Inter', sans-serif;
+            font-family: var(--font-main);
+            color: #F4F4F9;
+            background-color: var(--color-bg);
+            /* UNFINISHED ART: Background Grid Pattern */
+            background-image: 
+                linear-gradient(var(--color-grid) 1px, transparent 1px),
+                linear-gradient(90deg, var(--color-grid) 1px, transparent 1px);
+            background-size: 50px 50px;
             line-height: 1.6;
             overflow-x: hidden;
         }
 
-        h1, h2, h3, h4, .navbar-brand {
-            font-family: var(--font-main);
-            font-weight: 800;
+        /* --- 2. DECORATIVE RETRO SHAPES --- */
+        .shape { position: absolute; z-index: -1; opacity: 0.5; pointer-events: none; }
+        .circle { width: 300px; height: 300px; border: 2px solid var(--color-accent); border-radius: 50%; top: -100px; left: -100px; }
+        .triangle { 
+            width: 0; height: 0; 
+            border-left: 50px solid transparent; border-right: 50px solid transparent; 
+            border-bottom: 100px solid var(--color-primary); 
+            bottom: 10%; right: 5%; transform: rotate(15deg); 
+        }
+        .squiggle {
+            position: absolute; top: 40%; left: 2%; width: 100px; height: 20px;
+            background: repeating-linear-gradient(45deg, var(--color-secondary), var(--color-secondary) 10px, transparent 10px, transparent 20px);
         }
 
-        /* --- 2. FLOATING NAVIGATION --- */
-        .floating-burger {
-            position: fixed; 
-            top: 25px; 
-            right: 25px; 
-            z-index: 5000;
-            background: var(--hub-navy); 
-            width: 55px; 
-            height: 55px;
-            border-radius: 50%; 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center; 
-            cursor: pointer;
-            box-shadow: 0 0 15px rgba(0, 255, 192, 0.4); 
-            border: 2px solid var(--hub-neon);
+        /* --- 3. TOP TOOLBAR NAV --- */
+        header {
+            background-color: rgba(10, 25, 47, 0.9);
+            position: sticky; top: 0; z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--color-primary);
         }
 
-        .floating-burger span { 
-            display: block; 
-            width: 28px; 
-            height: 3px; 
-            background-color: var(--hub-neon); 
-            margin: 3px 0; 
-            transition: 0.3s; 
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            height: 70px; max-width: 1200px; margin: 0 auto; padding: 0 30px;
         }
 
-        /* Slide-out Menu Panel */
+        .logo { font-size: 1.5rem; font-weight: 900; letter-spacing: 3px; color: var(--color-primary); }
+
+        .hamburger { cursor: pointer; display: flex; flex-direction: column; gap: 6px; }
+        .hamburger span { display: block; height: 3px; width: 25px; background: var(--color-primary); transition: 0.3s; }
+
+        /* --- 4. THE MENU PANEL --- */
         .menu-panel {
-            position: fixed; 
-            top: 0; 
-            right: -100%; 
-            width: 320px; 
-            height: 100vh;
-            background: var(--hub-navy); 
-            display: flex; 
-            flex-direction: column;
-            justify-content: center; 
-            align-items: center; 
+            position: fixed; top: 0; right: -100%; width: 320px; height: 100vh;
+            background-color: var(--color-bg); z-index: 2000;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
             transition: 0.5s cubic-bezier(0.77,0.2,0.05,1.0);
-            z-index: 6000; 
-            box-shadow: -10px 0 30px rgba(0,0,0,0.5);
+            border-left: 2px solid var(--color-primary);
         }
-
         body.menu-open .menu-panel { right: 0; }
-
         .menu-link { 
-            font-size: 1.2rem; 
-            color: white; 
-            text-decoration: none; 
-            margin: 15px 0; 
-            text-transform: uppercase; 
-            font-weight: bold; 
-            transition: 0.3s;
+            font-size: 1.5rem; color: #fff; text-decoration: none; margin: 15px 0;
+            text-transform: uppercase; font-weight: 900; transition: 0.3s;
+        }
+        .menu-link:hover { color: var(--color-primary); transform: skewX(-10deg); }
+
+        /* --- 5. HERO & ARTISTIC MARKS --- */
+        .portfolio-header {
+            padding: 100px 20px 40px; text-align: center; position: relative;
+        }
+        .portfolio-header h1 { 
+            font-size: 5rem; text-transform: uppercase; font-weight: 900; 
+            letter-spacing: -2px; line-height: 0.9;
+        }
+        .red-line { width: 200px; height: 8px; background-color: var(--color-secondary); margin: 20px auto; }
+        
+        .drafting-mark {
+            font-family: var(--font-mono); font-size: 0.7rem; color: var(--color-primary);
+            position: absolute; opacity: 0.6;
         }
 
-        .menu-link:hover { color: var(--hub-neon); padding-left: 10px; }
+        /* --- 6. PROJECT STACK (BLUEPRINT STYLE) --- */
+        .stack-container { max-width: 1000px; margin: 0 auto; padding: 40px 20px; }
 
-        /* --- 3. HERO SECTION (SMUSH-PROOF) --- */
-        .hero-lane {
-            min-height: 80vh;
-            background: linear-gradient(rgba(26, 115, 232, 0.9), rgba(10, 25, 47, 0.95)), url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop');
-            background-size: cover;
-            background-position: center;
-            background-attachment: fixed;
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
+        .project-row {
+            display: flex; align-items: center; background: rgba(255,255,255,0.02);
+            margin-bottom: 40px; position: relative; text-decoration: none; color: inherit;
+            border: 1px solid rgba(255,255,255,0.1); transition: 0.4s;
+        }
+        .project-row:hover {
+            border-color: var(--color-primary); background: rgba(0, 255, 192, 0.05);
+            transform: translateX(10px);
+        }
+
+        .project-row::before { content: ''; position: absolute; top: -5px; left: -5px; width: 20px; height: 20px; border-top: 2px solid var(--color-primary); border-left: 2px solid var(--color-primary); }
+        .project-row::after { content: 'REF_ID: 102'; position: absolute; bottom: 5px; right: 10px; font-family: var(--font-mono); font-size: 0.6rem; color: var(--color-primary); opacity: 0.5; }
+
+        .project-thumb {
+            width: 350px; height: 200px; background-size: cover; background-position: center;
+            filter: grayscale(100%); transition: 0.5s;
+        }
+        .project-row:hover .project-thumb { filter: grayscale(0%); }
+
+        .project-info { padding: 30px 50px; }
+        .project-info h2 { font-size: 1.8rem; text-transform: uppercase; margin-bottom: 10px; }
+        .project-info p { font-size: 0.9rem; opacity: 0.7; max-width: 400px; }
+
+        /* --- 7. HIDDEN G.E.M.s SECTION --- */
+        .gems-section {
             padding: 100px 20px;
+            text-align: center;
+            max-width: 1000px;
+            margin: 0 auto;
         }
 
-        .hero-lane h1 { font-size: 4rem; text-shadow: 0 4px 10px rgba(0,0,0,0.3); }
-
-        /* --- 4. CONTENT CARDS --- */
-        .section-padding { padding: 80px 0; }
-
-        .card-modern {
-            border: none;
-            border-left: 5px solid var(--lane-blue);
-            transition: all 0.3s ease;
-            background: white;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            height: 100%;
+        .gems-title-container {
+            display: inline-block;
+            position: relative;
+            margin-bottom: 50px;
         }
 
-        .card-modern:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        .gems-title {
+            font-size: 3rem;
+            text-transform: uppercase;
+            font-weight: 900;
+            color: var(--color-accent);
+            letter-spacing: 5px;
+            margin-bottom: 10px;
         }
 
-        /* --- 5. THE TERMINAL (DEEP DIVE AREA) --- */
-        .terminal-window {
-            background-color: var(--term-bg);
-            border-radius: 12px;
-            padding: 40px;
-            font-family: var(--font-code);
-            color: var(--term-text);
-            box-shadow: 0 20px 50px rgba(0,0,0,0.4);
-            border: 1px solid rgba(255,255,255,0.1);
+        .gems-subtitle {
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            color: var(--color-primary);
+            text-transform: uppercase;
+            opacity: 0.8;
         }
 
-        .terminal-header {
-            color: #61afef;
-            border-bottom: 2px solid #56b6c2;
-            padding-bottom: 15px;
-            margin-bottom: 25px;
-            font-weight: bold;
+        .upcoming-grid {
+            display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px;
         }
-
-        .lane-item {
-            border-left: 4px solid;
-            padding: 20px;
-            margin: 20px 0;
-            background: rgba(255,255,255,0.03);
-            transition: 0.3s;
+        .upcoming-item { text-align: center; }
+        .placeholder-box {
+            aspect-ratio: 1 / 1; border: 2px dashed rgba(255,255,255,0.2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 3rem; margin-bottom: 20px; transition: 0.3s;
+            position: relative; background: rgba(255,255,255,0.01);
         }
+        .upcoming-item h3 { font-size: 1.1rem; text-transform: uppercase; margin-bottom: 5px; }
+        .upcoming-item span { font-family: var(--font-mono); font-size: 0.75rem; color: var(--color-primary); opacity: 0.7; }
 
-        .lane-item:hover { transform: translateX(10px); background: rgba(97, 175, 239, 0.08); }
-
-        .lane-analytical { border-color: #e5c07b; }
-        .lane-creative { border-color: #98c379; }
-        .lane-technical { border-color: #61afef; }
-        .lane-relational { border-color: #c678dd; }
-        .lane-operational { border-color: #e06c75; }
-
-        /* --- 6. ACTION PLAN ACCORDION --- */
-        .accordion-button {
-            font-weight: 700;
-            color: var(--hub-navy);
-            border-left: 5px solid #f90;
+        /* --- 8. FOOTER --- */
+        footer {
+            padding: 80px 20px; text-align: center; background: #050b16;
+            border-top: 2px solid var(--color-primary); margin-top: 100px;
         }
-
-        .accordion-button:not(.collapsed) {
-            background-color: #e6f0ff;
-            color: var(--lane-blue);
-            border-left: 5px solid var(--lane-blue);
-        }
-
-        /* --- 7. CONTACT TERMINAL --- */
-        .contact-terminal {
-            background: #0f172a;
-            color: white;
-            padding: 80px 0;
-        }
-
-        .form-terminal input, .form-terminal textarea {
-            background: #1e293b;
-            border: 1px solid #334155;
-            color: var(--hub-neon);
-            font-family: var(--font-code);
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-
-        .btn-terminal {
-            background: var(--hub-neon);
-            color: var(--hub-navy);
-            font-weight: 800;
-            border: none;
-            padding: 15px;
-            width: 100%;
-            transition: 0.3s;
-        }
-
-        .btn-terminal:hover {
-            filter: brightness(1.2);
-            letter-spacing: 2px;
-        }
-
-        .reveal-on-scroll { opacity: 0; transform: translateY(30px); transition: 0.8s ease-out; }
-        .reveal-on-scroll.is-visible { opacity: 1; transform: translateY(0); }
+        .legal-text { font-size: 0.7rem; opacity: 0.4; max-width: 900px; margin: 30px auto 0; line-height: 1.8; }
 
         @media (max-width: 768px) {
-            .hero-lane h1 { font-size: 2.5rem; }
-            .terminal-window { padding: 20px; }
+            .project-row { flex-direction: column; }
+            .project-thumb { width: 100%; height: 250px; }
+            .upcoming-grid { grid-template-columns: 1fr; }
+            .portfolio-header h1 { font-size: 3rem; }
+            .gems-title { font-size: 2rem; }
         }
     </style>
 </head>
-<body id="mainBody">
+<body id="body">
 
-    <div class="floating-burger" onclick="toggleMenu()">
-        <span></span><span></span><span></span>
-    </div>
+    <div class="shape circle"></div>
+    <div class="shape triangle"></div>
+    <div class="shape squiggle"></div>
 
-    <nav class="menu-panel" id="sideMenu">
-        <a href="https://ddynastia.com" class="menu-link">The Hub</a>
-        <a href="/creative/index.html" class="menu-link" style="color: var(--hub-neon);">Staying in Lane</a>
-        <a href="/style/index.html" class="menu-link">Style</a>
-        <a href="/lawn/index.html" class="menu-link">Lawn Care</a>
-        <hr style="width: 50%; border: 1px solid rgba(0, 255, 192, 0.1); margin: 20px 0;">
-        <a href="#" class="menu-link" onclick="toggleMenu()" style="font-size: 0.8rem; color: var(--hub-neon);">[ CLOSE MENU ]</a>
-    </nav>
-
-    <header class="hero-lane">
-        <div class="container reveal-on-scroll">
-            <i class="bi bi-compass-fill" style="font-size: 4rem; color: var(--hub-neon);"></i>
-            <h1 class="display-1 fw-bold mt-3">Focus & Flow</h1>
-            <p class="lead fs-3 opacity-75">Identifying core competencies. Maximizing absolute impact.</p>
-            <a href="#deep-dive" class="btn btn-outline-light btn-lg mt-4 px-5 py-3 rounded-pill fw-bold">Initialize Deep Dive</a>
-        </div>
+    <header>
+        <nav>
+            <div class="logo">GIFT'DD STUDIO</div>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span><span></span><span></span>
+            </div>
+        </nav>
     </header>
 
-    <section class="section-padding">
-        <div class="container">
-            <h2 class="text-center mb-5 display-4 fw-bold">The Three Pillars</h2>
-            <div class="row g-4">
-                <div class="col-md-4 reveal-on-scroll">
-                    <div class="card card-modern p-5">
-                        <h3 class="h4 fw-bold text-primary">01. Identify Your Zone</h3>
-                        <p class="text-muted">Clearly articulate what you are uniquely qualified to do. Understand your role's specific responsibilities and the boundaries of your expertise.</p>
-                    </div>
+    <nav class="menu-panel">
+        <a href="/creative/" class="menu-link">Staying in Lane</a>
+        <a href="/style/" class="menu-link">Style</a>
+        <a href="/lawn/" class="menu-link">Lawn Care</a>
+        <a href="/technical/" class="menu-link" style="color: var(--color-primary);">Technical Hub</a>
+        <div style="margin-top: 50px; cursor: pointer; color: var(--color-secondary);" onclick="toggleMenu()">[ CANCEL ]</div>
+    </nav>
+
+    <main>
+        <div class="portfolio-header">
+            <span class="drafting-mark" style="top: 20px; left: 20%;">COORD_X: 44.22</span>
+            <span class="drafting-mark" style="bottom: 0; right: 25%;">COORD_Y: 10.98</span>
+            <h1>SAMPLE'DD</h1>
+            <div class="red-line"></div>
+            <p style="font-family: var(--font-mono); color: var(--color-primary); font-size: 0.8rem;">>> ARCHIVE_SELECTION // INITIALIZING...</p>
+        </div>
+
+        <div class="stack-container">
+            <a href="/creative/" class="project-row">
+                <div class="project-thumb" style="background-image: url('https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=2070&auto=format&fit=crop');"></div>
+                <div class="project-info">
+                    <h2>Staying In Your Lane</h2>
+                    <p>Strategic UX framework designed to reveal over-steppers and optimize team flow. Stern logic for modern management.</p>
                 </div>
-                <div class="col-md-4 reveal-on-scroll">
-                    <div class="card card-modern p-5">
-                        <h3 class="h4 fw-bold text-primary">02. Trust Collaboration</h3>
-                        <p class="text-muted">Offer support, not takeover. Trust your teammates to manage their domains and provide constructive feedback only when invited.</p>
-                    </div>
+            </a>
+
+            <a href="/style/" class="project-row">
+                <div class="project-thumb" style="background-image: url('IMG_2310.jpg');"></div>
+                <div class="project-info">
+                    <h2>Style Division</h2>
+                    <p>High-impact commemorative apparel and graphic merchandise. Visceral design storytelling from vision to print.</p>
                 </div>
-                <div class="col-md-4 reveal-on-scroll">
-                    <div class="card card-modern p-5">
-                        <h3 class="h4 fw-bold text-primary">03. Maximize Efficiency</h3>
-                        <p class="text-muted">Focusing your energy prevents burnout and ensures that your contributions are meaningful, high-quality, and strategically on point.</p>
+            </a>
+
+            <a href="/lawn/" class="project-row">
+                <div class="project-thumb" style="background-image: url('https://jond25.github.io/ddynastia.com/IMG_6024.jpg');"></div>
+                <div class="project-info">
+                    <h2>Lawncare Ops</h2>
+                    <p>The One-Man Army approach to premium landscape maintenance. 15 years of institutional knowledge on every blade.</p>
+                </div>
+            </a>
+        </div>
+
+        <section class="gems-section">
+            <div class="gems-title-container">
+                <h2 class="gems-title">Hidden G.E.M.s</h2>
+                <div class="gems-subtitle">>> Discovery Mode: Active // Future Assets</div>
+            </div>
+
+            <div class="upcoming-grid">
+                <div class="upcoming-item">
+                    <div class="placeholder-box">
+                        <i class="fas fa-dove"></i>
                     </div>
+                    <h3>Spiritual</h3>
+                    <span>In Progress // 2026.Q1</span>
+                </div>
+                <div class="upcoming-item">
+                    <div class="placeholder-box">
+                        <i class="fas fa-dumbbell"></i>
+                    </div>
+                    <h3>Physical</h3>
+                    <span>Wireframing // 2027</span>
+                </div>
+                <div class="upcoming-item">
+                    <div class="placeholder-box">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <h3>Mental</h3>
+                    <span>Drafting // 2026.Q4</span>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+    </main>
 
-    <section id="deep-dive" class="section-padding" style="background-color: #050b16;">
-        <div class="container">
-            <div class="terminal-window reveal-on-scroll">
-                <h2 class="terminal-header">>> Lane Definitions Initialization...</h2>
-                <p><span style="color: #98c379;">[SYSTEM] Philosophy Check:</span> Depth triumphs over superficial breadth. Mastering a single lane creates more value than drifting across five.</p>
-                
-                <div id="laneDetails" class="mt-5">
-                    <div class="lane-item lane-analytical">
-                        <h4 style="color: #e5c07b;">Analytical Lane</h4>
-                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Data interpretation, trend forecasting, and strategic insights.</p>
-                        <p class="small opacity-50">Examples: Data Scientists, Financial Analysts, Strategic Planners.</p>
-                    </div>
-
-                    <div class="lane-item lane-creative">
-                        <h4 style="color: #98c379;">Creative Lane</h4>
-                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Visual design, branding, and imaginative problem-solving.</p>
-                        <p class="small opacity-50">Examples: Graphic Designers, Art Directors, Content Strategists.</p>
-                    </div>
-
-                    <div class="lane-item lane-technical">
-                        <h4 style="color: #61afef;">Technical Lane</h4>
-                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> System architecture, code development, and infrastructure.</p>
-                        <p class="small opacity-50">Examples: Software Engineers, Cloud Architects, Technical Leads.</p>
-                    </div>
-
-                    <div class="lane-item lane-relational">
-                        <h4 style="color: #c678dd;">Relational Lane</h4>
-                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Building connections, negotiation, and client success.</p>
-                        <p class="small opacity-50">Examples: Account Managers, HR Professionals, Negotiators.</p>
-                    </div>
-
-                    <div class="lane-item lane-operational">
-                        <h4 style="color: #e06c75;">Operational Lane</h4>
-                        <p class="mb-1"><span style="font-weight:bold;">Focus:</span> Process optimization, logistics, and resource allocation.</p>
-                        <p class="small opacity-50">Examples: Ops Managers, Supply Chain Directors, Project Coordinators.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section-padding bg-white">
-        <div class="container">
-            <h2 class="text-center mb-5 fw-bold">Action Plan for Lane Maintenance</h2>
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="accordion shadow-sm" id="laneAccordion">
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#tip1">
-                                    Tip 1: Create a Responsibility Matrix (RACI)
-                                </button>
-                            </h2>
-                            <div id="tip1" class="accordion-collapse collapse show" data-bs-parent="#laneAccordion">
-                                <div class="accordion-body">
-                                    Define who is Responsible, Accountable, Consulted, and Informed for key tasks. This visual aid clarifies boundaries immediately.
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip2">
-                                    Tip 2: Practice "Gentle Redirection"
-                                </button>
-                            </h2>
-                            <div id="tip2" class="accordion-collapse collapse" data-bs-parent="#laneAccordion">
-                                <div class="accordion-body">
-                                    When someone asks you to step into their lane, use phrases like: "My best contribution here would be to offer guidance on X, but [Owner's Name] has the final say."
-                                </div>
-                            </div>
-                        </div>
-                        <div class="accordion-item">
-                            <h2 class="accordion-header">
-                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#tip3">
-                                    Tip 3: Set "Meeting Endpoints"
-                                </button>
-                            </h2>
-                            <div id="tip3" class="accordion-collapse collapse" data-bs-parent="#laneAccordion">
-                                <div class="accordion-body">
-                                    Before a meeting, identify the non-negotiable outcome. If the discussion veers off course, bring it back by stating, "To make sure we hit our endpoint, let's focus on deciding X."
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="contact-terminal">
-        <div class="container" style="max-width: 700px;">
-            <div class="text-center mb-5 reveal-on-scroll">
-                <h2 class="display-5 fw-bold">Inquire About This Framework</h2>
-                <p class="opacity-50 font-monospace">>> SYSTEM READY FOR INPUT</p>
-            </div>
-            <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST" class="form-terminal">
-                <input type="text" name="name" class="form-control" placeholder="[ User_ID / Name ]" required>
-                <input type="email" name="email" class="form-control" placeholder="[ Contact_Protocol (Email) ]" required>
-                <textarea name="message" class="form-control" rows="5" placeholder="[ Input_Message_Data... ]" required></textarea>
-                <button type="submit" class="btn-terminal">EXECUTE SUBMISSION</button>
-            </form>
-        </div>
-    </section>
-
-    <footer class="py-5 text-center border-top bg-dark text-white">
-        <div class="container">
-            <p class="mb-4 small">
-                &copy; 2025 gift'DD Consultant Services. All Rights Reserved. <br>
-                Without Recourse. No part of this publication may be reproduced, distributed, or transmitted without prior written permission.
-            </p>
+    <footer>
+        <p class="logo" style="font-size: 1.2rem; margin-bottom: 10px;">Gift'DD Consultant Services</p>
+        <p>&copy; 2025-2026. All Rights Reserved. Without Recourse.</p>
+        <div class="legal-text">
+            Proprietary Framework. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the studio.
         </div>
     </footer>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function toggleMenu() { document.body.classList.toggle('menu-open'); }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('is-visible');
-                    }
-                });
-            }, { threshold: 0.1 });
-
-            document.querySelectorAll('.reveal-on-scroll').forEach((el) => observer.observe(el));
-        });
+        function toggleMenu() {
+            document.getElementById('body').classList.toggle('menu-open');
+        }
     </script>
+
 </body>
 </html>
