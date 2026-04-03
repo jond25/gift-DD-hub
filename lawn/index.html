@@ -133,6 +133,26 @@
 
         .calculator-card { background: white; border-radius: 15px; border-bottom: 8px solid #ffc107; }
 
+        /* --- 4. CONTACT SECTION GUI --- */
+        .contact-section { background-color: var(--hub-navy); color: white; padding: 100px 0; }
+        .form-terminal input, .form-terminal textarea { 
+            background: #112240; border: 1px solid #233554; color: white; padding: 15px; margin-bottom: 20px; border-radius: 5px;
+            width: 100%;
+        }
+        .form-terminal input:focus, .form-terminal textarea:focus { 
+            border-color: var(--hub-neon); outline: none; background: #1a2c4e; 
+        }
+        .btn-submit-contact { 
+            background: var(--lawn-green); color: white; font-weight: 800; border: none; padding: 15px; width: 100%; transition: 0.3s; text-transform: uppercase;
+            border-radius: 5px;
+        }
+        .btn-submit-contact:hover { filter: brightness(1.2); transform: translateY(-3px); }
+
+        #success-gui {
+            display: none; text-align: center; padding: 50px; border: 2px solid var(--lawn-green); background: rgba(25, 135, 84, 0.05); border-radius: 10px;
+        }
+        #success-gui i { font-size: 4rem; color: var(--lawn-green); margin-bottom: 20px; }
+
         @media (max-width: 768px) {
             .jumbotron h1 { font-size: 2.2rem; }
             .carousel-item { height: 350px; }
@@ -148,8 +168,8 @@
 
     <nav class="menu-panel">
         <a href="/" class="menu-link">Back to Hub</a>
-        <a href="/creative/" class="menu-link">Creative Service</a>
-        <a href="/design'DDtees/" class="menu-link">Style Service</a>
+        <a href="/creative/" class="menu-link">Staying in Lane Service</a>
+        <a href="/style/" class="menu-link">Style Service</a>
         <a href="/lawn/" class="menu-link" style="color: var(--lawn-green);">Lawn Care Service</a>
         <a href="/technical/" class="menu-link">Technical Service</a>
         
@@ -301,12 +321,38 @@
         </div>
     </section>
 
-    <footer>
-        <p class="logo" style="font-size: 1.4rem; margin-bottom: 15px;">Gift'DD Studio</p>
-        <p>&copy; Copyright © 2025-2026. Gift'DD Consultant Services. All Rights Reserved. Without Recourse.</p>
-        <div class="legal-text">
-          No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law. 
+    <section class="contact-section">
+        <div class="container" style="max-width: 800px;">
+            <div class="text-center mb-5 reveal-on-scroll">
+                <h2 class="display-5 fw-bold text-success">Contact The Studio</h2>
+                <p class="opacity-50">Ready to transform your landscape? Send a direct transmission.</p>
+            </div>
 
+            <div id="success-gui">
+                <i class="fas fa-check-circle"></i>
+                <h3 class="fw-bold text-success">Request Logged Successfully</h3>
+                <p class="mt-3">The One-Man Army has received your data. <br>Expect a response protocol within 24 hours.</p>
+            </div>
+
+            <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST" class="form-terminal">
+                <div class="reveal-on-scroll"><input type="text" name="name" class="form-control" placeholder="[ User_ID / Name ]" required></div>
+                <div class="reveal-on-scroll"><input type="email" name="email" class="form-control" placeholder="[ Contact_Protocol (Email) ]" required></div>
+                <div class="reveal-on-scroll"><textarea name="message" class="form-control" rows="6" placeholder="[ Input_Message_Data... ]" required></textarea></div>
+                <div class="reveal-on-scroll"><button type="submit" id="submitBtn" class="btn-submit-contact">Execute Submission</button></div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="bg-dark text-white pt-5 pb-4 text-center border-top border-success border-4">
+        <div class="container">
+            <h5 class="text-success text-uppercase fw-bold mb-4">gift'DD Lawncare</h5>
+            <p class="small opacity-75">
+                Copyright &copy; 2025-2026 gift'DD Consultant Services. All Rights Reserved. <br>
+                Without Recourse. No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher.
+            </p>
+            <div class="mt-4 opacity-50">
+                <p class="small">Proprietary Studio Framework. <br> Designed for Impact.</p>
+            </div>
         </div>
     </footer>
 
@@ -334,6 +380,40 @@
             const total = (basePrice * multiplier).toFixed(2);
             resultDiv.classList.remove('d-none');
             resultDiv.innerHTML = `Estimated Price: $${total}* <br><span style="font-size: 0.8rem; font-weight: normal;">*Subject to final on-site inspection.</span>`;
+        }
+
+        /** AJAX Form Submission Logic **/
+        const contactForm = document.getElementById('contactForm');
+        const successGui = document.getElementById('success-gui');
+        const submitBtn = document.getElementById('submitBtn');
+
+        if(contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault(); 
+                submitBtn.innerText = "TRANSMITTING DATA...";
+                submitBtn.disabled = true;
+                const formData = new FormData(contactForm);
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+                    if (response.ok) {
+                        contactForm.style.display = 'none'; 
+                        document.querySelector('.contact-section .text-center').style.display = 'none'; 
+                        successGui.style.display = 'block'; 
+                    } else {
+                        alert("ERROR: System Fault during transmission.");
+                        submitBtn.innerText = "RE-EXECUTE SUBMISSION";
+                        submitBtn.disabled = false;
+                    }
+                } catch (error) {
+                    alert("ERROR: Terminal Connection Interrupted.");
+                    submitBtn.innerText = "RE-EXECUTE SUBMISSION";
+                    submitBtn.disabled = false;
+                }
+            });
         }
 
         document.addEventListener("DOMContentLoaded", function() {
