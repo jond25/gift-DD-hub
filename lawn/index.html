@@ -133,12 +133,26 @@
 
         .calculator-card { background: white; border-radius: 15px; border-bottom: 8px solid #ffc107; }
 
-        /* --- 4. CONTACT SECTION GUI --- */
+        /* --- 4. CONTACT SECTION & BRIGHTNESS FIX --- */
         .contact-section { background-color: var(--hub-navy); color: white; padding: 100px 0; }
+        
         .form-terminal input, .form-terminal textarea { 
-            background: #112240; border: 1px solid #233554; color: white; padding: 15px; margin-bottom: 20px; border-radius: 5px;
+            background: #112240; 
+            border: 1px solid #233554; 
+            color: #FFFFFF !important; /* Brighter Typed Text */
+            padding: 15px; 
+            margin-bottom: 20px; 
+            border-radius: 5px;
             width: 100%;
         }
+
+        /* BRIGHTNESS FIX: Lightening the Placeholder Text (Name, Email, etc.) */
+        .form-terminal input::placeholder, 
+        .form-terminal textarea::placeholder {
+            color: rgba(0, 255, 192, 0.7) !important; /* Bright Neon Mint */
+            opacity: 1; /* Firefox fix */
+        }
+
         .form-terminal input:focus, .form-terminal textarea:focus { 
             border-color: var(--hub-neon); outline: none; background: #1a2c4e; 
         }
@@ -324,7 +338,7 @@
     <section class="contact-section">
         <div class="container" style="max-width: 800px;">
             <div class="text-center mb-5 reveal-on-scroll">
-                <h2 class="display-5 fw-bold text-success">Contact The Studio</h2>
+                <h2 class="display-5 fw-bold text-success">Contact Us Now</h2>
                 <p class="opacity-50">Ready to transform your landscape? Send a direct transmission.</p>
             </div>
 
@@ -382,7 +396,6 @@
             resultDiv.innerHTML = `Estimated Price: $${total}* <br><span style="font-size: 0.8rem; font-weight: normal;">*Subject to final on-site inspection.</span>`;
         }
 
-        /** AJAX Form Submission Logic **/
         const contactForm = document.getElementById('contactForm');
         const successGui = document.getElementById('success-gui');
         const submitBtn = document.getElementById('submitBtn');
