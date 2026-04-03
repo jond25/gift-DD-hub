@@ -99,43 +99,12 @@
         .contact-info { flex: 1; border-right: 1px solid rgba(255, 255, 255, 0.1); padding-right: 20px; }
         .contact-form-container { flex: 1; }
         .contact-form input, .contact-form textarea {
-            width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid var(--color-accent);
+            width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid var(--color-secodary);
             background: rgba(0,0,0,0.2); color: white; border-radius: 5px;
         }
         .social-links a { color: var(--color-light); transition: 0.3s; margin-right: 15px; text-decoration: none; font-size: 1.5rem; }
         .social-links a:hover { color: var(--color-secondary); }
-
-        /* 1. Brighten the Field Titles (Name, Email, Message) */
-.contact-form label {
-    color: var(--color-secondary) !important; /* Using your Neon Mint/Secondary color */
-    font-weight: 600;
-    display: block;
-    margin-bottom: 8px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-size: 0.9rem;
-}
-
-/* 2. Brighten the text as the user types it */
-.contact-form input, 
-.contact-form textarea {
-    color: #FFFFFF !important; /* Pure white for high contrast */
-    background: rgba(255, 255, 255, 0.05) !important; /* Subtle transparency */
-    border: 1px solid var(--color-secondary) !important; /* Mint border to match */
-}
-
-/* 3. Style the placeholder text (the "ghost" text before typing) */
-.contact-form input::placeholder, 
-.contact-form textarea::placeholder {
-    color: rgba(255, 255, 255, 0.4) !important;
-}
-
-/* 4. Ensure the Send Message button text is clear */
-#submitBtn {
-    color: #0A192F !important; /* Dark Navy text on the bright button */
-    font-weight: 900;
-}
-        
+ 
         /* --- MOBILE REFINEMENTS (Surgical Logic) --- */
         @media (max-width: 768px) {
             #hero h1 { font-size: 2.3em; line-height: 1.2; }
