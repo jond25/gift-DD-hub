@@ -44,7 +44,7 @@
             font-weight: 700; 
         }
 
-        /* --- 3. FLOATING NAVIGATION (REPLACED STAGNANT BAR) --- */
+        /* --- 3. FLOATING NAVIGATION --- */
         .floating-burger {
             position: fixed; 
             top: 25px; 
@@ -109,7 +109,7 @@
             padding-left: 10px;
         }
 
-        /* --- 4. HERO SECTION FIX --- */
+        /* --- 4. HERO SECTION --- */
         #hero-section {
             min-height: 100vh; 
             display: flex; 
@@ -291,7 +291,69 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        /* --- 9. RESPONSIVE DESIGN --- */
+        /* --- 9. CONTACT SECTION GUI (MATCHED TO STELLAR THEME) --- */
+        .contact-section { 
+            padding: 120px 0; 
+            background-color: var(--card-bg); 
+            border-radius: 12px; 
+            margin: 100px 0; 
+        }
+
+        .form-terminal input, 
+        .form-terminal textarea { 
+            background: rgba(10, 25, 47, 0.8); 
+            border: 1px solid rgba(163, 163, 255, 0.3); 
+            color: white; 
+            padding: 20px; 
+            margin-bottom: 25px; 
+            border-radius: 8px;
+            width: 100%;
+        }
+
+        .form-terminal input:focus, 
+        .form-terminal textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 15px rgba(163, 163, 255, 0.2);
+        }
+
+        .btn-submit-contact { 
+            background: var(--primary-color); 
+            color: #000; 
+            font-weight: 900; 
+            border: none; 
+            padding: 20px; 
+            width: 100%; 
+            transition: 0.4s; 
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 8px;
+        }
+
+        .btn-submit-contact:hover { 
+            background: var(--secondary-color);
+            transform: translateY(-3px); 
+            box-shadow: 0 10px 20px rgba(255, 107, 107, 0.2);
+        }
+
+        #success-gui {
+            display: none; 
+            text-align: center; 
+            padding: 60px 20px; 
+            border: 2px solid var(--primary-color); 
+            background: rgba(163, 163, 255, 0.05); 
+            border-radius: 12px;
+            animation: terminalIn 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        @keyframes terminalIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        #success-gui i { font-size: 5rem; color: var(--primary-color); margin-bottom: 25px; }
+
+        /* --- 10. RESPONSIVE DESIGN --- */
         @media (max-width: 992px) {
             #hero-section h1 { font-size: 3.2rem; }
         }
@@ -316,7 +378,7 @@
     <nav class="menu-panel" id="sideMenu">
         <a href="https://ddynastia.com/index.html" class="menu-link">Back to Hub</a>
         <a href="/creative/index.html" class="menu-link">Creative Service</a>
-        <a href="/design'DDtees/index.html" class="menu-link" style="color: var(--primary-color);">Style Service</a>
+        <a href="/style/index.html" class="menu-link" style="color: var(--primary-color);">Style Service</a>
         <a href="/lawn/index.html" class="menu-link">Lawn Service</a>
         <a href="/technical/index.html" class="menu-link">Technical Service</a>
         <hr style="width: 50%; border: 1px solid rgba(163, 163, 255, 0.1); margin: 30px 0;">
@@ -481,11 +543,25 @@
             </div>
         </section>
 
-        <section id="contact-cta" class="py-5 text-center reveal-on-scroll" style="background-color: var(--primary-color); border-radius: 10px; margin: 100px 0;">
-            <div class="container py-5">
-                <h2 class="display-3 mb-4 fw-bold" style="color: #000;">Ready to Create Your Product?</h2>
-                <p class="lead mb-5 fs-4" style="color: #000; max-width: 700px; margin: 0 auto;">From shirts to coasters, let's collaborate on your next physical masterpiece.</p>
-                <a href="mailto:giftdd.llc@gmail.com" class="btn btn-dark btn-lg px-5 py-3 shadow-lg" style="text-transform: uppercase; font-weight: 800;">Contact Us Now</a>
+        <section id="contact-cta" class="contact-section reveal-on-scroll">
+            <div class="container" style="max-width: 800px;">
+                <div class="text-center mb-5">
+                    <h2 class="display-4 fw-bold">Initialize Project Protocol</h2>
+                    <p class="opacity-75">Ready to turn your vision into a visceral reality? Send a direct transmission.</p>
+                </div>
+
+                <div id="success-gui">
+                    <i class="fas fa-check-circle"></i>
+                    <h3 class="display-6 fw-bold">Transmission Successful</h3>
+                    <p class="mt-3 font-monospace">>> Data logged at studio level. Our personnel will respond via provided protocol shortly.</p>
+                </div>
+
+                <form id="contactForm" action="https://formspree.io/f/mnjodnny" method="POST" class="form-terminal">
+                    <input type="text" name="name" placeholder="[ User_ID / Name ]" required>
+                    <input type="email" name="email" placeholder="[ Contact_Protocol (Email) ]" required>
+                    <textarea name="message" rows="6" placeholder="[ Input_Creative_Brief / Message... ]" required></textarea>
+                    <button type="submit" id="submitBtn" class="btn-submit-contact">Execute Submission</button>
+                </form>
             </div>
         </section>
 
@@ -493,12 +569,13 @@
 
     <div id="lightbox" onclick="this.style.display='none'"><img id="lightbox-img" src=""></div>
 
-   <footer>
-        <p class="logo" style="font-size: 1.4rem; margin-bottom: 15px;">Gift'DD Studio</p>
-        <p>&copy; Copyright © 2025-2026. Gift'DD Consultant Services. All Rights Reserved. Without Recourse.</p>
-        <div class="legal-text">
-          No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher, except in the case of brief quotations embodied in critical reviews and certain other noncommercial uses permitted by copyright law. 
-
+    <footer class="py-5 text-center border-top" style="border-color: rgba(163, 163, 255, 0.1) !important; background-color: #070e1a;">
+        <div class="container">
+            <p class="logo" style="font-size: 1.4rem; margin-bottom: 15px;">Gift'DD Studio</p>
+            <p>&copy; Copyright © 2025-2026. Gift'DD Consultant Services. All Rights Reserved. Without Recourse.</p>
+            <div class="legal-text small text-white-50">
+                No part of this publication may be reproduced, distributed, or transmitted in any form or by any means, including photocopying, recording, or other electronic or mechanical methods, without the prior written permission of the publisher.
+            </div>
         </div>
     </footer>
 
@@ -538,6 +615,44 @@
                 videoLoader.style.opacity = '0';
                 setTimeout(function() { videoLoader.style.display = 'none'; }, 500);
             };
+        }
+
+        /** AJAX Form Submission Logic **/
+        const contactForm = document.getElementById('contactForm');
+        const successGui = document.getElementById('success-gui');
+        const submitBtn = document.getElementById('submitBtn');
+        const contactHeader = document.querySelector('#contact-cta .text-center');
+
+        if(contactForm) {
+            contactForm.addEventListener('submit', async function(e) {
+                e.preventDefault(); 
+                submitBtn.innerText = "TRANSMITTING DATA...";
+                submitBtn.disabled = true;
+
+                const formData = new FormData(contactForm);
+
+                try {
+                    const response = await fetch(contactForm.action, {
+                        method: 'POST',
+                        body: formData,
+                        headers: { 'Accept': 'application/json' }
+                    });
+
+                    if (response.ok) {
+                        contactForm.style.display = 'none'; 
+                        contactHeader.style.display = 'none'; 
+                        successGui.style.display = 'block'; 
+                    } else {
+                        alert("ERROR: System Fault during transmission.");
+                        submitBtn.innerText = "RE-EXECUTE SUBMISSION";
+                        submitBtn.disabled = false;
+                    }
+                } catch (error) {
+                    alert("ERROR: Terminal Connection Interrupted.");
+                    submitBtn.innerText = "RE-EXECUTE SUBMISSION";
+                    submitBtn.disabled = false;
+                }
+            });
         }
 
         document.addEventListener("DOMContentLoaded", function() {
